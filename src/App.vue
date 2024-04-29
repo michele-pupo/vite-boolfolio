@@ -7,7 +7,7 @@
     <h1>ciao</h1>
     <h2>Dev</h2>
 
-    <h3>Ciao</h3>
+    <h3>Nuovo titolo</h3>
  </div>
 </template>
 
