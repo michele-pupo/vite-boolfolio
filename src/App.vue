@@ -1,13 +1,43 @@
 <script>
 
+import axios from 'axios';
+
+export default {
+    data() {
+        return {
+            projects: [],
+
+            baseApiUrl: 'http://127.0.0.1:800/api',
+        }
+    },
+
+    mounted() {
+
+        axios.get(this.baseApiUrl + '/projects').then(res => {
+
+            console.log(res);
+
+            this.projects = res.data.results;
+
+        })
+    },
+
+    methods: {
+
+    },
+}
 </script>
 
 <template>
- <div class="container"> 
-    <h1>ciao</h1>
-    <h2>Dev</h2>
+ <div class="container py-4"> 
+    <h1>I nostri progetti</h1>
 
-    <h3>Nuovo titolo</h3>
+    <ul>
+        <li v-for="project in projects">
+            {{ project.title }}
+        </li>
+    </ul>
+
  </div>
 </template>
 
