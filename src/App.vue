@@ -1,16 +1,17 @@
 <script>
 
 
-import AppMain from './components/AppMain.vue';
+// import AppMain from './components/AppMain.vue';
+import AppProject from './components/AppProject.vue';
 
 
 
 import axios from 'axios';
 
 export default {
-   components: {
-      
-      AppMain,
+   components: { 
+      // AppMain,
+      AppProject,
    },
 
     data() {
@@ -41,12 +42,19 @@ export default {
 <template>
 
    <!-- <AppMain></AppMain> -->
+   <div class="container d-flex">
+      <AppProject 
+         v-for="currentProject in projects"
+         :projectName="currentProject.name"
+         :projectDescription="currentProject.description"
+         :projectImage="currentProject.project_image"
+         :projectDate="currentProject.project_date"
+         :projectLink="currentProject.link_github"
+      >
+      </AppProject>
 
-   <ul>
-      <li v-for="project in projects">
-         {{ project.name }}
-      </li>
-   </ul>
+   </div>
+
 
 </template>
 
