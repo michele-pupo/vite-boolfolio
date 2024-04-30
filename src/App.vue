@@ -17,7 +17,7 @@ export default {
         return {
             projects: [],
 
-            baseApiUrl: 'http://127.0.0.1:800/api',
+            baseApiUrl: 'http://127.0.0.1:8000/api',
         }
     },
 
@@ -25,9 +25,9 @@ export default {
 
         axios.get(this.baseApiUrl + '/projects').then(res => {
 
-            console.log(res);
+            // console.log(res.data.result.data);
 
-            this.projects = res.data.results;
+            this.projects = res.data.result.data;
 
         })
     },
@@ -40,7 +40,13 @@ export default {
 
 <template>
 
-   <AppMain></AppMain>
+   <!-- <AppMain></AppMain> -->
+
+   <ul>
+      <li v-for="project in projects">
+         {{ project.name }}
+      </li>
+   </ul>
 
 </template>
 
