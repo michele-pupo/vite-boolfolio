@@ -50,6 +50,8 @@ export default {
          :projectImage="currentProject.project_image"
          :projectDate="currentProject.project_date"
          :projectLink="currentProject.link_github"
+         :projectTechnolgies="currentProject.technologies"
+         :projectType="currentProject.type.title"
       >
       </AppProject>
 
