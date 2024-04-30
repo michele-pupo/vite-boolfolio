@@ -1,15 +1,20 @@
 <script>
 
+import AppMain from './components/AppMain.vue';
 
+export default {
+   components: {
+      
+      AppMain,
+   } 
+}
 
 </script>
 
 <template>
- <div class="container"> 
-    <h1>Titolo</h1>
 
+   <AppMain></AppMain>
 
- </div>
 </template>
 
 <style lang="scss">
