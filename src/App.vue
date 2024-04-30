@@ -1,26 +1,18 @@
 <script>
 
-import AppMain from './components/AppMain.vue';
-
-export default {
-   components: {
-      
-      AppMain,
-   } 
-}
 
 import AppMain from './components/AppMain.vue';
 
-export default {
-   components: {
-      
-      AppMain,
-   } 
-}
+
 
 import axios from 'axios';
 
 export default {
+   components: {
+      
+      AppMain,
+   },
+
     data() {
         return {
             projects: [],
