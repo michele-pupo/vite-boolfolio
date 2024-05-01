@@ -37,7 +37,7 @@ export default {
                 <div class="card-link text-info">{{ projectLink }}</div>
                 <div class="card-tech text-danger" v-for="tech in projectTechnolgies">{{ tech.title }}</div>
                 <div class="card-type text-success">{{ projectType }}</div>
-                <div class="btn btn-primary">Visualizza</div>
+                <router-link :to="{name: 'single-project'}" class="btn btn-primary">Visualizza</router-link>
             </div>
         </div>
     </div>

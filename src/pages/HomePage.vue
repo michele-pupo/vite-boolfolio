@@ -43,20 +43,24 @@ export default {
 <template>
 
    <!-- <AppMain></AppMain> -->
-   <div class="container d-flex">
-        <AppProject 
-         v-for="currentProject in projects"
-         :projectName="currentProject.name"
-         :projectDescription="currentProject.description"
-         :projectImage="currentProject.project_image"
-         :projectDate="currentProject.project_date"
-         :projectLink="currentProject.link_github"
-         :projectTechnolgies="currentProject.technologies"
-         :projectType="currentProject.type.title"
-        >
-        </AppProject>
+   <div class="d-flex flex-column">
+        <h1 class="text-center">I nostri progetti</h1>
+        <div class="container d-flex">
+                <AppProject 
+                v-for="currentProject in projects"
+                :projectName="currentProject.name"
+                :projectDescription="currentProject.description"
+                :projectImage="currentProject.project_image"
+                :projectDate="currentProject.project_date"
+                :projectLink="currentProject.link_github"
+                :projectTechnolgies="currentProject.technologies"
+                :projectType="currentProject.type.title"
+                >
+                </AppProject>
 
+        </div>
    </div>
+   
 
 
 </template>
