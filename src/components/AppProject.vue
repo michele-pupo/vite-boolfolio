@@ -1,4 +1,6 @@
 <script>
+import dayjs from 'dayjs';
+import 'dayjs/locale/it';
 
 export default {
 
@@ -21,6 +23,12 @@ export default {
         }
     },
 
+    methods: {
+        formatDate(date) {
+            dayjs.locale('it'); // Impostiamo il "locale" in italiano
+            return dayjs(date).format('DD/MM/YYYY'); // formattazione italiana della data
+        },
+    },
 
 }
 
@@ -34,7 +42,7 @@ export default {
             <div class="card-body">
                 <h5 class="card-title fw-bold fs-1">{{ projectName }}</h5>
                 <p class="card-text">{{ projectDescription }}</p>
-                <div class="card-date">{{ projectDate }}</div>
+                <div class="card-date">{{ formatDate(projectDate) }}</div>
                 <div class="card-link text-info">{{ projectLink }}</div>
                 <div class="card-tech text-danger" v-for="tech in projectTechnolgies">{{ tech.title }}</div>
                 <div class="card-type text-success">{{ projectType }}</div>
