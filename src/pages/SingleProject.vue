@@ -7,18 +7,37 @@ export default{
 
     data(){
         return{
-            project:null,
+            project: null,
+            projectId: null,
 
-            apiBaseUrl: 'http://127.0.0.1:8000/api/'
+            apiBaseUrl: 'http://127.0.0.1:8000/api'
         }
     },
 
     mounted(){
-        axios.get(this.apiBaseUrl + 'projects/1').then(res =>{
+
+        // recuperiamo il parametro dell'id del project dall'url
+        console.log(this.$route.params.id);
+
+        // lo assegnamo alla variabile projectId
+        this.projectId = this.$route.params.id;
+
+        axios.get(this.apiBaseUrl + '/projects/' + this.projectId).then(res =>{
 
             console.log(res)
 
-            this.project = res.data.result
+            if(res.data.success){
+
+                // se troviamo il project lo salviamo
+                this.project = res.data.result
+            
+            } else {
+
+                // torniamo indietro alla home
+                this.$router.push({name: 'home'})
+            }
+
+            
 
         })
     }
