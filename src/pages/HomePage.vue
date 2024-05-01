@@ -1,6 +1,5 @@
 <script>
 
-
 // import AppMain from './components/AppMain.vue';
 import AppProject from '../components/AppProject.vue';
 
@@ -43,11 +42,13 @@ export default {
 <template>
 
    <!-- <AppMain></AppMain> -->
-   <div class="d-flex flex-column">
+   <div class="d-flex flex-column container py-5">
         <h1 class="text-center">I nostri progetti</h1>
-        <div class="container d-flex">
+        <div class="container d-flex justify-content-center">
                 <AppProject 
                 v-for="currentProject in projects"
+                :key="currentProject.id"
+                :project="currentProject"
                 :projectName="currentProject.name"
                 :projectDescription="currentProject.description"
                 :projectImage="currentProject.project_image"

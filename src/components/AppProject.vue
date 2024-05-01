@@ -12,6 +12,7 @@ export default {
         projectLink: String,
         projectTechnolgies: Array,
         projectType: String,
+        project: Object,
     },
 
     data() {
@@ -28,10 +29,10 @@ export default {
 <template>
 
     <div class="container py-5">
-        <div class="card" style="width: 18rem;">
+        <div class="card text-center">
             <img :src="this.baseApiUrl + projectImage" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">{{ projectName }}</h5>
+                <h5 class="card-title fw-bold fs-1">{{ projectName }}</h5>
                 <p class="card-text">{{ projectDescription }}</p>
                 <div class="card-date">{{ projectDate }}</div>
                 <div class="card-link text-info">{{ projectLink }}</div>

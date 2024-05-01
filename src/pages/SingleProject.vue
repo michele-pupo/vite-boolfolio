@@ -36,9 +36,6 @@ export default{
                 // torniamo indietro alla home
                 this.$router.push({name: 'home'})
             }
-
-            
-
         })
     }
 }
@@ -49,20 +46,22 @@ export default{
 
 <template>
 
-    <div class="text-center" v-if="project">
-        <h2>
-            {{ project.name }}
-        </h2>
-        <p>
-            {{ project.description }}
-        </p>
-    </div>
-    <div v-else>
-        <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
+    <div class="container py-5">
+        <div class="text-center" v-if="project">
+            <h2>
+                {{ project.name }}
+            </h2>
+            <p>
+                {{ project.description }}
+            </p>
+        </div>
+        <div v-else>
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
         </div>
     </div>
-
+    
 </template>
 
 
