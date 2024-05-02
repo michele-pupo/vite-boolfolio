@@ -60,8 +60,7 @@ export default{
             <p>
                 {{ project.description }}
             </p>
-            <router-link to="/" class="btn btn-secondary">Indietro</router-link>
-
+            
             <ul>
                 <li v-for="tech in project.technologies">
                     {{ tech.title }}
@@ -72,6 +71,7 @@ export default{
                 <small>{{ project.type.title }}</small>
             </div>
 
+            <router-link to="/" class="btn btn-secondary">Indietro</router-link>
         </div>
         <div v-else>
             <div class="spinner-border" role="status">
