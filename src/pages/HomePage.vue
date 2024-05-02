@@ -67,7 +67,19 @@ export default {
 
         changeApiPage(pageNumber) {
             // console.log(pageNumber);
-            this.apiPageNumber = pageNumber;
+            if(pageNumber == '&laquo; Previous') {
+
+                this.apiPageNumber = Number(this.apiPageNumber) - 1;
+
+            } else if(pageNumber == 'Next &raquo;'){
+
+                this.apiPageNumber = Number(this.apiPageNumber) + 1;
+
+            } else {
+                
+                this.apiPageNumber = pageNumber;
+
+            }
 
             this.apiCall();
         },
@@ -101,7 +113,23 @@ export default {
 
             <div class="pages">
                 <ul class="">
-                <li v-for="link in apiLinks" v-html="link.label" @click="changeApiPage(link.label)" :class="link.label == apiPageNumber ? 'active' : ''"></li>
+                    <li v-html="apiLinks[0].label" 
+                        :class="apiPageNumber == 1 ? 'none' : ''"
+                        @click="changeApiPage(apiLinks[0].label)"
+                        >
+                    </li>
+                    <li 
+                        v-for="link in apiLinks.slice(1, -1)"
+                        v-html="link.label" 
+                        @click="changeApiPage(link.label)" 
+                        v-bind:class="{ 'active' : link.label == apiPageNumber }"
+                        >
+                    </li>
+                    <li v-html="apiLinks[apiLinks.length - 1].label" 
+                        :class="apiPageNumber == apiLinks.length - 2 ? 'none' : ''"
+                        @click="changeApiPage(apiLinks[apiLinks.length - 1].label)"
+                        >
+                    </li>
                 </ul>
             </div>
 
@@ -136,6 +164,10 @@ export default {
 
          &:hover, &.active{
             background-color: rgba(255, 255, 255, 0.4);
+         }
+
+         &.none {
+            display: none;
          }
       }
    }
