@@ -1,10 +1,11 @@
 <script>
 
 import axios from 'axios';
+import { router } from '../router'
 
 export default{
     name:'SingleProject',
-
+     
     data(){
         return{
             project: null,
@@ -54,6 +55,7 @@ export default{
             <p>
                 {{ project.description }}
             </p>
+            <router-link to="/" class="btn btn-secondary">Indietro</router-link>
         </div>
         <div v-else>
             <div class="spinner-border" role="status">
