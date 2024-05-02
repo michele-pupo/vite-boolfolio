@@ -41,7 +41,11 @@ export default {
             <img :src="this.baseApiUrl + projectImage" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title fw-bold fs-1">{{ projectName }}</h5>
-                <p class="card-text">{{ projectDescription }}</p>
+
+                <div class="desc-container">
+                    <p class="card-text">{{ projectDescription }}</p>
+                </div>
+
                 <div class="card-date">{{ formatDate(projectDate) }}</div>
                 <div class="card-link text-info">{{ projectLink }}</div>
                 <div class="card-tech text-danger" v-for="tech in projectTechnolgies">{{ tech.title }}</div>
@@ -51,8 +55,28 @@ export default {
         </div>
     </div>
 
+
 </template>
 
 <style lang="scss">
+
+
+.card {
+
+    .card-body{
+
+        .desc-container {
+            height: 200px;
+
+            overflow: hidden;
+
+            .card-text{
+                height: 100%;
+
+                overflow-y: auto;
+            }
+        }
+    }
+}
 
 </style>
