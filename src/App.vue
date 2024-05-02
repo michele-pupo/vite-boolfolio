@@ -1,14 +1,13 @@
 <script>
 
-
-// import AppMain from './components/AppMain.vue';
-// import AppProject from './components/AppProject.vue';
+import AppHeader from './components/AppHeader.vue';
+import AppFooter from './components/AppFooter.vue';
 
 
 export default {
    components: { 
-      // AppMain,
-      // AppProject,
+      AppHeader,
+      AppFooter,
    },
 
     data() {
@@ -29,12 +28,15 @@ export default {
 
 <template>
 
-   <!-- <AppMain></AppMain> -->
+   <AppHeader></AppHeader>
+   
    <div class="container d-flex">
       
     <router-view></router-view>
 
    </div>
+
+   <AppFooter></AppFooter>
 
 
 </template>
