@@ -10,7 +10,9 @@ export default{
             project: null,
             projectId: null,
 
-            apiBaseUrl: 'http://127.0.0.1:8000/api'
+            apiBaseUrl: 'http://127.0.0.1:8000/api',
+
+            apiImageUrl: 'http://127.0.0.1:8000/storage/',
         }
     },
 
@@ -48,12 +50,26 @@ export default{
 
     <div class="container py-5">
         <div class="text-center" v-if="project">
+
+            <img :src="this.apiImageUrl + project.project_image" class="card-img-top" alt="...">
+
             <h2>
                 {{ project.name }}
             </h2>
             <p>
                 {{ project.description }}
             </p>
+
+            <ul>
+                <li v-for="tech in project.technologies">
+                    {{ tech.title }}
+                </li>
+            </ul>
+            
+            <div>
+                <small>{{ project.type.title }}</small>
+            </div>
+
         </div>
         <div v-else>
             <div class="spinner-border" role="status">
