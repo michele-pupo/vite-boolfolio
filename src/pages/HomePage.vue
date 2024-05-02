@@ -86,7 +86,7 @@ export default {
             <div class="container d-flex justify-content-center">
                     <AppProject 
                     v-for="currentProject in projects"
-                    :key="currentProject.id"
+                    :key="currentProject.slug"
                     :project="currentProject"
                     :projectName="currentProject.name"
                     :projectDescription="currentProject.description"

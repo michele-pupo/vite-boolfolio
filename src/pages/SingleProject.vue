@@ -17,12 +17,12 @@ export default{
     mounted(){
 
         // recuperiamo il parametro dell'id del project dall'url
-        console.log(this.$route.params.id);
+        console.log(this.$route.params.slug);
 
         // lo assegnamo alla variabile projectId
-        this.projectId = this.$route.params.id;
+        this.projectSlug = this.$route.params.slug;
 
-        axios.get(this.apiBaseUrl + '/projects/' + this.projectId).then(res =>{
+        axios.get(this.apiBaseUrl + '/projects/' + this.projectSlug).then(res =>{
 
             console.log(res)
 

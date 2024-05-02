@@ -50,7 +50,7 @@ export default {
                 <div class="card-link text-info">{{ projectLink }}</div>
                 <div class="card-tech text-danger" v-for="tech in projectTechnolgies">{{ tech.title }}</div>
                 <div class="card-type text-success">{{ projectType }}</div>
-                <router-link :to="{name: 'single-project', params: {id: project.id}}" class="btn btn-primary">Visualizza</router-link>
+                <router-link :to="{name: 'single-project', params: {slug: project.slug}}" class="btn btn-primary">Visualizza</router-link>
             </div>
         </div>
     </div>
