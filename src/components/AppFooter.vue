@@ -1,5 +1,8 @@
 <script>
 
+import { router } from '../router';
+
+
 export default {
     name: 'AppFooter',
 }
@@ -50,6 +53,10 @@ export default {
                 <small>Copyright (c): 2024 Boolean Classe #188 - Team 9</small>
             </p>
         </div>
+
+
+        <router-link :to="{name: 'contact-me'}">Contattami</router-link>
+
     </div>
 
 </footer>
