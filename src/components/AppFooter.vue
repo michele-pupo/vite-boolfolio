@@ -17,28 +17,7 @@ export default {
     <div class="container">
         <div class="top-footer d-flex justify-content-around py-5">
             <div class="links">
-                <h5>LINKS</h5>
-                <ul>
-                    <li>Link</li>
-                    <li>Link</li>
-                    <li>Link</li>
-                    <li>Link</li>
-                    <li>Link</li>
-                </ul>
-            </div>
-            <div class="links">
-                <h5>LINKS</h5>
-                <ul>
-                    <li>Link</li>
-                    <li>Link</li>
-                    <li>Link</li>
-                    <li>Link</li>
-                    <li>Link</li>
-                </ul>
-            </div>
-            <div class="links">
-                <h5>LINKS</h5>
-                <ul>
+                <ul class="d-flex gap-5">
                     <li>Link</li>
                     <li>Link</li>
                     <li>Link</li>
@@ -48,16 +27,12 @@ export default {
             </div>
         </div>
 
-        <div class="bottom-footer text-center d-flex justify-content-center gap-3 mb-3">
+        <div class="bottom-footer text-center d-flex justify-content-center gap-3 mb-5">
             <p class="m-0">
-                <small>Copyright (c): 2024 Boolean Classe #188 - Team 9</small>
+                <small>Copyright (c): 2024 Boolean Classe #118 - Team 9</small>
             </p>
-
             <router-link :to="{name: 'contact-me'}" id="contact-me">Contattami</router-link>
         </div>
-
-
-
     </div>
 
 </footer>
