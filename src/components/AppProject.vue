@@ -36,21 +36,22 @@ export default {
 
 <template>
 
-    <div class="container py-5">
+    <div class="container p-5">
         <div class="card text-center">
-            <img :src="this.baseApiUrl + projectImage" class="card-img-top" alt="...">
+            <h2 class="card-title fw-bold fs-1">{{ projectName }}</h2>
+            <img :src="this.baseApiUrl + projectImage" class="card-img-top px-5" alt="{{ projectName }}">
             <div class="card-body">
-                <h5 class="card-title fw-bold fs-1">{{ projectName }}</h5>
-
                 <div class="desc-container">
                     <p class="card-text">{{ projectDescription }}</p>
                 </div>
-
                 <div class="card-date">{{ formatDate(projectDate) }}</div>
-                <div class="card-link text-info">{{ projectLink }}</div>
                 <div class="card-tech text-danger" v-for="tech in projectTechnolgies">{{ tech.title }}</div>
                 <div class="card-type text-success">{{ projectType }}</div>
-                <router-link :to="{name: 'single-project', params: {slug: project.slug}}" class="btn btn-primary">Visualizza</router-link>
+                <div class="card-link d-flex gap-3 justify-content-center">
+                    <button class="btn btn-primary"><a :href="projectLink">Link progetto</a></button>
+                    <router-link :to="{name: 'single-project', params: {slug: project.slug}}" class="btn btn-info">Specifiche progetto</router-link>
+                </div>
+                
             </div>
         </div>
     </div>
@@ -74,6 +75,12 @@ export default {
                 height: 100%;
 
                 overflow-y: auto;
+            }
+        }
+
+        .card-link{
+            a{
+                text-decoration: none;
             }
         }
     }

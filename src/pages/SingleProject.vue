@@ -51,26 +51,18 @@ export default{
 
     <div class="container py-5">
         <div class="text-center" v-if="project">
-
-            <img :src="this.apiImageUrl + project.project_image" class="card-img-top" alt="...">
-
-            <h2>
-                {{ project.name }}
-            </h2>
-            <p>
-                {{ project.description }}
-            </p>
-            
-            <ul>
-                <li v-for="tech in project.technologies">
+            <h2 class="display-2 fw-bold">{{ project.name }}</h2>
+            <img :src="this.apiImageUrl + project.project_image" class="card-img-top w-50" alt="{{ project.name }}">
+            <p>{{ project.description }}</p>
+            <div class="tech">
+                <span v-for="tech in project.technologies" class="badge rounded-pill text-black text-uppercase fw-bold" :style="{ backgroundColor: tech.color }">
                     {{ tech.title }}
-                </li>
-            </ul>
-            
-            <div>
-                <small>{{ project.type.title }}</small>
+                </span>
             </div>
-
+            <div>
+                <small class="text-danger">{{ project.type.title }}</small>
+            </div>
+            <h4>{{ project.date }}</h4>
             <router-link to="/" class="btn btn-secondary">Indietro</router-link>
         </div>
         <div v-else>

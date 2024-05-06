@@ -92,7 +92,7 @@ export default {
    <!-- <AppMain></AppMain> -->
    <div class="d-flex flex-column container py-5">
 
-        <h1 class="text-center text-uppercase fw-bold">I nostri progetti</h1>
+        <h1 class="text-center text-uppercase fw-bold">I miei progetti</h1>
 
         <div v-if="!isLoading">
             <div class="container d-flex justify-content-center">
