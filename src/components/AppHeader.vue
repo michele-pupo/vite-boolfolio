@@ -8,7 +8,7 @@ export default {
 
 
 <template>
-    <header>
+    <header class="my_header">
 
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
 
@@ -36,6 +36,10 @@ export default {
 
 <style lang="scss">
 
-
+.my_header{
+    width: 100%;
+    z-index: 10;
+    position: fixed;
+}
 
 </style>

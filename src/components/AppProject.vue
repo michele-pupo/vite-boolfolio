@@ -39,23 +39,20 @@ export default {
     <div class="container p-5">
         <div class="card text-center">
             <h2 class="card-title fw-bold fs-1">{{ projectName }}</h2>
-            <img :src="this.baseApiUrl + projectImage" class="card-img-top px-5" alt="{{ projectName }}">
+            <img :src="this.baseApiUrl + projectImage" class="card-img-top px-3" alt="{{ projectName }}">
             <div class="card-body">
-                <div class="desc-container">
-                    <p class="card-text">{{ projectDescription }}</p>
-                </div>
+                
                 <div class="card-date">{{ formatDate(projectDate) }}</div>
                 <div class="card-tech text-danger" v-for="tech in projectTechnolgies">{{ tech.title }}</div>
                 <div class="card-type text-success">{{ projectType }}</div>
                 <div class="card-link d-flex gap-3 justify-content-center">
-                    <button class="btn btn-primary"><a :href="projectLink">Link progetto</a></button>
+                    <button class="btn btn-primary"><a :href="projectLink" target="_blank">Link progetto</a></button>
                     <router-link :to="{name: 'single-project', params: {slug: project.slug}}" class="btn btn-info">Specifiche progetto</router-link>
                 </div>
                 
             </div>
         </div>
     </div>
-
 
 </template>
 
@@ -68,12 +65,10 @@ export default {
 
         .desc-container {
             height: 200px;
-
             overflow: hidden;
 
             .card-text{
                 height: 100%;
-
                 overflow-y: auto;
             }
         }

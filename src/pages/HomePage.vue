@@ -40,7 +40,7 @@ export default {
     methods: {
 
         apiCall() {
-            // implementiamo il loader anche qui
+            // implementiamo il loader
             // impostiamo la variabile isLoading a true
             this.isLoading = true;
 
@@ -92,7 +92,7 @@ export default {
    <!-- <AppMain></AppMain> -->
    <div class="d-flex flex-column container py-5">
 
-        <h1 class="text-center text-uppercase fw-bold">I miei progetti</h1>
+        <h1 class="text-center text-uppercase fw-bold pt-5">I miei progetti</h1>
 
         <div v-if="!isLoading">
             <div class="container d-flex justify-content-center">
@@ -111,7 +111,7 @@ export default {
                     </AppProject>
             </div>
 
-            <div class="pages">
+            <div class="pages d-flex justify-content-center pt-5">
                 <ul class="">
                     <li v-html="apiLinks[0].label" 
                         :class="apiPageNumber == 1 ? 'none' : ''"
@@ -134,7 +134,7 @@ export default {
             </div>
 
         </div>
-        <div v-else>
+        <div v-else class="centered">
             <div class="spinner-border" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
@@ -152,16 +152,12 @@ export default {
    ul {
       display: flex;
       gap: 10px;
-
       list-style-type: none;
 
       li {
          padding: 8px;
-
          transition: all .3s ease;
-
          cursor: pointer;
-
          &:hover, &.active{
             background-color: rgba(255, 255, 255, 0.4);
          }
@@ -171,6 +167,12 @@ export default {
          }
       }
    }
-   
+}
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 </style>

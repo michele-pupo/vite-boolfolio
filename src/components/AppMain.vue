@@ -16,11 +16,11 @@ export default {
 
 <template>
 
-<div class="container">
-    
-      <AppProject></AppProject>
+    <div class="container">
+        
+        <AppProject></AppProject>
 
-   </div>
+    </div>
 
 </template>
 

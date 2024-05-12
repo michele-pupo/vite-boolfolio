@@ -58,7 +58,11 @@ export default {
         <label for="message">Messaggio</label>
     </div>
 
-    <button type="submit" class="btn btn-primary">Invia</button>
+    <div class="d-flex gap-3">
+        <button type="submit" class="btn btn-primary">Invia</button>
+        <router-link to="/" class="btn btn-secondary">Indietro</router-link>
+    </div>
+    
 
 </form>
 
