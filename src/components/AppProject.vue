@@ -36,7 +36,7 @@ export default {
 
 <template>
 
-    <div class="container p-5">
+    <div class="container p-5 gradient-bg">
         <div class="card text-center">
             <h2 class="card-title fw-bold fs-1">{{ projectName }}</h2>
             <img :src="this.baseApiUrl + projectImage" class="card-img-top px-3" alt="{{ projectName }}">
@@ -44,7 +44,7 @@ export default {
                 
                 <div class="card-date">{{ formatDate(projectDate) }}</div>
                 <div class="card-tech text-danger" v-for="tech in projectTechnolgies">{{ tech.title }}</div>
-                <div class="card-type text-success">{{ projectType }}</div>
+                <div class="card-type text-success mb-3">{{ projectType }}</div>
                 <div class="card-link d-flex gap-3 justify-content-center">
                     <button class="btn btn-primary"><a :href="projectLink" target="_blank">Link progetto</a></button>
                     <router-link :to="{name: 'single-project', params: {slug: project.slug}}" class="btn btn-info">Specifiche progetto</router-link>
@@ -57,6 +57,10 @@ export default {
 </template>
 
 <style lang="scss">
+
+.gradient-bg {
+    background: linear-gradient(to bottom, #87CEEB, #D8BFD8);
+}
 
 
 .card {

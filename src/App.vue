@@ -32,7 +32,7 @@ export default {
    
    <div class="container d-flex">
       
-    <router-view></router-view>
+      <router-view></router-view>
 
    </div>
 
