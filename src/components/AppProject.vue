@@ -45,11 +45,13 @@ export default {
                 <div class="card-date">{{ formatDate(projectDate) }}</div>
                 <div class="card-tech text-danger" v-for="tech in projectTechnolgies">{{ tech.title }}</div>
                 <div class="card-type text-success mb-3">{{ projectType }}</div>
+                <span v-for="tech in projectTechnolgies" class="badge rounded-pill text-black text-uppercase fw-bold mb-3 me-2" :style="{ backgroundColor: tech.color }">
+                    {{ tech.title }}
+                </span>
                 <div class="card-link d-flex gap-3 justify-content-center">
                     <button class="btn btn-primary"><a :href="projectLink" target="_blank">Link progetto</a></button>
                     <router-link :to="{name: 'single-project', params: {slug: project.slug}}" class="btn btn-info">Specifiche progetto</router-link>
                 </div>
-                
             </div>
         </div>
     </div>
