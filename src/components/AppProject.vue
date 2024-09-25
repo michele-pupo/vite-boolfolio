@@ -65,16 +65,11 @@ export default {
 
     .card-body{
 
-        .desc-container {
-            height: 200px;
-            overflow: hidden;
-
-            .card-text{
-                height: 100%;
-                overflow-y: auto;
-            }
+        .card-text{
+            height: 100%;
+            overflow-y: auto;
         }
-
+        
         .card-link{
             a{
                 text-decoration: none;

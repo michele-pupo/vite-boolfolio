@@ -16,7 +16,7 @@ export default {
 
 <template>
 
-    <div>
+    <div class="my-main">
         
         <AppProject></AppProject>
 
@@ -25,5 +25,5 @@ export default {
 </template>
 
 <style>
-
+    
 </style>

@@ -72,7 +72,7 @@ export default {
 
 <template>
 
-        <div class="d-flex flex-column pt-5">
+        <div class="d-flex flex-column pt-5 my_home">
             <div class="carousel-wrapper">
                 <div class="carousel">
                     <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
@@ -96,7 +96,7 @@ export default {
                     <img src="/sass-icon-1024x1024-kn7u23pl.png" alt="Sass">
                 </div>
             </div>
-            <h1 class="text-center text-uppercase fw-bold py-5">Progetti</h1>
+            <h1 class="text-center text-uppercase fw-bold display-3 pb-4">Progetti</h1>
 
             <div v-if="!isLoading">
                 <div class="container d-flex justify-content-center">
@@ -115,7 +115,7 @@ export default {
                     </AppProject>
                 </div>
 
-                <div class="pages d-flex justify-content-center pt-5 mb-5">
+                <div class="pages d-flex justify-content-center py-5 pe-5">
                     <ul class="">
                         <li v-html="apiLinks[0].label" 
                             :class="apiPageNumber == 1 ? 'none' : ''"
@@ -145,8 +145,15 @@ export default {
 
 <style lang="scss">
 
+.my_home{
+    width: 100%;
+    height: 1120px;
+    padding-bottom: 50px;
+}
+
 .carousel-wrapper {
   width: 100%; /* Larghezza del carosello */
+  height: 250px;
   overflow: hidden; /* Nasconde le immagini che escono dal bordo */
   background-color: #1A4870;
 }

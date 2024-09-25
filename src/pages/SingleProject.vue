@@ -49,21 +49,26 @@ export default{
 
 <template>
 
-    <div class="container py-5">
+    <div class="container py-5 my_project">
         <div class="text-center" v-if="project">
-            <h2 class="display-2 fw-bold">{{ project.name }}</h2>
-            <img :src="this.apiImageUrl + project.project_image" class="card-img-top w-50" alt="{{ project.name }}">
-            <p>{{ project.description }}</p>
-            <div class="tech">
-                <span v-for="tech in project.technologies" class="badge rounded-pill text-black text-uppercase fw-bold" :style="{ backgroundColor: tech.color }">
+            <h2 class="display-2 fw-bold pt-5">{{ project.name }}</h2>
+            <img :src="this.apiImageUrl + project.project_image" class="card-img-top w-100" alt="{{ project.name }}">
+            <p class="py-5 fs-3">{{ project.description }}</p>
+            <div class="tech py-3">
+                <span 
+                    v-for="tech in project.technologies" 
+                    class="badge rounded-pill text-black text-uppercase fw-bold fs-4 tech-badge" 
+                    :style="{ backgroundColor: tech.color }">
                     {{ tech.title }}
                 </span>
             </div>
             <div>
-                <small class="text-danger">{{ project.type.title }}</small>
+                <small class="text-danger fw-bold fs-4">{{ project.type.title }}</small>
             </div>
-            <h4>{{ project.date }}</h4>
-            <router-link to="/" class="btn btn-secondary">Indietro</router-link>
+            <div class="pt-5">
+                <router-link to="/" class="btn btn-secondary">Indietro</router-link>
+            </div>
+            
         </div>
         <div v-else>
             <div class="spinner-border" role="status">
@@ -77,6 +82,10 @@ export default{
 
 
 <style lang="scss" scoped>
-
+    .my_project{
+        height: calc(100% - 5000px);
+        overflow-y: auto;
+        background-color: #1A4870;
+    }
 
 </style>

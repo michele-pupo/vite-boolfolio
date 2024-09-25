@@ -8,9 +8,9 @@ export default {
 
 
 <template>
-    <header class="my_header">
+    <header>
 
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg">
 
             <div class="container-fluid">
                 <router-link :to="{name: 'home'}" class="navbar-brand">Home</router-link>
@@ -26,10 +26,12 @@ export default {
 
 <style lang="scss">
 
-.my_header{
+.navbar{
     width: 100%;
+    height: 50px;
     z-index: 10;
     position: fixed;
+    background-color: #03346E;
 }
 
 </style>

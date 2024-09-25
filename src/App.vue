@@ -44,5 +44,6 @@ export default {
 <style lang="scss">
    .my-app{
       background-color: #1A4870;
+      // height: calc(100% - 200px);
    }
 </style>
