@@ -72,7 +72,7 @@ export default {
 
 <template>
 
-        <div class="d-flex flex-column container py-5">
+        <div class="d-flex flex-column pt-5">
             <div class="carousel-wrapper">
                 <div class="carousel">
                     <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
@@ -115,7 +115,7 @@ export default {
                     </AppProject>
                 </div>
 
-                <div class="pages d-flex justify-content-center pt-5">
+                <div class="pages d-flex justify-content-center pt-5 mb-5">
                     <ul class="">
                         <li v-html="apiLinks[0].label" 
                             :class="apiPageNumber == 1 ? 'none' : ''"
@@ -148,7 +148,7 @@ export default {
 .carousel-wrapper {
   width: 100%; /* Larghezza del carosello */
   overflow: hidden; /* Nasconde le immagini che escono dal bordo */
-  background-color: #f0f0f0;
+  background-color: #1A4870;
 }
 
 .carousel {

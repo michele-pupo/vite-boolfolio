@@ -30,7 +30,7 @@ export default {
 
    <AppHeader></AppHeader>
    
-   <div class="container d-flex">
+   <div class="my-app">
       
       <router-view></router-view>
 
@@ -42,5 +42,7 @@ export default {
 </template>
 
 <style lang="scss">
-
+   .my-app{
+      background-color: #1A4870;
+   }
 </style>

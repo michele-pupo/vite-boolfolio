@@ -36,15 +36,14 @@ export default {
 
 <template>
 
-    <div class="container p-5 gradient-bg">
+    <div class="container">
         <div class="card text-center">
-            <h2 class="card-title fw-bold fs-1">{{ projectName }}</h2>
+            <h2 class="card-title text-black fw-bold fs-1 pt-3">{{ projectName }}</h2>
             <img :src="this.baseApiUrl + projectImage" class="card-img-top px-3" alt="{{ projectName }}">
             <div class="card-body">
                 
-                <div class="card-date">{{ formatDate(projectDate) }}</div>
-                <div class="card-tech text-danger" v-for="tech in projectTechnolgies">{{ tech.title }}</div>
-                <div class="card-type text-success mb-3">{{ projectType }}</div>
+                <div class="card-date text-danger fw-bold pb-2">{{ formatDate(projectDate) }}</div>
+                <div class="card-type text-success mb-3 fw-bold fs-3">{{ projectType }}</div>
                 <span v-for="tech in projectTechnolgies" class="badge rounded-pill text-black text-uppercase fw-bold mb-3 me-2" :style="{ backgroundColor: tech.color }">
                     {{ tech.title }}
                 </span>
@@ -60,12 +59,9 @@ export default {
 
 <style lang="scss">
 
-.gradient-bg {
-    background: linear-gradient(to bottom, #87CEEB, #D8BFD8);
-}
-
-
 .card {
+
+    background-color: #F9DBBA;
 
     .card-body{
 
