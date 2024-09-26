@@ -48,8 +48,10 @@ export default {
                     {{ tech.title }}
                 </span>
                 <div class="card-link d-flex gap-3 justify-content-center">
-                    <button class="btn btn-primary"><a :href="projectLink" target="_blank">Link progetto</a></button>
-                    <router-link :to="{name: 'single-project', params: {slug: project.slug}}" class="btn btn-info">Specifiche progetto</router-link>
+                    <router-link :to="{name: 'single-project', params: {slug: project.slug}}" class="btn btn-custom-info">Specifiche progetto</router-link>
+                    <button class="btn btn-custom-primary">
+                        <a class="text-black" :href="projectLink" target="_blank">Sito progetto</a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -70,6 +72,39 @@ export default {
         }
         
         .card-link{
+
+            .btn-custom-info {
+                background-color: #007bff; /* Blu accattivante */
+                color: white; /* Colore del testo */
+                transition: transform 0.2s; /* Transizione per l'animazione */
+
+                &:hover {
+                    animation: pulse 1s infinite; /* Aggiungi animazione al passaggio del mouse */
+                }
+            }
+
+            .btn-custom-primary {
+                background-color: #fd7e14; /* Arancione accattivante */
+                color: white; /* Colore del testo */
+                transition: transform 0.2s; /* Transizione per l'animazione */
+
+                &:hover {
+                    animation: pulse 1s infinite; /* Aggiungi animazione al passaggio del mouse */
+                }
+            }
+
+            @keyframes pulse {
+                0% {
+                    transform: scale(1); /* Dimensione normale */
+                }
+                50% {
+                    transform: scale(1.1); /* Dimensione ingrandita */
+                }
+                100% {
+                    transform: scale(1); /* Dimensione normale */
+                }
+            }
+
             a{
                 text-decoration: none;
             }

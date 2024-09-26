@@ -17,29 +17,22 @@ export default{
         }
     },
 
-    mounted(){
-
+    mounted() {
         // recuperiamo il parametro dell'id del project dall'url
         console.log(this.$route.params.slug);
-
-        // lo assegnamo alla variabile projectId
         this.projectSlug = this.$route.params.slug;
 
-        axios.get(this.apiBaseUrl + '/projects/' + this.projectSlug).then(res =>{
+        axios.get(this.apiBaseUrl + '/projects/' + this.projectSlug).then(res => {
+            console.log(res);
 
-            console.log(res)
-
-            if(res.data.success){
-
+            if (res.data.success) {
                 // se troviamo il project lo salviamo
-                this.project = res.data.result
-            
+                this.project = res.data.result;
             } else {
-
                 // torniamo indietro alla home
-                this.$router.push({name: 'home'})
+                this.$router.push({ name: 'home' });
             }
-        })
+        });
     }
 }
 
@@ -62,9 +55,9 @@ export default{
                     {{ tech.title }}
                 </span>
             </div>
-            <div>
-                <small class="text-danger fw-bold fs-4">{{ project.type.title }}</small>
-            </div>
+            <button class="btn btn-custom mt-5 fs-1">
+                <a class="text-info" :href="project.link_github" target="_blank">Sito progetto</a>
+            </button>
             <div class="pt-5">
                 <router-link to="/" class="btn btn-secondary">Indietro</router-link>
             </div>
@@ -83,8 +76,34 @@ export default{
 
 <style lang="scss" scoped>
     .my_project{
-        height: 100vw;
+        height: 1900px;
         background-color: #1A4870;
+
+        .btn-custom {
+            background-color: #28a745; /* Verde */
+            color: white; /* Colore del testo */
+            transition: transform 0.2s; /* Transizione per l'animazione */
+
+            &:hover {
+                animation: pulse 1s infinite; /* Aggiungi animazione al passaggio del mouse */
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1); /* Dimensione normale */
+            }
+            50% {
+                transform: scale(1.1); /* Dimensione ingrandita */
+            }
+            100% {
+                transform: scale(1); /* Dimensione normale */
+            }
+        }
+
+        a{
+            text-decoration: none;
+        }
     }
 
 </style>

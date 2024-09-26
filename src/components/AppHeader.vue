@@ -17,6 +17,9 @@ export default {
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <div>
+                    <h1 class="fs-3"><span>Web Developer :</span> Michele Fabio Pupo</h1>
+                </div>
             </div>
 
         </nav>
