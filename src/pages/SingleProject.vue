@@ -57,7 +57,7 @@ export default{
             <div class="tech py-3">
                 <span 
                     v-for="tech in project.technologies" 
-                    class="badge rounded-pill text-black text-uppercase fw-bold fs-4 tech-badge" 
+                    class="badge rounded-pill text-black text-uppercase fw-bold fs-4 tech-badge me-3" 
                     :style="{ backgroundColor: tech.color }">
                     {{ tech.title }}
                 </span>
