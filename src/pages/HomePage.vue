@@ -76,6 +76,7 @@ export default {
             <div class="carousel-wrapper">
                 <div class="carousel">
                     <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
+                    <img src="/bootstrap-tutorial.png" alt="Bootstrap">
                     <img src="/1698604163003.png" alt="Javascript">
                     <img src="/css.png" alt="Css">
                     <img src="/353261.png" alt="Php">
@@ -86,6 +87,18 @@ export default {
                     <img src="/sass-icon-1024x1024-kn7u23pl.png" alt="Sass">
                     <!-- Duplicazione delle immagini per un carosello continuo -->
                     <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
+                    <img src="/bootstrap-tutorial.png" alt="Bootstrap">
+                    <img src="/1698604163003.png" alt="Javascript">
+                    <img src="/css.png" alt="Css">
+                    <img src="/353261.png" alt="Php">
+                    <img src="/eceb15684d4183c66f73c1a9bb777eef708b2b66.png" alt="Mysql">
+                    <img src="/fposter,small,wall_texture,product,750x1000_preview_rev_1.png" alt="Vite">
+                    <img src="/HTML5_logo_and_wordmark.svg.png" alt="Html5">
+                    <img src="/laravel-featured_preview_rev_1.png" alt="Laravel">
+                    <img src="/sass-icon-1024x1024-kn7u23pl.png" alt="Sass">
+                    <!-- Duplicazione delle immagini per un carosello continuo -->
+                    <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
+                    <img src="/bootstrap-tutorial.png" alt="Bootstrap">
                     <img src="/1698604163003.png" alt="Javascript">
                     <img src="/css.png" alt="Css">
                     <img src="/353261.png" alt="Php">
@@ -153,18 +166,18 @@ export default {
 
 .carousel-wrapper {
   width: 100%; /* Larghezza del carosello */
-  height: 250px;
+  height: 200px;
   overflow: hidden; /* Nasconde le immagini che escono dal bordo */
   background-color: #1A4870;
 }
 
 .carousel {
   display: flex;
-  animation: scroll 30s linear infinite; /* Animazione infinita */
+  animation: scroll 25s linear infinite; /* Animazione infinita */
 }
 
 .carousel img {
-  width: 150px; /* Larghezza delle immagini */
+  width: 100px; /* Larghezza delle immagini */
   height: auto; /* Mantiene le proporzioni */
   margin-right: 20px; /* Spazio tra le immagini */
   object-fit: contain; /* Garantisce che l'immagine non venga deformata */
