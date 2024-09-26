@@ -83,8 +83,7 @@ export default{
 
 <style lang="scss" scoped>
     .my_project{
-        height: calc(100% - 5000px);
-        overflow-y: auto;
+        height: 100vw;
         background-color: #1A4870;
     }
 

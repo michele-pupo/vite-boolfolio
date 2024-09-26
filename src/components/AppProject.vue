@@ -67,7 +67,6 @@ export default {
 
         .card-text{
             height: 100%;
-            overflow-y: auto;
         }
         
         .card-link{

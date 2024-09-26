@@ -36,26 +36,27 @@ export default {
 
     methods: {
         apiCall() {
-            // implementiamo il loader
-            // impostiamo la variabile isLoading a true
             this.isLoading = true;
 
             axios.get(this.baseApiUrl + '/projects', {
                 params: {
-                    page: this.apiPageNumber, 
-                } 
+                    page: this.apiPageNumber,
+                }
             }).then(res => {
-                // solo quando riceviamo una risposta di successo
-                if(res.data.success) {
-                    // impostiamo isLoading a false
+                console.log(res.data); // Controlla se i dati sono già ordinati
+
+                if (res.data.success) {
                     this.isLoading = false;
                 }
 
-                this.projects = res.data.result.data;
+                // Ordina i dati per la data prima di assegnarli alla variabile `projects`
+                this.projects = res.data.result.data.sort((a, b) => {
+                    return new Date(b.project_date) - new Date(a.project_date);
+                });
                 this.apiLinks = res.data.result.links;
-            })
+            });
         },
-
+        
         changeApiPage(pageNumber) {
             if(pageNumber == '&laquo; Previous') {
                 this.apiPageNumber = Number(this.apiPageNumber) - 1;
