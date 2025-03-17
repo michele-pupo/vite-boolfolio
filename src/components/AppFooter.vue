@@ -5,31 +5,30 @@ export default {
 </script>
 
 <template>
-  <footer class="top-footer pt-3">
+  <footer class="top-footer">
     <div class="container">
-      <div class="d-flex justify-content-center justify-content-md-between align-items-center">
-        <div class="links">
-          <ul class="d-flex gap-4">
+      <div class="footer-content">
+        <div class="social-links">
+          <ul class="social-list">
             <li>
-              <a id="git-hub" href="https://github.com/michele-pupo" target="_blank">
+              <a href="https://github.com/michele-pupo" target="_blank" aria-label="GitHub">
                 <img src="/public/github-logo.png" alt="GitHub" class="social-icon">
               </a>
             </li>
             <li>
-              <a id="linkedin" href="https://www.linkedin.com/in/michele-fabio-pupo-727738308/" target="_blank">
-                <img src="/public/25-removebg-preview.png" alt="Linkedin" class="social-icon">
+              <a href="https://www.linkedin.com/in/michele-fabio-pupo-727738308/" target="_blank" aria-label="LinkedIn">
+                <img src="/public/25-removebg-preview.png" alt="LinkedIn" class="social-icon">
               </a>
             </li>
             <li>
-              <a id="contact-me" href="https://wa.me/3899928860" target="_blank">
+              <a href="https://wa.me/3899928860" target="_blank" aria-label="WhatsApp">
                 <img src="/pngtree-whatsapp-icon-png-image_3584845.png" alt="WhatsApp" class="social-icon">
               </a>
             </li>
           </ul>
         </div>
-        <!-- Aggiungi eventualmente un testo o una piccola descrizione qui -->
-        <div class="footer-text text-center text-md-end">
-          <p class="text-white mb-0">© 2025 MFP</p>
+        <div class="copyright">
+          <p>© 2025 Michele Fabio Pupo | Web Developer</p>
         </div>
       </div>
     </div>
@@ -39,45 +38,64 @@ export default {
 <style lang="scss">
 .top-footer {
   width: 100%;
-  height: 120px;
+  height: auto;
+  padding: 1.5rem 0;
   position: fixed;
   bottom: 0;
   background-color: #03346E;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
   z-index: 10;
-  padding: 20px 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.social-list {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  gap: 1.5rem;
 }
 
 .social-icon {
-  width: 80px;
-  height: 80px;
-  transition: transform 0.3s ease;
+  width: 42px;
+  height: 42px;
+  transition: all 0.3s ease;
+  filter: brightness(0.95);
+  
+  &:hover {
+    transform: translateY(-5px);
+    filter: brightness(1.1);
+  }
 }
 
-.social-icon:hover {
-  transform: scale(1.3);
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-ul li {
-  margin-right: 15px;
-}
-
-.footer-text {
-  margin-top: 10px;
+.copyright {
+  color: white;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  font-weight: 300;
+  text-align: right;
 }
 
 @media (max-width: 768px) {
-  .top-footer {
-    padding: 15px 0;
+  .footer-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
   }
-
-  .social-icon {
-    width: 60px;
-    height: 60px;
+  
+  .copyright {
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+  
+  .social-list {
+    justify-content: center;
   }
 }
 </style>

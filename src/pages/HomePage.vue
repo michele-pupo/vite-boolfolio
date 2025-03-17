@@ -40,58 +40,60 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #1a4870, #4169e1);
-  color: #fff;
-  text-align: center;
+  min-height: 100vh;
+  background-color: #ffffff; /* Sfondo bianco per coerenza con le altre pagine */
   padding: 20px;
+}
 
-  .splash-content {
-    max-width: 800px;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 1s ease-out;
+.splash-content {
+  max-width: 800px;
+  background: #F9DBBA; /* Richiama lo stile delle card delle pagine progetto */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  animation: fadeIn 1s ease-out;
 
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-    }
-    h2 {
-      font-size: 1.8rem;
-      margin-bottom: 1.5rem;
-    }
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    color: #03346E; /* Richiamo al blu scuro di header e footer */
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #03346E;
+  }
 
-    /* Stile per l'immagine profilo circolare */
-    .profile-photo {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 3px solid #fff;
-      margin-bottom: 1.5rem;
-    }
+  .profile-photo {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #03346E;
+    margin-bottom: 1.5rem;
+  }
 
-    .description {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      margin-bottom: 2rem;
-    }
+  .description {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: #343a40;
+  }
 
-    .dropdown select {
-      background: #fff;
-      color: #000;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s ease;
+  .dropdown select {
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
 
-      &:hover {
-        background: #f0f0f0;
-      }
+    &:hover {
+      background: #f0f0f0;
     }
   }
 }

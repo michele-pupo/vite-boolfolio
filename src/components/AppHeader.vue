@@ -5,117 +5,103 @@ export default {
 </script>
 
 <template>
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container-fluid">
-        <!-- Link per tornare alla Home -->
-        <router-link to="/" class="navbar-brand">
-          <span class="fw-bold">Home</span>
-        </router-link>
-
-        <!-- Bottone per il menu in versione mobile -->
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- Sezioni e Titolo -->
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav ms-auto">
-            <!-- Link Sezioni accanto a Home -->
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdownMenuLink"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Sezioni
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <li>
-                  <router-link :to="{ name: 'project' }" class="dropdown-item">
-                    Progetti
-                  </router-link>
-                </li>
-                <!-- Aggiungi altre opzioni qui -->
-              </ul>
+  <header class="top-header">
+    <div class="container">
+      <div class="header-content">
+        <!-- Link Home -->
+        <div class="brand">
+          <router-link to="/" class="brand-link">
+            <span class="fw-bold">Home</span>
+          </router-link>
+        </div>
+        <!-- Menu di navigazione -->
+        <nav class="menu">
+          <ul class="menu-list">
+            <li>
+              <router-link :to="{ name: 'project' }">Progetti</router-link>
             </li>
+            <!-- Aggiungi altre opzioni qui se necessario -->
           </ul>
-
-          <!-- Titolo della pagina, se desideri lasciarlo -->
-          <div class="ms-3 d-none d-md-block">
-            <h1 class="fs-5 text-white mb-0">
-              <span class="text-muted">Web Developer:</span> <span class="fw-bold">Michele Fabio Pupo</span>
-            </h1>
-          </div>
+        </nav>
+        <!-- Titolo dell'header -->
+        <div class="header-title">
+          <h1>
+            <span class="text-muted">Web Developer:</span>
+            <span class="fw-bold">Michele Fabio Pupo</span>
+          </h1>
         </div>
       </div>
-    </nav>
+    </div>
   </header>
 </template>
 
 <style lang="scss">
-.navbar {
+.top-header {
   width: 100%;
-  height: 60px;
-  z-index: 10;
+  padding: 1.5rem 0;
   position: fixed;
   top: 0;
   background-color: #03346E;
-  padding: 0.5rem 1rem;
-
-  .navbar-brand {
-    font-size: 1.2rem;
-  }
-
-  .navbar-toggler {
-    border-color: #fff;
-  }
-
-  .navbar-toggler-icon {
-    background-color: #fff;
-  }
-
-  .navbar-nav {
-    margin-left: auto;
-  }
-
-  .dropdown-menu {
-    background-color: #03346E;
-  }
-
-  .navbar-collapse {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
 }
 
-h1 {
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Stile per il link Home */
+.brand-link {
   font-size: 1.2rem;
-  color: #fff;
-  font-weight: 400;
-  span {
-    color: #ccc;
+  color: white;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
   }
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    padding: 0.5rem;
+/* Stile per il menu */
+.menu-list {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  padding: 0;
+  margin: 0;
+  
+  li a {
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    &:hover {
+      transform: translateY(-2px);
+    }
   }
+}
 
+/* Stile per il titolo */
+.header-title {
   h1 {
+    font-size: 1.2rem;
+    color: white;
+    font-weight: 400;
+    margin: 0;
+    span {
+      color: #ccc;
+    }
+  }
+}
+
+/* Responsive: per schermi piccoli, il contenuto è centrato e disposto a colonna */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  .header-title h1 {
     font-size: 1rem;
   }
 }
