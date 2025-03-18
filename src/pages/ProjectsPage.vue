@@ -18,7 +18,9 @@ export default {
             baseApiUrl: 'http://127.0.0.1:8000/api',
             isMobile: false,
             error: null,
-            visibleProjects: [] // Track which projects are visible for animation
+            visibleProjects: [], // Track which projects are visible for animation
+            lastScrollY: window.scrollY,
+            scrollDirection: 'down'
         }
     },
 
@@ -163,21 +165,39 @@ export default {
         },
         
         checkProjectVisibility() {
+            const currentScrollY = window.scrollY;
+            // Update scroll direction
+            this.scrollDirection = currentScrollY > this.lastScrollY ? 'down' : 'up';
+            this.lastScrollY = currentScrollY;
+
             const projectElements = document.querySelectorAll('.project-item');
             projectElements.forEach((el, index) => {
                 const rect = el.getBoundingClientRect();
                 const windowHeight = window.innerHeight || document.documentElement.clientHeight;
                 
                 if (rect.top <= windowHeight * 0.8) {
-                    // Add a slight delay based on index to create a cascading effect
                     setTimeout(() => {
                         this.visibleProjects[index] = true;
-                    }, index * 150); // 150ms delay between each project
+                    }, index * 150);
                 } else {
-                    // Reset visibility when project is out of view
                     this.visibleProjects[index] = false;
                 }
             });
+        },
+
+        // Restituisce le classi per animare in base al dispositivo e alla direzione dello scroll
+        projectAnimationClass(index) {
+            const base = 'project-animation';
+            if (this.isMobile) {
+                if (this.visibleProjects[index]) {
+                    return [base, 'show'];
+                } else {
+                    // Se scroll verso l'alto, esce verso sinistra; altrimenti verso destra
+                    return [base, this.scrollDirection === 'up' ? 'hide-up' : 'hide-down'];
+                }
+            } else {
+                return [base, this.visibleProjects[index] ? 'show' : ''];
+            }
         },
 
         changeApiPage(pageNumber) {
@@ -244,7 +264,7 @@ export default {
                             v-for="(currentProject, index) in projects"
                             :key="currentProject.slug"
                             :data-index="index"
-                            :class="['project-item', 'project-animation', visibleProjects[index] ? 'show' : '']"
+                            :class="['project-item', ...projectAnimationClass(index)]"
                         >
                             <AppProject 
                                 :project="currentProject"
@@ -315,16 +335,37 @@ export default {
 .my_home {
     width: 100%;
     min-height: 100vh;
-    padding-bottom: 80px; /* Added padding at the bottom to prevent projects from being cut off */
+    
+    // On desktop, use flex layout to distribute elements vertically
+    @media (min-width: 992px) {
+        padding-bottom: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; // Distribuisci lo spazio verticalmente
+    }
+    
+    // On mobile, keep the bottom padding to prevent projects from being cut off
+    @media (max-width: 991px) {
+        padding-bottom: 80px;
+    }
 }
 
-// Header section
+// Header section - adjusted for better vertical distribution
 .header-section {
     position: relative;
-    height: 300px;
-    overflow: hidden;
-    margin-bottom: 40px;
-    background-color: #1A4870; /* Background color for both desktop and mobile */
+    background-color: #1A4870;
+    
+    // Ensure the header takes up appropriate space on desktop with better vertical distribution
+    @media (min-width: 992px) {
+        height: 300px; // Increased from 250px for better distribution
+        margin-bottom: 50px; // Increased from 20px for better spacing
+    }
+    
+    // Mobile header height
+    @media (max-width: 991px) {
+        height: 300px;
+        margin-bottom: 40px;
+    }
 }
 
 .carousel-wrapper {
@@ -332,25 +373,25 @@ export default {
     height: 100%;
     overflow: hidden;
     background-color: #1A4870;
-    display: flex; /* For centering */
-    align-items: center; /* Center vertically */
-    justify-content: center; /* Center horizontally */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .carousel {
     display: flex;
     animation: scroll 25s linear infinite;
     align-items: center;
-    height: auto; /* Let it size naturally */
-    min-height: 100px; /* Minimum height */
-    padding: 20px 0; /* Add padding to ensure images are visible */
-    position: relative; /* Ensure visibility */
-    z-index: 1; /* Ensure visibility */
+    height: auto;
+    min-height: 100px;
+    padding: 20px 0;
+    position: relative;
+    z-index: 1;
 }
 
 .carousel img {
     width: 100px;
-    height: 100px; /* Fixed height for consistency */
+    height: 100px;
     margin-right: 20px;
     object-fit: contain;
     filter: brightness(0.8);
@@ -376,7 +417,7 @@ export default {
     text-align: center;
     color: white;
     padding: 0 20px;
-    z-index: 2; /* Ensure overlay is above carousel */
+    z-index: 2;
     
     h1 {
         margin-bottom: 15px;
@@ -398,11 +439,32 @@ export default {
     }
 }
 
-// Projects section
+// Projects section - adjusted for better vertical centering
 .projects-section {
-    padding: 40px 0;
     background-color: #f8f9fa;
-    min-height: 60vh; /* Ensure minimum height to give space for all content */
+    
+    // On desktop, use flex layout with better vertical distribution
+    @media (min-width: 992px) {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; // Center projects vertically
+        padding: 40px 0; // Added more padding for better spacing
+        
+        // Container should also flex to fill the space
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; // Center projects vertically
+        }
+    }
+    
+    // On mobile, keep the original padding
+    @media (max-width: 991px) {
+        padding: 40px 0;
+        min-height: 60vh;
+    }
 }
 
 .projects-container {
@@ -410,26 +472,93 @@ export default {
     flex-wrap: wrap;
     justify-content: center;
     gap: 30px;
-    margin-bottom: 40px; /* Space for pagination */
+    position: relative; // For hover effect
+    
+    // Adjusted for better spacing on desktop
+    @media (min-width: 992px) {
+        margin-bottom: 30px; // Increased from 20px
+    }
+    
+    // Keep original margin for mobile view
+    @media (max-width: 991px) {
+        margin-bottom: 40px;
+    }
 }
 
-// Project animation styles
+// Project animation and hover effect
 .project-animation {
     opacity: 0;
-    transform: translateX(100px); /* Increased distance for more visible effect */
-    transition: opacity 0.8s ease, transform 0.8s ease; /* Slightly faster for better UX */
+    transform: translateY(20px) translateZ(0); // Added translateZ(0) to migliorare il rendering
+    transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.4s ease, filter 0.4s ease;
+    position: relative;
+    background-color: none;
+    border: none;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
     
     &.show {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateY(0) translateZ(0);
     }
+    
+    &:hover {
+        // Su desktop manteniamo l'effetto di box-shadow; su mobile sarà rimosso per evitare l'effetto indesiderato
+        filter: brightness(1.05);
+    }
+    
+    &:focus,
+    &:active {
+      outline: none;
+      border: none;
+    }
+}
+
+// Add a parent hover effect to dim other projects
+.projects-container:hover .project-animation:not(:hover) {
+    filter: brightness(0.7); // Dim other projects
+    transform: scale(0.95); // Slightly smaller
+}
+
+// Mobile specific animations for project items
+@media (max-width: 768px) {
+  .project-animation {
+    opacity: 0;
+    transform: translateX(100%) translateZ(0);
+    transition: transform 0.8s ease, opacity 0.8s ease;
+  }
+  .project-animation.show {
+    opacity: 1;
+    transform: translateX(0) translateZ(0);
+  }
+  /* Quando scrolli verso l'alto, nascondi con effetto da sinistra */
+  .project-animation.hide-up {
+    opacity: 0;
+    transform: translateX(-100%) translateZ(0);
+  }
+  /* Quando scrolli verso il basso, nascondi con effetto da destra */
+  .project-animation.hide-down {
+    opacity: 0;
+    transform: translateX(100%) translateZ(0);
+  }
+  .project-animation:hover {
+    box-shadow: none; /* Rimuove il box-shadow su mobile per evitare l'effetto di "altra card" */
+  }
 }
 
 // Pagination styles improved
 .pagination-container {
     display: flex;
     justify-content: center;
-    margin: 30px 0 60px; /* Added bottom margin */
+    
+    // Adjust margin for desktop view
+    @media (min-width: 992px) {
+        margin: 30px 0; // Increased from 20px
+    }
+    
+    // Keep original margin for mobile view
+    @media (max-width: 991px) {
+        margin: 30px 0 60px;
+    }
 }
 
 .pagination {
@@ -449,7 +578,7 @@ export default {
         transition: all 0.3s ease;
         border-right: 1px solid #e9ecef;
         user-select: none;
-        font-size: 16px; /* Added explicit font size */
+        font-size: 16px;
         
         &:last-child {
             border-right: none;
@@ -520,7 +649,7 @@ export default {
 @media (max-width: 991px) {
     // Medium devices (tablets, desktops)
     .header-section {
-        height: 250px; /* Reduced height */
+        height: 250px;
     }
     
     // Styles for projects on tablets
@@ -538,7 +667,7 @@ export default {
     }
     
     .header-section {
-        height: 220px; /* Adjusted height */
+        height: 220px;
     }
     
     .header-overlay {
@@ -560,7 +689,7 @@ export default {
 @media (max-width: 576px) {
     // Extra small devices (phones)
     .header-section {
-        height: 200px; /* Adjusted height */
+        height: 200px;
     }
     
     .header-overlay {
