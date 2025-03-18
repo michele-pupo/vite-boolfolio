@@ -43,7 +43,7 @@ export default {
   top: 0;
   background-color: #03346E;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  z-index: 10;
+  z-index: 1000; /* Aumentato per assicurarsi che sia sempre sopra gli altri elementi */
 }
 
 .header-content {
@@ -96,11 +96,16 @@ export default {
 
 /* Responsive: per schermi piccoli, il contenuto è centrato e disposto a colonna */
 @media (max-width: 768px) {
+  .top-header {
+    padding: 1rem 0;
+  }
+  
   .header-content {
     flex-direction: column;
     text-align: center;
-    gap: 1rem;
+    gap: 0.8rem;
   }
+  
   .header-title h1 {
     font-size: 1rem;
   }

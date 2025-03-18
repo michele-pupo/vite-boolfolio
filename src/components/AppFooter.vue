@@ -44,7 +44,7 @@ export default {
   bottom: 0;
   background-color: #03346E;
   box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
-  z-index: 10;
+  z-index: 1000; /* Aumentato per assicurarsi che sia in primo piano */
 }
 
 .footer-content {
@@ -83,19 +83,30 @@ export default {
 }
 
 @media (max-width: 768px) {
+  .top-footer {
+    padding: 1rem 0; /* Ridotto il padding per dispositivi mobili */
+  }
+  
   .footer-content {
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.8rem;
     text-align: center;
   }
   
   .copyright {
     text-align: center;
     margin-top: 0.5rem;
+    font-size: 0.8rem; /* Testo leggermente più piccolo */
   }
   
   .social-list {
     justify-content: center;
+    gap: 1.2rem; /* Spazio ridotto tra le icone */
+  }
+  
+  .social-icon {
+    width: 36px; /* Icone leggermente più piccole su mobile */
+    height: 36px;
   }
 }
 </style>

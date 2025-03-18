@@ -108,13 +108,15 @@ export default {
   position: relative;
   overflow-y: auto;
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+  /* Compensazione per header e footer fissi */
+  padding-top: 80px; /* Spazio per l'header */
+  padding-bottom: 100px; /* Spazio per il footer */
 }
 
 .project-container {
   width: 100%;
-  min-height: 100vh;
+  /* Altezza regolata per tenere conto di header e footer */
+  min-height: calc(100vh - 180px); /* 100vh - (header + footer) */
   padding: 30px 15px;
   box-sizing: border-box;
   display: flex;
@@ -124,15 +126,13 @@ export default {
 
 .project-card {
   width: 100%;
-  height: 100%;
+  height: auto;
   max-width: 800px;
   border-radius: 12px;
   overflow: hidden;
   background-color: #F9DBBA;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
-  margin-top: 80px;
-  margin-bottom: 80px;
+  margin: 20px auto; /* Aggiunto un margine minimo */
   
   .card-header {
     background-color: rgba(0, 0, 0, 0.03);
@@ -265,11 +265,19 @@ export default {
 
 /* Stili per dispositivi di piccole dimensioni */
 @media (max-width: 576px) {
+  .page-wrapper {
+    padding-top: 120px; /* Più spazio per l'header su mobile */
+    padding-bottom: 120px; /* Più spazio per il footer su mobile */
+  }
+
   .project-container {
+    min-height: calc(100vh - 240px); /* 100vh - (header + footer su mobile) */
     padding: 15px 10px;
   }
   
   .project-card {
+    margin: 10px auto;
+    
     .card-header {
       padding: 10px 15px;
       
@@ -294,6 +302,9 @@ export default {
         
         .btn {
           margin-bottom: 10px;
+          &:last-child {
+            margin-bottom: 0;
+          }
         }
       }
     }
@@ -302,11 +313,19 @@ export default {
 
 /* Stili per dispositivi di medie dimensioni */
 @media (min-width: 577px) and (max-width: 768px) {
+  .page-wrapper {
+    padding-top: 110px; /* Spazio per l'header su tablet */
+    padding-bottom: 110px; /* Spazio per il footer su tablet */
+  }
+
   .project-container {
-    padding: 20px;
+    min-height: calc(100vh - 220px); /* 100vh - (header + footer su tablet) */
+    padding: 20px 15px;
   }
   
   .project-card {
+    margin: 15px auto;
+    
     .card-header {
       .card-title {
         font-size: 1.8rem;
@@ -324,7 +343,12 @@ export default {
   .project-container {
     padding: 30px;
   }
+  
+  .project-card {
+    margin: 20px auto;
+  }
 }
+
 </style>
 
 
