@@ -18,6 +18,7 @@ export default {
             baseApiUrl: 'http://127.0.0.1:8000/api',
             isMobile: false,
             error: null,
+            visibleProjects: [] // Track which projects are visible for animation
         }
     },
 
@@ -30,11 +31,24 @@ export default {
         
         // Initial API call based on device type
         this.loadProjects();
+        
+        // Add scroll event listener for animations
+        window.addEventListener('scroll', this.checkProjectVisibility);
     },
     
     beforeUnmount() {
-        // Remove event listener when component is destroyed
+        // Remove event listeners when component is destroyed
         window.removeEventListener('resize', this.checkDeviceType);
+        window.removeEventListener('scroll', this.checkProjectVisibility);
+    },
+    
+    updated() {
+        // Setup intersection observer after projects are loaded
+        if (this.projects.length > 0 && this.visibleProjects.length === 0) {
+            this.$nextTick(() => {
+                this.setupIntersectionObserver();
+            });
+        }
     },
 
     methods: {
@@ -45,6 +59,9 @@ export default {
             // Only reload if device type changed
             if (wasAlreadyMobile !== this.isMobile) {
                 this.loadProjects();
+                
+                // Reset visibility when switching device types
+                this.resetProjectVisibility();
             }
         },
         
@@ -69,6 +86,8 @@ export default {
                     this.isLoading = false;
                     this.projects = res.data.result.data;
                     this.apiLinks = res.data.result.links;
+                    // Initialize visibility array
+                    this.resetProjectVisibility();
                 }
             }).catch(error => {
                 console.error("Error fetching projects:", error);
@@ -89,11 +108,75 @@ export default {
                 if (res.data.success) {
                     this.isLoading = false;
                     this.projects = res.data.result;
+                    // Initialize visibility array for all projects
+                    this.resetProjectVisibility();
+                    
+                    // Setup intersection observer after DOM update
+                    this.$nextTick(() => {
+                        this.setupIntersectionObserver();
+                    });
                 }
             }).catch(error => {
                 console.error("Error fetching all projects:", error);
                 this.isLoading = false;
                 this.error = "Si è verificato un errore durante il caricamento dei progetti.";
+            });
+        },
+        
+        // Reset all projects to invisible state
+        resetProjectVisibility() {
+            this.visibleProjects = Array(this.projects.length).fill(false);
+            // Force check visibility after reset
+            this.$nextTick(() => {
+                this.checkProjectVisibility();
+            });
+        },
+        
+        setupIntersectionObserver() {
+            const options = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 // Reduced threshold so animation starts sooner
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const index = parseInt(entry.target.dataset.index);
+                    if (!isNaN(index)) {
+                        if (entry.isIntersecting) {
+                            // Add a slight delay based on index to create a cascading effect
+                            setTimeout(() => {
+                                this.visibleProjects[index] = true;
+                            }, index * 150); // 150ms delay between each project
+                        } else {
+                            // Reset visibility when project is out of view
+                            this.visibleProjects[index] = false;
+                        }
+                    }
+                });
+            }, options);
+            
+            // Observe all project elements
+            document.querySelectorAll('.project-item').forEach(el => {
+                observer.observe(el);
+            });
+        },
+        
+        checkProjectVisibility() {
+            const projectElements = document.querySelectorAll('.project-item');
+            projectElements.forEach((el, index) => {
+                const rect = el.getBoundingClientRect();
+                const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+                
+                if (rect.top <= windowHeight * 0.8) {
+                    // Add a slight delay based on index to create a cascading effect
+                    setTimeout(() => {
+                        this.visibleProjects[index] = true;
+                    }, index * 150); // 150ms delay between each project
+                } else {
+                    // Reset visibility when project is out of view
+                    this.visibleProjects[index] = false;
+                }
             });
         },
 
@@ -116,32 +199,10 @@ export default {
 
 <template>
     <div class="d-flex flex-column my_home">
-        <!-- Header section with carousel -->
+        <!-- Header section with carousel - hidden on mobile -->
         <div class="header-section">
-            <div class="carousel-wrapper">
+            <div class="carousel-wrapper" v-if="!isMobile">
                 <div class="carousel">
-                    <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
-                    <img src="/bootstrap-tutorial.png" alt="Bootstrap">
-                    <img src="/1698604163003.png" alt="Javascript">
-                    <img src="/css.png" alt="Css">
-                    <img src="/353261.png" alt="Php">
-                    <img src="/eceb15684d4183c66f73c1a9bb777eef708b2b66.png" alt="Mysql">
-                    <img src="/fposter,small,wall_texture,product,750x1000_preview_rev_1.png" alt="Vite">
-                    <img src="/HTML5_logo_and_wordmark.svg.png" alt="Html5">
-                    <img src="/laravel-featured_preview_rev_1.png" alt="Laravel">
-                    <img src="/sass-icon-1024x1024-kn7u23pl.png" alt="Sass">
-                    <!-- Duplicate images for continuous carousel -->
-                    <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
-                    <img src="/bootstrap-tutorial.png" alt="Bootstrap">
-                    <img src="/1698604163003.png" alt="Javascript">
-                    <img src="/css.png" alt="Css">
-                    <img src="/353261.png" alt="Php">
-                    <img src="/eceb15684d4183c66f73c1a9bb777eef708b2b66.png" alt="Mysql">
-                    <img src="/fposter,small,wall_texture,product,750x1000_preview_rev_1.png" alt="Vite">
-                    <img src="/HTML5_logo_and_wordmark.svg.png" alt="Html5">
-                    <img src="/laravel-featured_preview_rev_1.png" alt="Laravel">
-                    <img src="/sass-icon-1024x1024-kn7u23pl.png" alt="Sass">
-                    <!-- Duplicate images for continuous carousel -->
                     <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
                     <img src="/bootstrap-tutorial.png" alt="Bootstrap">
                     <img src="/1698604163003.png" alt="Javascript">
@@ -179,19 +240,24 @@ export default {
                 <div v-if="!isLoading && !error">
                     <!-- Projects container with responsive layout -->
                     <div class="projects-container">
-                        <AppProject 
-                            v-for="currentProject in projects"
+                        <div 
+                            v-for="(currentProject, index) in projects"
                             :key="currentProject.slug"
-                            :project="currentProject"
-                            :projectName="currentProject.name"
-                            :projectDescription="currentProject.description"
-                            :projectImage="currentProject.project_image"
-                            :projectDate="currentProject.project_date"
-                            :projectLink="currentProject.link_github"
-                            :projectTechnolgies="currentProject.technologies"
-                            :projectType="currentProject.type.title"
-                            :nonClickable="true"
-                        />
+                            :data-index="index"
+                            :class="['project-item', 'project-animation', visibleProjects[index] ? 'show' : '']"
+                        >
+                            <AppProject 
+                                :project="currentProject"
+                                :projectName="currentProject.name"
+                                :projectDescription="currentProject.description"
+                                :projectImage="currentProject.project_image"
+                                :projectDate="currentProject.project_date"
+                                :projectLink="currentProject.link_github"
+                                :projectTechnolgies="currentProject.technologies"
+                                :projectType="currentProject.type.title"
+                                :nonClickable="true"
+                            />
+                        </div>
                     </div>
 
                     <!-- No projects message -->
@@ -258,6 +324,7 @@ export default {
     height: 300px;
     overflow: hidden;
     margin-bottom: 40px;
+    background-color: #1A4870; /* Background color for both desktop and mobile */
 }
 
 .carousel-wrapper {
@@ -265,18 +332,25 @@ export default {
     height: 100%;
     overflow: hidden;
     background-color: #1A4870;
+    display: flex; /* For centering */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
 }
 
 .carousel {
     display: flex;
     animation: scroll 25s linear infinite;
-    height: 100%;
     align-items: center;
+    height: auto; /* Let it size naturally */
+    min-height: 100px; /* Minimum height */
+    padding: 20px 0; /* Add padding to ensure images are visible */
+    position: relative; /* Ensure visibility */
+    z-index: 1; /* Ensure visibility */
 }
 
 .carousel img {
     width: 100px;
-    height: auto;
+    height: 100px; /* Fixed height for consistency */
     margin-right: 20px;
     object-fit: contain;
     filter: brightness(0.8);
@@ -302,6 +376,7 @@ export default {
     text-align: center;
     color: white;
     padding: 0 20px;
+    z-index: 2; /* Ensure overlay is above carousel */
     
     h1 {
         margin-bottom: 15px;
@@ -336,6 +411,18 @@ export default {
     justify-content: center;
     gap: 30px;
     margin-bottom: 40px; /* Space for pagination */
+}
+
+// Project animation styles
+.project-animation {
+    opacity: 0;
+    transform: translateX(100px); /* Increased distance for more visible effect */
+    transition: opacity 0.8s ease, transform 0.8s ease; /* Slightly faster for better UX */
+    
+    &.show {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 // Pagination styles improved
@@ -433,11 +520,7 @@ export default {
 @media (max-width: 991px) {
     // Medium devices (tablets, desktops)
     .header-section {
-        height: 350px;
-    }
-    
-    .carousel img {
-        width: 95px;
+        height: 250px; /* Reduced height */
     }
     
     // Styles for projects on tablets
@@ -455,7 +538,7 @@ export default {
     }
     
     .header-section {
-        height: 400px;
+        height: 220px; /* Adjusted height */
     }
     
     .header-overlay {
@@ -468,18 +551,6 @@ export default {
         }
     }
     
-    .carousel-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .carousel {
-        position: relative;
-        top: 0;
-        height: auto;
-    }
-    
     // Ensure projects have enough margin at the bottom
     .my_home {
         padding-bottom: 100px;
@@ -488,18 +559,17 @@ export default {
 
 @media (max-width: 576px) {
     // Extra small devices (phones)
-    .carousel {
-        align-items: center;
-    }
-    
-    .carousel img {
-        width: 80px;
-        margin-right: 15px;
+    .header-section {
+        height: 200px; /* Adjusted height */
     }
     
     .header-overlay {
         h1 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
+        }
+        
+        p {
+            font-size: 0.9rem;
         }
     }
     
