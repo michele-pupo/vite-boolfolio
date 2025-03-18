@@ -37,14 +37,19 @@ export default {
 
 <style lang="scss">
 .top-footer {
-  width: 100%;
-  height: auto;
-  padding: 1.5rem 0;
-  position: fixed;
-  bottom: 0;
-  background-color: #03346E;
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000; /* Aumentato per assicurarsi che sia in primo piano */
+    width: 100%;
+    height: auto;
+    padding: 1.5rem 0;
+    position: fixed;
+    bottom: 0;
+    background-color: #03346E;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    
+    // Add this to ensure content isn't hidden behind the footer
+    @media (min-width: 992px) {
+        padding: 1rem 0; // Slightly reduced padding for desktop
+    }
 }
 
 .footer-content {

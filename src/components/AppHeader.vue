@@ -94,20 +94,73 @@ export default {
   }
 }
 
-/* Responsive: per schermi piccoli, il contenuto è centrato e disposto a colonna */
+/* Responsive: per schermi piccoli, modifica il layout invece di nascondere completamente */
 @media (max-width: 768px) {
   .top-header {
-    padding: 1rem 0;
+    padding: 0.8rem 0;
+    position: relative; /* Cambiato da fixed a relative per non sovrapporsi al contenuto */
   }
   
   .header-content {
-    flex-direction: column;
+    flex-direction: row; /* Mantenuto in riga per ottimizzare lo spazio */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .brand, .menu {
+    flex-basis: 50%; /* Utilizza metà dello spazio disponibile */
+  }
+  
+  .brand {
+    text-align: left;
+  }
+  
+  .menu {
+    text-align: right;
+  }
+  
+  .header-title {
+    flex-basis: 100%; /* Occupa l'intera larghezza */
     text-align: center;
+    margin-top: 0.5rem;
+    
+    h1 {
+      font-size: 0.9rem;
+    }
+  }
+  
+  /* Stile per il menu ridotto */
+  .menu-list {
+    justify-content: flex-end;
     gap: 0.8rem;
+  }
+}
+
+/* Aggiustamenti per schermi molto piccoli */
+@media (max-width: 480px) {
+  .header-content {
+    gap: 0.3rem;
+  }
+  
+  .brand-link, .menu-list li a {
+    font-size: 0.9rem;
   }
   
   .header-title h1 {
-    font-size: 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Compensare lo spazio occupato dall'header nelle altre sezioni */
+body {
+  padding-top: 0; /* Rimuoviamo padding che potrebbe essere presente */
+}
+
+/* Aggiunta di spazio per l'header per il contenuto principale su desktop */
+@media (min-width: 769px) {
+  .my_home, main, .header-section {
+    padding-top: 5rem; /* Aggiungiamo spazio per l'header fisso */
   }
 }
 </style>

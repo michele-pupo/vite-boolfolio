@@ -219,8 +219,9 @@ export default {
 
 <template>
     <div class="d-flex flex-column my_home">
-        <!-- Header section with carousel - hidden on mobile -->
+        <!-- Header section - with carousel only on desktop -->
         <div class="header-section">
+            <!-- Carousel only shown on desktop -->
             <div class="carousel-wrapper" v-if="!isMobile">
                 <div class="carousel">
                     <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
@@ -246,6 +247,7 @@ export default {
                     <img src="/sass-icon-1024x1024-kn7u23pl.png" alt="Sass">
                 </div>
             </div>
+            <!-- Header overlay always visible on all devices -->
             <div class="header-overlay">
                 <div class="container">
                     <h1 class="text-uppercase fw-bold display-3">I miei progetti</h1>
@@ -341,7 +343,7 @@ export default {
         padding-bottom: 0;
         display: flex;
         flex-direction: column;
-        justify-content: space-between; // Distribuisci lo spazio verticalmente
+        justify-content: space-between;
     }
     
     // On mobile, keep the bottom padding to prevent projects from being cut off
@@ -350,21 +352,35 @@ export default {
     }
 }
 
-// Header section - adjusted for better vertical distribution
+// Header section - adjusted for better appearance on all screen sizes
 .header-section {
     position: relative;
     background-color: #1A4870;
     
-    // Ensure the header takes up appropriate space on desktop with better vertical distribution
+    // Desktop header height
     @media (min-width: 992px) {
-        height: 300px; // Increased from 250px for better distribution
-        margin-bottom: 50px; // Increased from 20px for better spacing
+        height: 300px;
+        margin-bottom: 50px;
     }
     
-    // Mobile header height
-    @media (max-width: 991px) {
-        height: 300px;
+    // Tablet header height
+    @media (max-width: 991px) and (min-width: 769px) {
+        height: 250px;
         margin-bottom: 40px;
+    }
+    
+    // Small tablet/large mobile header height
+    @media (max-width: 768px) {
+        height: 200px !important; // !important to override other styles
+        min-height: 200px !important;
+        margin-bottom: 30px;
+    }
+    
+    // Small mobile devices
+    @media (max-width: 576px) {
+        height: 180px !important;
+        min-height: 180px !important;
+        margin-bottom: 25px;
     }
 }
 
@@ -376,6 +392,11 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    
+    // Hide carousel on mobile
+    @media (max-width: 768px) {
+        display: none !important;
+    }
 }
 
 .carousel {
@@ -409,7 +430,7 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background-color: rgba(26, 72, 112, 0.9); // #1A4870 with opacity
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -417,16 +438,42 @@ export default {
     text-align: center;
     color: white;
     padding: 0 20px;
-    z-index: 2;
+    z-index: 10; // Increased z-index to ensure it's above everything
     
     h1 {
         margin-bottom: 15px;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        
+        // Ensure text is visible on smaller screens
+        @media (max-width: 768px) {
+            font-size: 2rem !important;
+            margin-bottom: 10px;
+            display: block !important;
+            width: 100% !important;
+            text-align: center !important;
+        }
+        
+        @media (max-width: 576px) {
+            font-size: 1.8rem !important;
+            margin-bottom: 8px;
+        }
     }
     
     p {
         font-size: 1.2rem;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        
+        // Ensure subtitle is visible on smaller screens
+        @media (max-width: 768px) {
+            font-size: 1rem !important;
+            display: block !important;
+            width: 100% !important;
+            text-align: center !important;
+        }
+        
+        @media (max-width: 576px) {
+            font-size: 0.9rem !important;
+        }
     }
 }
 
@@ -439,7 +486,7 @@ export default {
     }
 }
 
-// Projects section - adjusted for better vertical centering
+// Projects section
 .projects-section {
     background-color: #f8f9fa;
     
@@ -448,22 +495,28 @@ export default {
         flex: 1;
         display: flex;
         flex-direction: column;
-        justify-content: center; // Center projects vertically
-        padding: 40px 0; // Added more padding for better spacing
+        justify-content: center;
+        padding: 40px 0;
         
         // Container should also flex to fill the space
         .container {
             flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center; // Center projects vertically
+            justify-content: center;
         }
     }
     
-    // On mobile, keep the original padding
-    @media (max-width: 991px) {
+    // On tablet, keep the original padding
+    @media (max-width: 991px) and (min-width: 769px) {
         padding: 40px 0;
         min-height: 60vh;
+    }
+    
+    // On mobile, reduce padding for better space utilization
+    @media (max-width: 768px) {
+        padding: 25px 0;
+        min-height: 50vh;
     }
 }
 
@@ -472,23 +525,35 @@ export default {
     flex-wrap: wrap;
     justify-content: center;
     gap: 30px;
-    position: relative; // For hover effect
+    position: relative;
     
     // Adjusted for better spacing on desktop
     @media (min-width: 992px) {
-        margin-bottom: 30px; // Increased from 20px
+        margin-bottom: 30px;
     }
     
-    // Keep original margin for mobile view
-    @media (max-width: 991px) {
+    // Keep original margin for tablet view
+    @media (max-width: 991px) and (min-width: 769px) {
         margin-bottom: 40px;
+    }
+    
+    // Reduced margin for mobile view
+    @media (max-width: 768px) {
+        margin-bottom: 25px;
+        gap: 20px;
+    }
+    
+    // Even smaller margin for smallest screens
+    @media (max-width: 576px) {
+        margin-bottom: 20px;
+        gap: 15px;
     }
 }
 
 // Project animation and hover effect
 .project-animation {
     opacity: 0;
-    transform: translateY(20px) translateZ(0); // Added translateZ(0) to migliorare il rendering
+    transform: translateY(20px) translateZ(0);
     transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.4s ease, filter 0.4s ease;
     position: relative;
     background-color: none;
@@ -502,7 +567,6 @@ export default {
     }
     
     &:hover {
-        // Su desktop manteniamo l'effetto di box-shadow; su mobile sarà rimosso per evitare l'effetto indesiderato
         filter: brightness(1.05);
     }
     
@@ -515,8 +579,8 @@ export default {
 
 // Add a parent hover effect to dim other projects
 .projects-container:hover .project-animation:not(:hover) {
-    filter: brightness(0.7); // Dim other projects
-    transform: scale(0.95); // Slightly smaller
+    filter: brightness(0.7);
+    transform: scale(0.95);
 }
 
 // Mobile specific animations for project items
@@ -541,23 +605,28 @@ export default {
     transform: translateX(100%) translateZ(0);
   }
   .project-animation:hover {
-    box-shadow: none; /* Rimuove il box-shadow su mobile per evitare l'effetto di "altra card" */
+    box-shadow: none;
   }
 }
 
-// Pagination styles improved
+// Pagination styles
 .pagination-container {
     display: flex;
     justify-content: center;
     
     // Adjust margin for desktop view
     @media (min-width: 992px) {
-        margin: 30px 0; // Increased from 20px
+        margin: 30px 0;
     }
     
-    // Keep original margin for mobile view
-    @media (max-width: 991px) {
+    // Keep original margin for tablet view
+    @media (max-width: 991px) and (min-width: 769px) {
         margin: 30px 0 60px;
+    }
+    
+    // Reduced margin for mobile view
+    @media (max-width: 768px) {
+        margin: 20px 0 50px;
     }
 }
 
@@ -599,6 +668,12 @@ export default {
             cursor: not-allowed;
             background-color: #f8f9fa;
         }
+        
+        // Adjusted padding for smaller screens
+        @media (max-width: 576px) {
+            padding: 8px 12px;
+            font-size: 14px;
+        }
     }
 }
 
@@ -610,6 +685,11 @@ export default {
     justify-content: center;
     padding: 50px 0;
     text-align: center;
+    
+    // Reduced padding on mobile
+    @media (max-width: 768px) {
+        padding: 30px 0;
+    }
 }
 
 .spinner-container {
@@ -623,6 +703,12 @@ export default {
         width: 3rem;
         height: 3rem;
         color: #1A4870;
+        
+        // Slightly smaller on mobile
+        @media (max-width: 576px) {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
     }
 }
 
@@ -638,23 +724,18 @@ export default {
     }
 }
 
-// Responsive styles adjusted
+// Responsive styles - refined for different breakpoints
 @media (max-width: 1200px) {
     // Large devices
     .projects-container {
-        gap: 20px;
+        gap: 25px;
     }
 }
 
 @media (max-width: 991px) {
     // Medium devices (tablets, desktops)
-    .header-section {
-        height: 250px;
-    }
-    
-    // Styles for projects on tablets
     .projects-container {
-        gap: 15px;
+        gap: 20px;
     }
 }
 
@@ -663,53 +744,25 @@ export default {
     .projects-container {
         flex-direction: column;
         align-items: center;
-        margin-bottom: 30px;
     }
     
-    .header-section {
-        height: 220px;
-    }
-    
-    .header-overlay {
-        h1 {
-            font-size: 2rem;
-        }
-        
-        p {
-            font-size: 1rem;
-        }
-    }
-    
-    // Ensure projects have enough margin at the bottom
+    // Optimize spacing for mobile
     .my_home {
-        padding-bottom: 100px;
+        padding-bottom: 80px;
+    }
+    
+    // Add negative margin to compensate for header margin if needed
+    #projects-section {
+        margin-top: -10px;
     }
 }
 
 @media (max-width: 576px) {
     // Extra small devices (phones)
-    .header-section {
-        height: 200px;
-    }
-    
-    .header-overlay {
-        h1 {
-            font-size: 1.5rem;
-        }
-        
-        p {
-            font-size: 0.9rem;
-        }
-    }
-    
     // Ensure projects have enough margin at the bottom
     .my_home {
-        padding-bottom: 120px;
-    }
-    
-    // Reduce project container bottom margin
-    .projects-container {
-        margin-bottom: 20px;
+        padding-bottom: 70px;
     }
 }
+
 </style>
