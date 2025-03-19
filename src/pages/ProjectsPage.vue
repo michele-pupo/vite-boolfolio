@@ -238,6 +238,17 @@ export default {
                     <img src="/HTML5_logo_and_wordmark.svg.png" alt="Html5">
                     <img src="/laravel-featured_preview_rev_1.png" alt="Laravel">
                     <img src="/sass-icon-1024x1024-kn7u23pl.png" alt="Sass">
+                    <!-- Duplico le immagini per effetto carousel continuo -->
+                    <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
+                    <img src="/bootstrap-tutorial.png" alt="Bootstrap">
+                    <img src="/1698604163003.png" alt="Javascript">
+                    <img src="/css.png" alt="Css">
+                    <img src="/353261.png" alt="Php">
+                    <img src="/eceb15684d4183c66f73c1a9bb777eef708b2b66.png" alt="Mysql">
+                    <img src="/fposter,small,wall_texture,product,750x1000_preview_rev_1.png" alt="Vite">
+                    <img src="/HTML5_logo_and_wordmark.svg.png" alt="Html5">
+                    <img src="/laravel-featured_preview_rev_1.png" alt="Laravel">
+                    <img src="/sass-icon-1024x1024-kn7u23pl.png" alt="Sass">
                 </div>
             </div>
             <!-- Overlay sempre presente per titoli e sottotitoli -->
@@ -348,13 +359,14 @@ export default {
 /* Header con gradiente più chiaro in alto, più scuro in basso */
 .header-section {
     position: relative;
+    margin-top: 110px;
     background: linear-gradient(135deg, #3F8EC2 20%, #1A4870 100%);
     /* Più percentuali: #3F8EC2 (azzurro) → #1A4870 (blu scuro) */
     color: #fff; 
     overflow: hidden; /* Nel caso ci siano elementi in overflow */
     
     /* Altezza minima per “hero” */
-    min-height: 300px;
+    min-height: 200px;
     
     @media (max-width: 768px) {
         min-height: 200px;
@@ -370,6 +382,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: 30px;
     
     @media (max-width: 768px) {
         display: none !important;
