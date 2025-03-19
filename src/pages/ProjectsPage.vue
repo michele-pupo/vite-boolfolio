@@ -216,6 +216,28 @@ export default {
                     <img src="/HTML5_logo_and_wordmark.svg.png" alt="Html5">
                     <img src="/laravel-featured_preview_rev_1.png" alt="Laravel">
                     <img src="/sass-icon-1024x1024-kn7u23pl.png" alt="Sass">
+                    <!-- Duplico le immagini per effetto carousel continuo -->
+                    <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
+                    <img src="/bootstrap-tutorial.png" alt="Bootstrap">
+                    <img src="/1698604163003.png" alt="Javascript">
+                    <img src="/css.png" alt="Css">
+                    <img src="/353261.png" alt="Php">
+                    <img src="/eceb15684d4183c66f73c1a9bb777eef708b2b66.png" alt="Mysql">
+                    <img src="/fposter,small,wall_texture,product,750x1000_preview_rev_1.png" alt="Vite">
+                    <img src="/HTML5_logo_and_wordmark.svg.png" alt="Html5">
+                    <img src="/laravel-featured_preview_rev_1.png" alt="Laravel">
+                    <img src="/sass-icon-1024x1024-kn7u23pl.png" alt="Sass">
+                    <!-- Duplico le immagini per effetto carousel continuo -->
+                    <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
+                    <img src="/bootstrap-tutorial.png" alt="Bootstrap">
+                    <img src="/1698604163003.png" alt="Javascript">
+                    <img src="/css.png" alt="Css">
+                    <img src="/353261.png" alt="Php">
+                    <img src="/eceb15684d4183c66f73c1a9bb777eef708b2b66.png" alt="Mysql">
+                    <img src="/fposter,small,wall_texture,product,750x1000_preview_rev_1.png" alt="Vite">
+                    <img src="/HTML5_logo_and_wordmark.svg.png" alt="Html5">
+                    <img src="/laravel-featured_preview_rev_1.png" alt="Laravel">
+                    <img src="/sass-icon-1024x1024-kn7u23pl.png" alt="Sass">
                 </div>
             </div>
             <!-- Overlay sempre presente per titoli e sottotitoli -->
