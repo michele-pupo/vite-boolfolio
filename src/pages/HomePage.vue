@@ -630,4 +630,10 @@ export default {
     height: 50px; /* Ridotto per schermi più piccoli */
   }
 }
+* {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
 </style>
