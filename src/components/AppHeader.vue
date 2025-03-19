@@ -98,7 +98,7 @@ export default {
 @media (max-width: 768px) {
   .top-header {
     padding: 0.8rem 0;
-    position: relative; /* Cambiato da fixed a relative per non sovrapporsi al contenuto */
+    position: fixed;
   }
   
   .header-content {
