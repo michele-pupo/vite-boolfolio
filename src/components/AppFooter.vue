@@ -79,7 +79,7 @@ export default {
   filter: brightness(0.95);
   
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px) scale(1.2);
     filter: brightness(1.1);
   }
 }
