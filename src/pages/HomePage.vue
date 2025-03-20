@@ -21,6 +21,54 @@ export default {
         { number: '2', text: 'Anni di esperienza tecnica' },
       ]
     }
+  },
+
+  methods: {
+    copyToClipboard(text, event) {
+      
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      
+      try {
+        document.execCommand('copy');
+        this.showTooltip(event.target, 'Copiato negli appunti');
+      } catch (err) {
+        this.showTooltip(event.target, 'Impossibile copiare');
+        console.error('Errore durante la copia: ', err);
+      }
+      
+      document.body.removeChild(textArea);
+    },
+    showTooltip(element, message) {
+      
+      const linkElement = element.closest('.contact-link');
+      if (!linkElement) return;
+      
+      // Crea un tooltip
+      const tooltip = document.createElement('div');
+      tooltip.classList.add('copy-tooltip');
+      tooltip.textContent = message;
+      
+      // Aggiungi il tooltip accanto all'elemento
+      linkElement.appendChild(tooltip);
+      
+      // Mostra il tooltip
+      setTimeout(() => {
+        tooltip.classList.add('visible');
+      }, 10);
+      
+      // Rimuovi il tooltip dopo 2 secondi
+      setTimeout(() => {
+        tooltip.classList.remove('visible');
+        setTimeout(() => {
+          if (tooltip.parentNode) {
+            tooltip.parentNode.removeChild(tooltip);
+          }
+        }, 300);
+      }, 2000);
+    }
   }
 }
 </script>
@@ -39,11 +87,11 @@ export default {
       <h2>Jr Full Stack Web Developer</h2>
 
       <div class="quick-contact">
-        <a href="#" class="contact-link">
+        <a href="#" class="contact-link" @click.prevent="copyToClipboard('mikypupowd@gmail.com', $event)">
           <i class="fas fa-envelope"></i>
           <span>mikypupowd@gmail.com</span>
         </a>
-        <a href="#" class="contact-link">
+        <a href="#" class="contact-link" @click.prevent="copyToClipboard('+39 389 992 8860', $event)">
           <i class="fas fa-phone"></i>
           <span>+39 389 992 8860</span>
         </a>
@@ -637,5 +685,47 @@ export default {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+}
+
+/* Stili per il tooltip */
+.contact-link {
+  cursor: pointer;
+  position: relative;
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.copy-tooltip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -30px;
+  background-color: #333;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+  z-index: 1000;
+  
+  &.visible {
+    opacity: 1;
+  }
+  
+  &:after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0 5px 5px;
+    border-style: solid;
+    border-color: transparent transparent #333;
+  }
 }
 </style>
