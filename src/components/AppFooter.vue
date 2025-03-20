@@ -21,7 +21,7 @@ export default {
               </a>
             </li>
             <li>
-              <router-link :to="{ name: 'contact-me' }" target="_blank" aria-label="Email" title="Scrivimi un'email">
+              <router-link :to="{ name: 'contact-me' }" aria-label="Email" title="Scrivimi un'email">
                 <img src="/public/email.png" alt="Email" class="social-icon">
               </router-link>
             </li>
