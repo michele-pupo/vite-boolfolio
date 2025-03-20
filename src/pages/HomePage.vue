@@ -9,6 +9,8 @@ export default {
         { name: 'Sass', icon: 'fab fa-sass', color: '#CC6699' },
         { name: 'JavaScript', icon: 'fab fa-js', color: '#F7DF1E' },
         { name: 'Vue.js', icon: 'fab fa-vuejs', color: '#4FC08D' },
+        { name: 'Angular', icon: 'fab fa-angular', color: '#DD0031' },
+        { name: 'React', icon: 'fab fa-react', color: '#61DAFB' },
         { name: 'PHP', icon: 'fab fa-php', color: '#777BB4' },
         { name: 'Laravel', icon: 'fab fa-laravel', color: '#FF2D20' },
         { name: 'MySQL', icon: 'fas fa-database', color: '#4479A1' },
@@ -123,7 +125,7 @@ export default {
             <h3>Scarica il mio CV</h3>
             <p>Visualizza e scarica il mio curriculum vitae completo in formato PDF</p>
           </div>
-          <a href="/public/CV Michele Fabio Pupo.pdf" download="Michele_Fabio_Pupo_CV.pdf" class="cv-button">
+          <a href="/CV%20Michele%20Fabio%20Pupo.pdf" target="_blank" class="cv-button">
             <span class="cv-button-text">Scarica CV</span>
             <span class="cv-button-icon"><i class="fas fa-download"></i></span>
           </a>

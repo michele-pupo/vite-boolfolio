@@ -18,9 +18,6 @@ export default {
             <li class="project">
               <router-link :to="{ name: 'project' }">Progetti</router-link>
             </li>
-            <li class="project">
-              <router-link :to="{ name: 'contact-me' }">Contattami</router-link>
-            </li>
           </ul>
         </nav>
         <!-- Titolo centrale -->

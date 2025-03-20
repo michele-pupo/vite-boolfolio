@@ -11,17 +11,22 @@ export default {
         <div class="social-links">
           <ul class="social-list">
             <li>
-              <a href="https://github.com/michele-pupo" target="_blank" aria-label="GitHub">
+              <a href="https://github.com/michele-pupo" target="_blank" aria-label="GitHub" title="Visita il mio GitHub">
                 <img src="/public/github-logo.png" alt="GitHub" class="social-icon">
               </a>
             </li>
             <li>
-              <a href="https://www.linkedin.com/in/michele-fabio-pupo-727738308/" target="_blank" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/michele-fabio-pupo-727738308/" target="_blank" aria-label="LinkedIn" title="Connettiti con me su LinkedIn">
                 <img src="/public/25-removebg-preview.png" alt="LinkedIn" class="social-icon">
               </a>
             </li>
             <li>
-              <a href="https://wa.me/3899928860" target="_blank" aria-label="WhatsApp">
+              <router-link :to="{ name: 'contact-me' }" target="_blank" aria-label="Email" title="Scrivimi un'email">
+                <img src="/public/email.png" alt="Email" class="social-icon">
+              </router-link>
+            </li>
+            <li>
+              <a href="https://wa.me/3899928860" target="_blank" aria-label="WhatsApp" title="Contattami su WhatsApp">
                 <img src="/pngtree-whatsapp-icon-png-image_3584845.png" alt="WhatsApp" class="social-icon">
               </a>
             </li>
