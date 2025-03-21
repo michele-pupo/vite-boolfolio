@@ -27,10 +27,22 @@ export default {
     mounted() {
         
         window.scrollTo(0, 0);
-        this.checkDeviceType();
-        window.addEventListener('resize', this.checkDeviceType);
-        this.loadProjects();
-        window.addEventListener('scroll', this.checkProjectVisibility);
+            this.checkDeviceType();
+            window.addEventListener('resize', this.checkDeviceType);
+            
+            // Controlla se c'è un parametro di pagina nell'URL
+            if (this.$route.query.page) {
+                this.apiPageNumber = this.$route.query.page;
+            } else {
+                // Altrimenti prova a recuperare dal localStorage
+                const savedPage = localStorage.getItem('currentPage');
+                if (savedPage) {
+                this.apiPageNumber = savedPage;
+                }
+            }
+            
+            this.loadProjects();
+            window.addEventListener('scroll', this.checkProjectVisibility);
     },
     
     beforeUnmount() {
@@ -182,6 +194,10 @@ export default {
             } else {
                 this.apiPageNumber = pageNumber;
             }
+            
+            // Salva la pagina corrente nel localStorage
+            localStorage.setItem('currentPage', this.apiPageNumber);
+            
             this.apiCall();
             document.querySelector('#projects-section').scrollIntoView({ behavior: 'smooth' });
         }

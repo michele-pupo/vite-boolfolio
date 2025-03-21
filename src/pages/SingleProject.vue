@@ -43,6 +43,11 @@ export default {
     formatDate(date) {
       dayjs.locale('it');
       return dayjs(date).format('DD/MM/YYYY');
+    },
+
+    getPreviousPage() {
+      // Recupera la pagina precedente dal localStorage
+      return localStorage.getItem('currentPage') || 1;
     }
   }
 }
@@ -86,7 +91,7 @@ export default {
             <a :href="project.link_github" target="_blank" class="btn btn-visit" rel="noopener noreferrer">
               <i class="fas fa-external-link-alt"></i> Sito progetto
             </a>
-            <router-link to="/project" class="btn btn-details">
+            <router-link :to="{ name: 'project', query: { page: getPreviousPage() }}" class="btn btn-details">
               <i class="fas fa-arrow-left"></i> Indietro
             </router-link>
           </div>
