@@ -292,7 +292,9 @@ export default {
                                 :projectDate="currentProject.project_date"
                                 :projectLink="currentProject.link_github"
                                 :projectTechnolgies="currentProject.technologies"
-                                :projectType="currentProject.type.title"
+                                :projectType="currentProject.types && currentProject.types.length > 0 
+                                    ? currentProject.types.map(type => type.title).join(', ') 
+                                    : 'No type'"
                                 :nonClickable="true"
                             />
                         </div>

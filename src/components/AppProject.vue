@@ -11,7 +11,11 @@ export default {
         projectDate: String,
         projectLink: String,
         projectTechnolgies: Array,
-        projectType: String,
+        projectType: {
+            type: String,
+            required: false,
+            default: 'No type'
+        },
         project: Object,
         nonClickable: {
             type: Boolean,
@@ -27,6 +31,16 @@ export default {
         }
     },
     
+    computed: {
+        projectTypeArray() {
+            // Divide la stringa delle tipologie in un array se contiene virgole
+            if (this.projectType && this.projectType.includes(',')) {
+                return this.projectType.split(',').map(type => type.trim());
+            }
+            return [this.projectType];
+        }
+    },
+    
     methods: {
         formatDate(date) {
             dayjs.locale('it'); // Impostiamo il "locale" in italiano
@@ -39,6 +53,33 @@ export default {
         
         handleImageError() {
             this.imageError = true;
+        },
+        
+        getTypeClass(type) {
+            // Converti il tipo in minuscolo per standardizzare
+            const typeKey = type.toLowerCase().trim();
+            
+            // Mappa dei tipi con le rispettive classi
+            const typeClasses = {
+                'frontend': 'type-frontend',
+                'backend': 'type-backend',
+                'fullstack': 'type-fullstack',
+                'mobile': 'type-mobile',
+                'design': 'type-design',
+                'wordpress': 'type-wordpress',
+                'e-commerce': 'type-ecommerce',
+                'ecommerce': 'type-ecommerce',
+                'app': 'type-app',
+                'web app': 'type-webapp',
+                'webapp': 'type-webapp',
+                'landing page': 'type-landing',
+                'sito web': 'type-website',
+                'website': 'type-website',
+                'no type': 'type-default'
+            };
+            
+            // Ritorna la classe corrispondente o default se non trovata
+            return typeClasses[typeKey] || 'type-default';
         }
     },
 }
@@ -50,7 +91,18 @@ export default {
             <!-- Card Header -->
             <div class="card-header">
                 <h2 class="card-title text-black fw-bold">{{ projectName }}</h2>
-                <div class="card-type">{{ projectType }}</div>
+                <!-- Mostra le tipologie come badge multipli se c'è una virgola -->
+                <div class="project-types">
+                    <div 
+                        v-for="(type, index) in projectTypeArray" 
+                        :key="index"
+                        class="project-type-badge" 
+                        :class="getTypeClass(type)"
+                    >
+                        <i class="fas fa-folder"></i>
+                        <span>{{ type }}</span>
+                    </div>
+                </div>
             </div>
             
             <!-- Card Image con overlay di caricamento -->
@@ -123,6 +175,7 @@ export default {
     </div>
 </template>
 
+
 <style lang="scss" scoped>
 .project-card {
     width: 100%;
@@ -149,19 +202,162 @@ export default {
         background-color: rgba(0, 0, 0, 0.03);
         padding: 15px 20px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
         
         .card-title {
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             font-size: 1.5rem;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
         
-        .card-type {
+        .project-types {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        
+        .project-type-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
             font-weight: 600;
-            color: #28a745;
-            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            
+            &:hover {
+                box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+            }
+            
+            i {
+                margin-right: 6px;
+                font-size: 0.8rem;
+            }
+            
+            &.type-frontend {
+                background-color: rgba(25, 118, 210, 0.1);
+                color: #1976d2;
+                border: 1px solid rgba(25, 118, 210, 0.2);
+                
+                &:hover {
+                    background-color: rgba(25, 118, 210, 0.15);
+                }
+            }
+            
+            &.type-backend {
+                background-color: rgba(76, 175, 80, 0.1);
+                color: #4caf50;
+                border: 1px solid rgba(76, 175, 80, 0.2);
+                
+                &:hover {
+                    background-color: rgba(76, 175, 80, 0.15);
+                }
+            }
+            
+            &.type-fullstack {
+                background-color: rgba(156, 39, 176, 0.1);
+                color: #9c27b0;
+                border: 1px solid rgba(156, 39, 176, 0.2);
+                
+                &:hover {
+                    background-color: rgba(156, 39, 176, 0.15);
+                }
+            }
+            
+            &.type-mobile {
+                background-color: rgba(244, 67, 54, 0.1);
+                color: #f44336;
+                border: 1px solid rgba(244, 67, 54, 0.2);
+                
+                &:hover {
+                    background-color: rgba(244, 67, 54, 0.15);
+                }
+            }
+            
+            &.type-design {
+                background-color: rgba(233, 30, 99, 0.1);
+                color: #e91e63;
+                border: 1px solid rgba(233, 30, 99, 0.2);
+                
+                &:hover {
+                    background-color: rgba(233, 30, 99, 0.15);
+                }
+            }
+            
+            &.type-wordpress {
+                background-color: rgba(33, 150, 243, 0.1);
+                color: #2196f3;
+                border: 1px solid rgba(33, 150, 243, 0.2);
+                
+                &:hover {
+                    background-color: rgba(33, 150, 243, 0.15);
+                }
+            }
+            
+            &.type-ecommerce {
+                background-color: rgba(255, 152, 0, 0.1);
+                color: #ff9800;
+                border: 1px solid rgba(255, 152, 0, 0.2);
+                
+                &:hover {
+                    background-color: rgba(255, 152, 0, 0.15);
+                }
+            }
+            
+            &.type-app {
+                background-color: rgba(0, 150, 136, 0.1);
+                color: #009688;
+                border: 1px solid rgba(0, 150, 136, 0.2);
+                
+                &:hover {
+                    background-color: rgba(0, 150, 136, 0.15);
+                }
+            }
+            
+            &.type-webapp {
+                background-color: rgba(121, 85, 72, 0.1);
+                color: #795548;
+                border: 1px solid rgba(121, 85, 72, 0.2);
+                
+                &:hover {
+                    background-color: rgba(121, 85, 72, 0.15);
+                }
+            }
+            
+            &.type-landing {
+                background-color: rgba(63, 81, 181, 0.1);
+                color: #3f51b5;
+                border: 1px solid rgba(63, 81, 181, 0.2);
+                
+                &:hover {
+                    background-color: rgba(63, 81, 181, 0.15);
+                }
+            }
+            
+            &.type-website {
+                background-color: rgba(0, 188, 212, 0.1);
+                color: #00bcd4;
+                border: 1px solid rgba(0, 188, 212, 0.2);
+                
+                &:hover {
+                    background-color: rgba(0, 188, 212, 0.15);
+                }
+            }
+            
+            &.type-default {
+                background-color: rgba(97, 97, 97, 0.1);
+                color: #616161;
+                border: 1px solid rgba(97, 97, 97, 0.2);
+                
+                &:hover {
+                    background-color: rgba(97, 97, 97, 0.15);
+                }
+            }
         }
     }
     
@@ -314,3 +510,6 @@ export default {
     pointer-events: none;
 }
 </style>
+
+
+
