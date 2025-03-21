@@ -61,21 +61,9 @@ export default {
             
             // Mappa dei tipi con le rispettive classi
             const typeClasses = {
-                'frontend': 'type-frontend',
-                'backend': 'type-backend',
-                'fullstack': 'type-fullstack',
-                'mobile': 'type-mobile',
-                'design': 'type-design',
-                'wordpress': 'type-wordpress',
-                'e-commerce': 'type-ecommerce',
-                'ecommerce': 'type-ecommerce',
-                'app': 'type-app',
-                'web app': 'type-webapp',
-                'webapp': 'type-webapp',
-                'landing page': 'type-landing',
-                'sito web': 'type-website',
-                'website': 'type-website',
-                'no type': 'type-default'
+                'front-end': 'type-frontend',    
+                'back-end': 'type-backend',      
+                'database': 'type-database', 
             };
             
             // Ritorna la classe corrispondente o default se non trovata
@@ -259,103 +247,13 @@ export default {
                 }
             }
             
-            &.type-fullstack {
-                background-color: rgba(156, 39, 176, 0.1);
-                color: #9c27b0;
-                border: 1px solid rgba(156, 39, 176, 0.2);
+            &.type-database {
+                background-color: rgba(121, 85, 192, 0.1);  // Puoi scegliere un colore appropriato
+                color: #7955c0;
+                border: 1px solid rgba(121, 85, 192, 0.2);
                 
                 &:hover {
-                    background-color: rgba(156, 39, 176, 0.15);
-                }
-            }
-            
-            &.type-mobile {
-                background-color: rgba(244, 67, 54, 0.1);
-                color: #f44336;
-                border: 1px solid rgba(244, 67, 54, 0.2);
-                
-                &:hover {
-                    background-color: rgba(244, 67, 54, 0.15);
-                }
-            }
-            
-            &.type-design {
-                background-color: rgba(233, 30, 99, 0.1);
-                color: #e91e63;
-                border: 1px solid rgba(233, 30, 99, 0.2);
-                
-                &:hover {
-                    background-color: rgba(233, 30, 99, 0.15);
-                }
-            }
-            
-            &.type-wordpress {
-                background-color: rgba(33, 150, 243, 0.1);
-                color: #2196f3;
-                border: 1px solid rgba(33, 150, 243, 0.2);
-                
-                &:hover {
-                    background-color: rgba(33, 150, 243, 0.15);
-                }
-            }
-            
-            &.type-ecommerce {
-                background-color: rgba(255, 152, 0, 0.1);
-                color: #ff9800;
-                border: 1px solid rgba(255, 152, 0, 0.2);
-                
-                &:hover {
-                    background-color: rgba(255, 152, 0, 0.15);
-                }
-            }
-            
-            &.type-app {
-                background-color: rgba(0, 150, 136, 0.1);
-                color: #009688;
-                border: 1px solid rgba(0, 150, 136, 0.2);
-                
-                &:hover {
-                    background-color: rgba(0, 150, 136, 0.15);
-                }
-            }
-            
-            &.type-webapp {
-                background-color: rgba(121, 85, 72, 0.1);
-                color: #795548;
-                border: 1px solid rgba(121, 85, 72, 0.2);
-                
-                &:hover {
-                    background-color: rgba(121, 85, 72, 0.15);
-                }
-            }
-            
-            &.type-landing {
-                background-color: rgba(63, 81, 181, 0.1);
-                color: #3f51b5;
-                border: 1px solid rgba(63, 81, 181, 0.2);
-                
-                &:hover {
-                    background-color: rgba(63, 81, 181, 0.15);
-                }
-            }
-            
-            &.type-website {
-                background-color: rgba(0, 188, 212, 0.1);
-                color: #00bcd4;
-                border: 1px solid rgba(0, 188, 212, 0.2);
-                
-                &:hover {
-                    background-color: rgba(0, 188, 212, 0.15);
-                }
-            }
-            
-            &.type-default {
-                background-color: rgba(97, 97, 97, 0.1);
-                color: #616161;
-                border: 1px solid rgba(97, 97, 97, 0.2);
-                
-                &:hover {
-                    background-color: rgba(97, 97, 97, 0.15);
+                    background-color: rgba(121, 85, 192, 0.15);
                 }
             }
         }
