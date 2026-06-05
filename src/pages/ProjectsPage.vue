@@ -10,44 +10,40 @@ export default {
         AppProject,
     },
 
-    data() {
-        return {
-            projects: [],
-            apiLinks: [],
-            apiPageNumber: 1,
-            isLoading: true,
-            baseApiUrl: 'http://127.0.0.1:8000/api',
-            isMobile: false,
-            error: null,
-            visibleProjects: [],
-            lastScrollY: window.scrollY,
-            scrollDirection: 'down'
+        data() {
+            return {
+              projects: [],
+              isLoading: true,
+              baseApiUrl: 'http://127.0.0.1:8000/api',
+              selectedTechnology: 'All',
+              isMobile: false,
+              error: null,
+              visibleProjects: [],
+              lastScrollY: window.scrollY,
+              scrollDirection: 'down'
         }
     },
 
     mounted() {
+
         window.scrollTo(0, 0);
+
         this.checkDeviceType();
-        
-        // Usa mitt invece di addEventListener
+
         emitter.on('resize', this.checkDeviceType);
         emitter.on('scroll', this.checkProjectVisibility);
-        
-        // Aggiungi i listener nativi che emettono eventi mitt
-        window.addEventListener('resize', () => emitter.emit('resize'));
-        window.addEventListener('scroll', () => emitter.emit('scroll'));
-        
-        // Il resto del codice rimane invariato
-        if (this.$route.query.page) {
-            this.apiPageNumber = this.$route.query.page;
-        } else {
-            const savedPage = localStorage.getItem('currentPage');
-            if (savedPage) {
-                this.apiPageNumber = savedPage;
-            }
-        }
-        
-        this.loadProjects();
+
+        window.addEventListener(
+            'resize',
+            () => emitter.emit('resize')
+        );
+
+        window.addEventListener(
+            'scroll',
+            () => emitter.emit('scroll')
+        );
+
+        this.apiCallAll();
     },
     
     beforeUnmount() {
@@ -70,27 +66,64 @@ export default {
 
     computed: {
 
-      uniqueTechnologies() {
+        uniqueTechnologies() {
 
-          const techs = [];
+            const techs = [];
 
-          this.projects.forEach(project => {
+            this.projects.forEach(project => {
 
-              if (project.technologies) {
+                if (project.technologies) {
 
-                  project.technologies.forEach(tech => {
+                    project.technologies.forEach(tech => {
 
-                      techs.push(tech.title);
+                        techs.push(tech.title);
 
-                  });
+                    });
 
-              }
+                }
 
-          });
+            });
 
-          return [...new Set(techs)].length;
-      }
+            return [...new Set(techs)].length;
+        },
 
+        availableTechnologies() {
+
+            const techs = [];
+
+            this.projects.forEach(project => {
+
+                if (project.technologies) {
+
+                    project.technologies.forEach(tech => {
+
+                        techs.push(tech.title);
+
+                    });
+
+                }
+
+            });
+
+            return ['All', ...new Set(techs)];
+        },
+
+        filteredProjects() {
+
+            if (this.selectedTechnology === 'All') {
+
+                return this.projects;
+
+            }
+
+            return this.projects.filter(project => {
+
+                return project.technologies.some(
+                    tech => tech.title === this.selectedTechnology
+                );
+
+            });
+        }
     },
 
     methods: {
@@ -136,28 +169,46 @@ export default {
         },
 
         apiCallAll() {
-            this.isLoading = true;
-            this.error = null;
-            axios.get(`${this.baseApiUrl}/projects`, {
-                params: {
-                    all: true,
-                }
-            }).then(res => {
-                console.log('Response:', res.data);
-                if (res.data.success) {
-                    this.isLoading = false;
-                    this.projects = res.data.result;
-                    this.resetProjectVisibility();
-                    this.$nextTick(() => {
-                        this.setupIntersectionObserver();
-                    });
-                }
-            }).catch(error => {
-                console.error('Axios Error:', error);
-                console.error("Error fetching all projects:", error);
-                this.isLoading = false;
-                this.error = "Si è verificato un errore durante il caricamento dei progetti.";
-            });
+
+          this.isLoading = true;
+
+          this.error = null;
+
+          axios.get(`${this.baseApiUrl}/projects`, {
+              params: {
+                  all: true
+              }
+          })
+          .then(res => {
+
+              if (res.data.success) {
+
+                  this.projects = res.data.result;
+
+                  this.isLoading = false;
+
+                  this.resetProjectVisibility();
+
+                  this.$nextTick(() => {
+
+                      this.setupIntersectionObserver();
+
+                  });
+
+              }
+
+          })
+          .catch(error => {
+
+              console.error(error);
+
+              this.isLoading = false;
+
+              this.error =
+                  'Si è verificato un errore durante il caricamento dei progetti.';
+
+          });
+
         },
         
         resetProjectVisibility() {
@@ -240,8 +291,76 @@ export default {
             
             this.apiCall();
             
+        }, 
+
+        handleTechnologyFilter(technology) {
+
+            this.selectedTechnology = technology;
+
+            this.$nextTick(() => {
+
+                this.visibleProjects =
+                    Array(this.filteredProjects.length)
+                    .fill(false);
+
+                this.setupIntersectionObserver();
+
+                this.checkProjectVisibility();
+
+            });
+
+        },
+
+        checkDeviceType() {
+
+            this.isMobile = window.innerWidth < 992;
+
+        },
+
+        loadAllProjects() {
+
+            axios.get(`${this.baseApiUrl}/projects`, {
+                params: {
+                    all: true
+                }
+            })
+            .then(res => {
+
+                if (res.data.success) {
+
+                    this.allProjects = res.data.result;
+
+                }
+
+            })
+            .catch(error => {
+
+                console.error(error);
+
+            });
+
+        },
+    },
+
+    watch: {
+
+        selectedTechnology() {
+
+            this.$nextTick(() => {
+
+                this.visibleProjects =
+                    Array(this.filteredProjects.length)
+                    .fill(false);
+
+                this.setupIntersectionObserver();
+
+                this.checkProjectVisibility();
+
+            });
+
         }
-    }
+
+    },
 }
 </script>
 
@@ -304,6 +423,26 @@ export default {
 
         </div>
 
+        <!-- TECHNOLOGY FILTERS -->
+
+        <div class="technology-filters">
+
+          <button
+            v-for="technology in availableTechnologies"
+            :key="technology"
+            @click="handleTechnologyFilter(technology)"
+            :class="[
+              'filter-chip',
+              selectedTechnology === technology
+                ? 'active'
+                : ''
+            ]"
+          >
+            {{ technology }}
+          </button>
+
+        </div>
+
       </div>
 
     </section>
@@ -322,7 +461,7 @@ export default {
           <div class="projects-grid">
 
             <div
-              v-for="(currentProject, index) in projects"
+              v-for="(currentProject, index) in filteredProjects"
               :key="currentProject.slug"
               :data-index="index"
               :class="[
@@ -349,56 +488,11 @@ export default {
 
           </div>
 
-          <!-- PAGINATION -->
-
           <div
-            v-if="!isMobile && apiLinks && apiLinks.length > 0"
-            class="pagination-container"
-          >
-
-            <ul class="pagination">
-
-              <li
-                v-html="apiLinks[0].label"
-                :class="[
-                  'page-item',
-                  apiPageNumber == 1 ? 'disabled' : ''
-                ]"
-                @click="apiPageNumber != 1 && changeApiPage(apiLinks[0].label)"
-              ></li>
-
-              <li
-                v-for="link in apiLinks.slice(1, -1)"
-                :key="link.label"
-                v-html="link.label"
-                @click="changeApiPage(link.label)"
-                :class="[
-                  'page-item',
-                  link.label == apiPageNumber ? 'active' : ''
-                ]"
-              ></li>
-
-              <li
-                v-html="apiLinks[apiLinks.length - 1].label"
-                :class="[
-                  'page-item',
-                  apiPageNumber == apiLinks.length - 2
-                    ? 'disabled'
-                    : ''
-                ]"
-                @click="apiPageNumber != apiLinks.length - 2 &&
-                changeApiPage(apiLinks[apiLinks.length - 1].label)"
-              ></li>
-
-            </ul>
-
-          </div>
-
-          <div
-            v-if="projects.length === 0"
+            v-if="filteredProjects.length === 0"
             class="no-projects"
           >
-            Nessun progetto disponibile.
+            Nessun progetto trovato per questa tecnologia.
           </div>
 
         </div>
@@ -635,6 +729,61 @@ export default {
   color: #94A3B8;
 
   font-size: .9rem;
+}
+
+.technology-filters {
+
+  display: flex;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: .8rem;
+
+  margin-top: 2.5rem;
+}
+
+.filter-chip {
+
+  border: none;
+
+  padding: .8rem 1.2rem;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255,255,255,.05);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  color: white;
+
+  cursor: pointer;
+
+  transition: .3s;
+}
+
+.filter-chip:hover {
+
+  transform:
+    translateY(-2px);
+
+  border-color:
+    rgba(139,92,246,.35);
+}
+
+.filter-chip.active {
+
+  background:
+    linear-gradient(
+      135deg,
+      #8B5CF6,
+      #2563EB
+    );
+
+  border: none;
 }
 
 /* ==========================================
