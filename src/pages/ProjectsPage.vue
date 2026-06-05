@@ -214,7 +214,7 @@ export default {
             localStorage.setItem('currentPage', this.apiPageNumber);
             
             this.apiCall();
-            document.querySelector('#projects-section').scrollIntoView({ behavior: 'smooth' });
+            
         }
     }
 }
