@@ -265,7 +265,11 @@ export default {
     <!-- SKILLS -->
     <section class="skills-section">
 
-      <h2>Tech Stack</h2>
+      <h2>Technologies & Tools</h2>
+
+      <p class="skills-description">
+          Main technologies and tools I use to design, develop and deploy modern web applications.
+      </p>
 
       <div class="skills-container">
 
@@ -848,9 +852,27 @@ export default {
 }
 
 .skills-section h2 {
+
   text-align: center;
 
-  margin-bottom: 2rem;
+  margin-bottom: .8rem;
+
+  color: white;
+}
+
+.skills-description {
+
+  max-width: 650px;
+
+  margin: 0 auto 2.5rem auto;
+
+  text-align: center;
+
+  color: #94A3B8;
+
+  line-height: 1.8;
+
+  font-size: 1rem;
 }
 
 .skills-container {
