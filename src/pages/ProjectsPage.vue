@@ -1,6 +1,7 @@
 <script>
 import AppProject from '../components/AppProject.vue';
 import axios from 'axios';
+import emitter from '../plugins/mitt';
 
 export default {
     name: 'HomePage',
@@ -25,29 +26,38 @@ export default {
     },
 
     mounted() {
-        
         window.scrollTo(0, 0);
-            this.checkDeviceType();
-            window.addEventListener('resize', this.checkDeviceType);
-            
-            // Controlla se c'è un parametro di pagina nell'URL
-            if (this.$route.query.page) {
-                this.apiPageNumber = this.$route.query.page;
-            } else {
-                // Altrimenti prova a recuperare dal localStorage
-                const savedPage = localStorage.getItem('currentPage');
-                if (savedPage) {
+        this.checkDeviceType();
+        
+        // Usa mitt invece di addEventListener
+        emitter.on('resize', this.checkDeviceType);
+        emitter.on('scroll', this.checkProjectVisibility);
+        
+        // Aggiungi i listener nativi che emettono eventi mitt
+        window.addEventListener('resize', () => emitter.emit('resize'));
+        window.addEventListener('scroll', () => emitter.emit('scroll'));
+        
+        // Il resto del codice rimane invariato
+        if (this.$route.query.page) {
+            this.apiPageNumber = this.$route.query.page;
+        } else {
+            const savedPage = localStorage.getItem('currentPage');
+            if (savedPage) {
                 this.apiPageNumber = savedPage;
-                }
             }
-            
-            this.loadProjects();
-            window.addEventListener('scroll', this.checkProjectVisibility);
+        }
+        
+        this.loadProjects();
     },
     
     beforeUnmount() {
-        window.removeEventListener('resize', this.checkDeviceType);
-        window.removeEventListener('scroll', this.checkProjectVisibility);
+        // Rimuovi i listener di mitt
+        emitter.off('resize', this.checkDeviceType);
+        emitter.off('scroll', this.checkProjectVisibility);
+        
+        // Rimuovi i listener nativi
+        window.removeEventListener('resize', () => emitter.emit('resize'));
+        window.removeEventListener('scroll', () => emitter.emit('scroll'));
     },
     
     updated() {
@@ -81,19 +91,22 @@ export default {
             this.error = null;
             axios.get(`${this.baseApiUrl}/projects`, {
                 params: {
-                    page: this.apiPageNumber,
+                page: this.apiPageNumber,
                 }
             }).then(res => {
+                console.log('API Response:', res); // Log completo risposta
                 if (res.data.success) {
-                    this.isLoading = false;
-                    this.projects = res.data.result.data;
-                    this.apiLinks = res.data.result.links;
-                    this.resetProjectVisibility();
+                this.isLoading = false;
+                this.projects = res.data.result.data;
+                this.apiLinks = res.data.result.links;
+                this.resetProjectVisibility();
                 }
             }).catch(error => {
-                console.error("Error fetching projects:", error);
+                console.error('Detailed Error:', error);
+                console.error('Error Response:', error.response);
+                console.error('Error Request:', error.request);
                 this.isLoading = false;
-                this.error = "Si è verificato un errore durante il caricamento dei progetti.";
+                this.error = error.message || "Errore di connessione";
             });
         },
 
@@ -105,6 +118,7 @@ export default {
                     all: true,
                 }
             }).then(res => {
+                console.log('Response:', res.data);
                 if (res.data.success) {
                     this.isLoading = false;
                     this.projects = res.data.result;
@@ -114,6 +128,7 @@ export default {
                     });
                 }
             }).catch(error => {
+                console.error('Axios Error:', error);
                 console.error("Error fetching all projects:", error);
                 this.isLoading = false;
                 this.error = "Si è verificato un errore durante il caricamento dei progetti.";
@@ -213,6 +228,28 @@ export default {
             <div class="carousel-wrapper" v-if="!isMobile">
                 <div class="carousel">
                     <!-- Esempio di immagini: sostituisci con le tue -->
+                    <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
+                    <img src="/bootstrap-tutorial.png" alt="Bootstrap">
+                    <img src="/1698604163003.png" alt="Javascript">
+                    <img src="/css.png" alt="Css">
+                    <img src="/353261.png" alt="Php">
+                    <img src="/eceb15684d4183c66f73c1a9bb777eef708b2b66.png" alt="Mysql">
+                    <img src="/fposter,small,wall_texture,product,750x1000_preview_rev_1.png" alt="Vite">
+                    <img src="/HTML5_logo_and_wordmark.svg.png" alt="Html5">
+                    <img src="/laravel-featured_preview_rev_1.png" alt="Laravel">
+                    <img src="/sass-icon-1024x1024-kn7u23pl.png" alt="Sass">
+                    <!-- Duplico le immagini per effetto carousel continuo -->
+                    <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
+                    <img src="/bootstrap-tutorial.png" alt="Bootstrap">
+                    <img src="/1698604163003.png" alt="Javascript">
+                    <img src="/css.png" alt="Css">
+                    <img src="/353261.png" alt="Php">
+                    <img src="/eceb15684d4183c66f73c1a9bb777eef708b2b66.png" alt="Mysql">
+                    <img src="/fposter,small,wall_texture,product,750x1000_preview_rev_1.png" alt="Vite">
+                    <img src="/HTML5_logo_and_wordmark.svg.png" alt="Html5">
+                    <img src="/laravel-featured_preview_rev_1.png" alt="Laravel">
+                    <img src="/sass-icon-1024x1024-kn7u23pl.png" alt="Sass">
+                    <!-- Duplico le immagini per effetto carousel continuo -->
                     <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
                     <img src="/bootstrap-tutorial.png" alt="Bootstrap">
                     <img src="/1698604163003.png" alt="Javascript">

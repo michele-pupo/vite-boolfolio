@@ -25,7 +25,7 @@ export default {
     
     data() {
         return {
-            baseApiUrl: 'http://127.0.0.1:8000/storage/',
+            baseApiUrl: 'http://127.0.0.1:8000/storage/', // Percorso relativo
             imageLoaded: false,
             imageError: false
         }
@@ -114,6 +114,7 @@ export default {
                 </div>
             </div>
             
+            
             <!-- Card Body -->
             <div class="card-body">
                 <!-- Data progetto -->
@@ -123,6 +124,7 @@ export default {
                 </div>
                 
                 <!-- Descrizione breve -->
+                 
                 <div class="card-description" :class="{ 'non-clickable': nonClickable }">
                     {{ projectDescription.length > 100 ? projectDescription.substring(0, 100) + '...' : projectDescription }}
                 </div>

@@ -9,6 +9,7 @@ export default {
     return {
       project: null,
       projectSlug: null,
+      
       apiBaseUrl: 'http://127.0.0.1:8000/api',
       apiImageUrl: 'http://127.0.0.1:8000/storage/',
     }
