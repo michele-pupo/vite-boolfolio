@@ -291,39 +291,6 @@ export default {
       </div>
 
     </section>
-
-    
-    <!-- CV -->
-    <section class="cv-download-section">
-
-      <div class="cv-card">
-
-        <div class="cv-icon">
-          <i class="fas fa-file-pdf"></i>
-        </div>
-
-        <div class="cv-content">
-
-          <h3>Curriculum Vitae</h3>
-
-          <p>
-            Visualizza e scarica il mio curriculum completo.
-          </p>
-
-        </div>
-
-        <a
-          href="/CV%20Michele%20Fabio%20Pupo.pdf"
-          target="_blank"
-          class="cv-button"
-        >
-          Download
-        </a>
-
-      </div>
-
-    </section>
-
   </div>
 </template>
 
