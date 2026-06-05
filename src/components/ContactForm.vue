@@ -46,255 +46,472 @@ export default {
 </script>
 
 <template>
-    <div class="contact-page">
-        <div class="contact-content">
-            <div class="header-spacer"></div>
-            
-            <h2>Contattami</h2>
-            
-            <div v-if="success" class="alert-message success">
-                <i class="fas fa-check-circle"></i>
-                Messaggio inviato con successo! Ti risponderò al più presto.
-            </div>
-            
-            <div v-if="error" class="alert-message error">
-                <i class="fas fa-exclamation-circle"></i>
-                {{ error }}
-            </div>
-            
-            <form @submit.prevent="sendContactRequest()" class="contact-form">
-                <div class="form-group">
-                    <label for="name">Nome</label>
-                    <input type="text" id="name" name="name" v-model="formData.name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="address">Indirizzo email</label>
-                    <input type="email" id="address" name="address" v-model="formData.address" required>
-                    <div class="form-helper">Non condivideremo la tua mail con terzi.</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Messaggio</label>
-                    <textarea id="message" name="message" v-model="formData.message" required></textarea>
-                </div>
-                
-                <div class="form-actions">
-                    <button type="submit" class="submit-button" :disabled="loading">
-                        <span v-if="loading" class="spinner"></span>
-                        {{ loading ? 'Invio in corso...' : 'Invia' }}
-                    </button>
-                    <router-link to="/" class="back-button">Indietro</router-link>
-                </div>
-            </form>
+
+  <div class="contact-page">
+
+    <div class="contact-glow"></div>
+
+    <div class="contact-container">
+
+      <div class="contact-card">
+
+        <div class="contact-header">
+
+          <span class="contact-badge">
+            Contact
+          </span>
+
+          <h1>
+            Let's Work Together
+          </h1>
+
+          <p>
+            Hai un progetto, una collaborazione o una proposta?
+            Scrivimi e ti risponderò nel più breve tempo possibile.
+          </p>
+
         </div>
+
+        <div v-if="success" class="alert success">
+
+          <i class="fas fa-circle-check"></i>
+
+          Messaggio inviato con successo!
+
+        </div>
+
+        <div v-if="error" class="alert error">
+
+          <i class="fas fa-circle-exclamation"></i>
+
+          {{ error }}
+
+        </div>
+
+        <form
+          @submit.prevent="sendContactRequest()"
+          class="contact-form"
+        >
+
+          <div class="form-group">
+
+            <label>Nome</label>
+
+            <input
+              type="text"
+              v-model="formData.name"
+              required
+            >
+
+          </div>
+
+          <div class="form-group">
+
+            <label>Email</label>
+
+            <input
+              type="email"
+              v-model="formData.address"
+              required
+            >
+
+          </div>
+
+          <div class="form-group">
+
+            <label>Messaggio</label>
+
+            <textarea
+              v-model="formData.message"
+              required
+            ></textarea>
+
+          </div>
+
+          <div class="form-actions">
+
+            <button
+              type="submit"
+              class="submit-btn"
+              :disabled="loading"
+            >
+
+              <span
+                v-if="loading"
+                class="spinner"
+              ></span>
+
+              {{ loading ? 'Sending...' : 'Send Message' }}
+
+            </button>
+
+            <router-link
+              to="/"
+              class="back-btn"
+            >
+              Back Home
+            </router-link>
+
+          </div>
+
+        </form>
+
+      </div>
+
     </div>
+
+  </div>
+
 </template>
 
 <style lang="scss" scoped>
+
 .contact-page {
-  background-color: #ffffff;
-  padding: 20px;
+
+  min-height: 100vh;
+
   padding-top: 150px;
-  padding-bottom: 150px;
-  min-height: calc(100vh - 300px); /* Regola in base all'altezza di header e footer */
-  width: 100%;
+  padding-bottom: 100px;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(139,92,246,.18),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(37,99,235,.12),
+      transparent 35%
+    ),
+    #070B14;
+
+  position: relative;
+
+  overflow: hidden;
 }
 
-.header-spacer {
-    height: 60px;
+.contact-glow {
+
+  position: absolute;
+
+  width: 700px;
+  height: 700px;
+
+  top: -250px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(139,92,246,.25),
+      rgba(37,99,235,.15),
+      transparent
+    );
+
+  filter: blur(120px);
+
+  pointer-events: none;
 }
 
-.contact-content {
-    max-width: 800px;
-    background: #F9DBBA;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    animation: fadeIn 1s ease-out;
-    margin: 0 auto;
+.contact-container {
 
-    h2 {
-        font-size: 1.8rem;
-        margin-bottom: 1.5rem;
-        color: #03346E;
-    }
+  max-width: 900px;
+
+  margin: auto;
+
+  padding: 0 2rem;
+
+  position: relative;
+
+  z-index: 2;
 }
 
-.alert-message {
-    padding: 12px 16px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    text-align: left;
-    animation: fadeIn 0.5s ease-out;
-    
-    i {
-        margin-right: 10px;
-        font-size: 1.2rem;
-    }
-    
-    &.success {
-        background-color: rgba(76, 175, 80, 0.2);
-        color: #2e7d32;
-        border: 1px solid #2e7d32;
-    }
-    
-    &.error {
-        background-color: rgba(244, 67, 54, 0.2);
-        color: #c62828;
-        border: 1px solid #c62828;
-    }
+.contact-card {
+
+  background:
+    rgba(255,255,255,.04);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  backdrop-filter: blur(20px);
+
+  border-radius: 30px;
+
+  padding: 3rem;
+
+  box-shadow:
+    0 25px 60px rgba(0,0,0,.25);
+}
+
+.contact-header {
+
+  text-align: center;
+
+  margin-bottom: 2.5rem;
+}
+
+.contact-badge {
+
+  display: inline-block;
+
+  padding: .6rem 1rem;
+
+  border-radius: 999px;
+
+  background:
+    rgba(139,92,246,.15);
+
+  color:
+    #C4B5FD;
+
+  border:
+    1px solid rgba(139,92,246,.25);
+
+  margin-bottom: 1rem;
+
+  font-size: .85rem;
+
+  font-weight: 600;
+}
+
+.contact-header h1 {
+
+  color: white;
+
+  font-size: clamp(2rem,5vw,3.5rem);
+
+  font-weight: 800;
+
+  margin-bottom: 1rem;
+}
+
+.contact-header p {
+
+  color: #94A3B8;
+
+  max-width: 600px;
+
+  margin: auto;
+
+  line-height: 1.8;
+}
+
+.alert {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: .8rem;
+
+  padding: 1rem;
+
+  border-radius: 14px;
+
+  margin-bottom: 1.5rem;
+}
+
+.success {
+
+  background:
+    rgba(34,197,94,.15);
+
+  border:
+    1px solid rgba(34,197,94,.25);
+
+  color:
+    #86EFAC;
+}
+
+.error {
+
+  background:
+    rgba(239,68,68,.15);
+
+  border:
+    1px solid rgba(239,68,68,.25);
+
+  color:
+    #FCA5A5;
 }
 
 .contact-form {
-    text-align: left;
-    margin-top: 20px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 1.5rem;
 }
 
 .form-group {
-    margin-bottom: 20px;
-    
-    label {
-        display: block;
-        margin-bottom: 6px;
-        font-weight: 600;
-        color: #03346E;
-    }
-    
-    input, textarea {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        background-color: rgba(255, 255, 255, 0.8);
-        transition: border-color 0.3s, box-shadow 0.3s;
-        color: #333; /* Aggiungere questo per il colore del testo */
-        
-        &:focus {
-            outline: none;
-            border-color: #03346E;
-            box-shadow: 0 0 0 2px rgba(3, 52, 110, 0.1);
-        }
-    }
-    
-    textarea {
-        min-height: 200px;
-        resize: vertical;
-    }
-    
-    .form-helper {
-        font-size: 0.8rem;
-        color: #666;
-        margin-top: 4px;
-    }
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+.form-group label {
+
+  color: white;
+
+  margin-bottom: .5rem;
+
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea {
+
+  background:
+    rgba(255,255,255,.04);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  border-radius: 14px;
+
+  padding: 1rem;
+
+  color: white;
+
+  font-size: 1rem;
+
+  transition: .3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+
+  outline: none;
+
+  border-color:
+    rgba(139,92,246,.5);
+
+  box-shadow:
+    0 0 0 4px rgba(139,92,246,.1);
+}
+
+.form-group textarea {
+
+  min-height: 220px;
+
+  resize: vertical;
 }
 
 .form-actions {
-    display: flex;
-    gap: 12px;
-    margin-top: 30px;
+
+  display: flex;
+
+  gap: 1rem;
+
+  margin-top: 1rem;
 }
 
-.submit-button, .back-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 20px;
-    border-radius: 6px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-    
-    &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    
-    &:active {
-        transform: translateY(0);
-    }
+.submit-btn,
+.back-btn {
+
+  flex: 1;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  border-radius: 14px;
+
+  padding: 1rem;
+
+  font-weight: 600;
+
+  transition: .3s;
 }
 
-.submit-button {
-    background-color: #03346E;
-    color: white;
-    border: none;
-    cursor: pointer;
-    
-    &:disabled {
-        background-color: #ccc;
-        cursor: not-allowed;
-        transform: none;
-        box-shadow: none;
-    }
-    
-    .spinner {
-        display: inline-block;
-        width: 16px;
-        height: 16px;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
-        border-top-color: #fff;
-        animation: spin 1s linear infinite;
-        margin-right: 8px;
-    }
+.submit-btn {
+
+  border: none;
+
+  cursor: pointer;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8B5CF6,
+      #2563EB
+    );
 }
 
-.back-button {
-    background-color: #f0f0f0;
-    color: #333;
-    border: 1px solid #ddd;
+.submit-btn:hover {
+
+  transform:
+    translateY(-3px);
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.back-btn {
+
+  color: white;
+
+  background:
+    rgba(255,255,255,.05);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+}
+
+.back-btn:hover {
+
+  background:
+    rgba(255,255,255,.1);
+}
+
+.spinner {
+
+  display: inline-block;
+
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+
+  border:
+    2px solid rgba(255,255,255,.3);
+
+  border-top:
+    2px solid white;
+
+  animation:
+    spin .8s linear infinite;
+
+  margin-right: .5rem;
 }
 
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 768px) {
-    .contact-content {
-        padding: 20px;
-        
-        h2 {
-            font-size: 1.4rem;
-        }
-    }
-    
-    .form-actions {
-        flex-direction: column;
-    }
-    
-    .submit-button, .back-button {
-        width: 100%;
-    }
+
+  .contact-card {
+
+    padding: 1.5rem;
+  }
+
+  .form-actions {
+
+    flex-direction: column;
+  }
 }
 
-@media (max-width: 480px) {
-    .contact-page {
-        padding-top: 100px;
-    }
-    
-    .contact-content {
-        padding: 15px;
-    }
-    
-    .form-group {
-        margin-bottom: 15px;
-    }
-}
 </style>

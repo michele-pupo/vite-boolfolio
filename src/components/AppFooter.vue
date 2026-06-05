@@ -5,118 +5,262 @@ export default {
 </script>
 
 <template>
-  <footer class="top-footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="social-links">
-          <ul class="social-list">
-            <li>
-              <a href="https://github.com/michele-pupo" target="_blank" aria-label="GitHub" title="Visita il mio GitHub">
-                <img src="/public/github-logo.png" alt="GitHub" class="social-icon">
-              </a>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/in/michele-fabio-pupo-727738308/" target="_blank" aria-label="LinkedIn" title="Connettiti con me su LinkedIn">
-                <img src="/public/25-removebg-preview.png" alt="LinkedIn" class="social-icon">
-              </a>
-            </li>
-            <li>
-              <router-link :to="{ name: 'contact-me' }" aria-label="Email" title="Scrivimi un'email">
-                <img src="/public/email.png" alt="Email" class="social-icon">
-              </router-link>
-            </li>
-            <li>
-              <a href="https://wa.me/3899928860" target="_blank" aria-label="WhatsApp" title="Contattami su WhatsApp">
-                <img src="/pngtree-whatsapp-icon-png-image_3584845.png" alt="WhatsApp" class="social-icon">
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="copyright">
-          <p>© 2025 Michele Fabio Pupo | Web Developer</p>
-        </div>
+  <footer class="app-footer">
+
+    <div class="footer-glow"></div>
+
+    <div class="footer-container">
+
+      <div class="footer-top">
+
+        <h2>Let's Build Something Great</h2>
+
+        <p>
+          Sono specializzato nello sviluppo di applicazioni web moderne
+          con Laravel, Vue.js e MySQL.
+        </p>
+
       </div>
+
+      <div class="footer-socials">
+
+        <a
+          href="https://github.com/michele-pupo"
+          target="_blank"
+          aria-label="Github"
+        >
+          <i class="fab fa-github"></i>
+        </a>
+
+        <a
+          href="https://www.linkedin.com/in/michele-fabio-pupo-727738308/"
+          target="_blank"
+          aria-label="Linkedin"
+        >
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+
+        <router-link
+          :to="{ name: 'contact-me' }"
+          aria-label="Email"
+        >
+          <i class="fas fa-envelope"></i>
+        </router-link>
+
+        <a
+          href="https://wa.me/3899928860"
+          target="_blank"
+          aria-label="Whatsapp"
+        >
+          <i class="fab fa-whatsapp"></i>
+        </a>
+
+      </div>
+
+      <div class="footer-bottom">
+
+        <span>
+          © 2026 Michele Fabio Pupo
+        </span>
+
+        <span>
+          Full Stack Developer
+        </span>
+
+      </div>
+
     </div>
+
   </footer>
 </template>
 
 <style lang="scss">
-.top-footer {
-    width: 100%;
-    height: auto;
-    padding: 1.5rem 0;
-    position: fixed;
-    bottom: 0;
-    background-color: #03346E;
-    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    
-    // Add this to ensure content isn't hidden behind the footer
-    @media (min-width: 992px) {
-        padding: 1rem 0; // Slightly reduced padding for desktop
-    }
+
+.app-footer {
+
+  position: relative;
+
+  width: 100%;
+
+  background: #070B14;
+
+  border-top: 1px solid rgba(255,255,255,.08);
+
+  overflow: hidden;
+
+  margin-top: 0;
 }
 
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
+.footer-glow {
+
+  position: absolute;
+
+  top: -100px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 600px;
+  height: 200px;
+
+  background: radial-gradient(
+    circle,
+    rgba(139,92,246,.35),
+    rgba(37,99,235,.15),
+    transparent
+  );
+
+  filter: blur(80px);
+
+  pointer-events: none;
 }
 
-.social-list {
-  display: flex;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  gap: 1.5rem;
+.footer-container {
+
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 1200px;
+
+  margin: auto;
+
+  padding: 4rem 2rem;
 }
 
-.social-icon {
-  width: 42px;
-  height: 42px;
-  transition: all 0.3s ease;
-  filter: brightness(0.95);
-  
-  &:hover {
-    transform: translateY(-10px) scale(1.2);
-    filter: brightness(1.1);
-  }
+.footer-top {
+
+  text-align: center;
+
+  margin-bottom: 3rem;
 }
 
-.copyright {
+.footer-top h2 {
+
   color: white;
-  font-size: 0.9rem;
-  letter-spacing: 0.5px;
-  font-weight: 300;
-  text-align: right;
+
+  font-size: 2rem;
+
+  font-weight: 700;
+
+  margin-bottom: 1rem;
+}
+
+.footer-top p {
+
+  max-width: 650px;
+
+  margin: auto;
+
+  color: #94A3B8;
+
+  line-height: 1.8;
+}
+
+.footer-socials {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 1.5rem;
+
+  margin-bottom: 3rem;
+}
+
+.footer-socials a {
+
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  text-decoration: none;
+
+  color: white;
+
+  font-size: 1.3rem;
+
+  background: rgba(255,255,255,.04);
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  backdrop-filter: blur(12px);
+
+  transition: .35s ease;
+}
+
+.footer-socials a:hover {
+
+  transform:
+    translateY(-6px)
+    scale(1.08);
+
+  background: linear-gradient(
+    135deg,
+    #8B5CF6,
+    #2563EB
+  );
+
+  box-shadow:
+    0 10px 25px rgba(99,102,241,.35);
+}
+
+.footer-bottom {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding-top: 2rem;
+
+  border-top: 1px solid rgba(255,255,255,.08);
+
+  color: #64748B;
+
+  font-size: .9rem;
 }
 
 @media (max-width: 768px) {
-  .top-footer {
-    padding: 1rem 0; /* Ridotto il padding per dispositivi mobili */
+
+  .footer-container {
+    padding: 3rem 1.2rem;
   }
-  
-  .footer-content {
+
+  .footer-top h2 {
+    font-size: 1.6rem;
+  }
+
+  .footer-socials {
+
+    gap: 1rem;
+
+    flex-wrap: wrap;
+  }
+
+  .footer-socials a {
+
+    width: 50px;
+    height: 50px;
+
+    font-size: 1.1rem;
+  }
+
+  .footer-bottom {
+
     flex-direction: column;
-    gap: 0.8rem;
+
+    gap: .8rem;
+
     text-align: center;
-  }
-  
-  .copyright {
-    text-align: center;
-    margin-top: 0.5rem;
-    font-size: 0.8rem; /* Testo leggermente più piccolo */
-  }
-  
-  .social-list {
-    justify-content: center;
-    gap: 1.2rem; /* Spazio ridotto tra le icone */
-  }
-  
-  .social-icon {
-    width: 36px; /* Icone leggermente più piccole su mobile */
-    height: 36px;
   }
 }
+
 </style>

@@ -55,306 +55,421 @@ export default {
 </script>
 
 <template>
-  <!-- Contiene tutto il contenuto principale con background -->
-  <div class="page-wrapper" :style="backgroundStyle">
-    <!-- Contenitore principale per il progetto -->
-    <div class="project-container">
-      <div v-if="project" class="project-card">
-        <!-- Card Header -->
-        <div class="card-header">
-          <h2 class="card-title">{{ project.name }}</h2>
-          <div v-if="project.type" class="card-type">{{ project.type.title }}</div>
+
+  <div class="single-project-page">
+
+    <div class="background-glow"></div>
+
+    <div v-if="project" class="project-wrapper">
+
+      <div class="project-card">
+
+        <div class="project-image-container">
+
+          <img
+            :src="apiImageUrl + project.project_image"
+            :alt="project.name"
+            class="project-image"
+          >
+
+          <div class="image-overlay"></div>
+
         </div>
-        
-        <!-- Card Image -->
-        <div class="card-image-container">
-          <img :src="apiImageUrl + project.project_image" class="card-img-top" :alt="project.name">
-        </div>
-        
-        <!-- Card Body -->
-        <div class="card-body">
-          <div v-if="project.project_date" class="card-date">
-            <i class="fas fa-calendar-alt"></i> {{ formatDate(project.project_date) }}
+
+        <div class="project-content">
+
+          <div class="project-header">
+
+            <span
+              v-if="project.type"
+              class="project-type"
+            >
+              {{ project.type.title }}
+            </span>
+
+            <h1 class="project-title">
+              {{ project.name }}
+            </h1>
+
+            <div
+              v-if="project.project_date"
+              class="project-date"
+            >
+              <i class="fas fa-calendar-alt"></i>
+              {{ formatDate(project.project_date) }}
+            </div>
+
           </div>
-          <div class="card-description">
+
+          <div class="project-description">
+
             {{ project.description }}
+
           </div>
-          <div class="card-technologies">
-            <span 
-              v-for="tech in project.technologies" 
+
+          <div class="technologies-container">
+
+            <span
+              v-for="tech in project.technologies"
               :key="tech.id"
-              class="technology-badge" 
-              :style="{ backgroundColor: tech.color }">
+              class="technology-badge"
+              :style="{ backgroundColor: tech.color }"
+            >
               {{ tech.title }}
             </span>
+
           </div>
-          <div class="card-actions">
-            <a :href="project.link_github" target="_blank" class="btn btn-visit" rel="noopener noreferrer">
-              <i class="fas fa-external-link-alt"></i> Sito progetto
+
+          <div class="project-actions">
+
+            <a
+              :href="project.link_github"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="visit-btn"
+            >
+              <i class="fas fa-arrow-up-right-from-square"></i>
+              Visit Project
             </a>
-            <router-link :to="{ name: 'project', query: { page: getPreviousPage() }}" class="btn btn-details">
-              <i class="fas fa-arrow-left"></i> Indietro
+
+            <router-link
+              :to="{ name: 'project', query: { page: getPreviousPage() } }"
+              class="back-btn"
+            >
+              <i class="fas fa-arrow-left"></i>
+              Back
             </router-link>
+
           </div>
+
         </div>
+
       </div>
-      <div v-else class="loading-container">
-        <div class="spinner-border" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
-      </div>
+
     </div>
+
+    <div
+      v-else
+      class="loading-container"
+    >
+      <div class="spinner"></div>
+    </div>
+
   </div>
+
 </template>
 
 <style lang="scss" scoped>
-.page-wrapper {
-  width: 100%;
+
+.single-project-page {
+
   min-height: 100vh;
+
+  padding-top: 140px;
+  padding-bottom: 100px;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(139,92,246,.18),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(37,99,235,.12),
+      transparent 35%
+    ),
+    #070B14;
+
   position: relative;
-  overflow-y: auto;
-  box-sizing: border-box;
-  /* Compensazione per header e footer fissi */
-  padding-top: 80px; /* Spazio per l'header */
-  padding-bottom: 100px; /* Spazio per il footer */
+
+  overflow: hidden;
 }
 
-.project-container {
-  width: 100%;
-  /* Altezza regolata per tenere conto di header e footer */
-  min-height: calc(100vh - 180px); /* 100vh - (header + footer) */
-  padding: 30px 15px;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.background-glow {
+
+  position: absolute;
+
+  width: 800px;
+  height: 800px;
+
+  top: -250px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(139,92,246,.25),
+      rgba(37,99,235,.15),
+      transparent
+    );
+
+  filter: blur(120px);
+
+  pointer-events: none;
+}
+
+.project-wrapper {
+
+  max-width: 1200px;
+
+  margin: auto;
+
+  padding: 0 2rem;
+
+  position: relative;
+
+  z-index: 2;
 }
 
 .project-card {
-  width: 100%;
-  height: auto;
-  max-width: 800px;
-  border-radius: 12px;
+
+  background:
+    rgba(255,255,255,.04);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  backdrop-filter: blur(20px);
+
+  border-radius: 30px;
+
   overflow: hidden;
-  background-color: #F9DBBA;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  margin: 20px auto; /* Aggiunto un margine minimo */
-  
-  .card-header {
-    background-color: rgba(0, 0, 0, 0.03);
-    padding: 15px 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    
-    .card-title {
-      margin-bottom: 5px;
-      font-size: 2rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      color: #000;
-    }
-    
-    .card-type {
-      font-weight: 600;
-      color: #28a745;
-      font-size: 1.2rem;
-    }
-  }
-  
-  .card-image-container {
-    position: relative;
-    height: 300px;
-    overflow: hidden;
-    
-    .card-img-top {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-      
-      &:hover {
-        transform: scale(1.05);
-      }
-    }
-  }
-  
-  .card-body {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    
-    .card-date {
-      color: #dc3545;
-      font-weight: bold;
-      margin-bottom: 10px;
-      font-size: 0.9rem;
-      
-      i {
-        margin-right: 5px;
-      }
-    }
-    
-    .card-description {
-      margin-bottom: 15px;
-      color: #343a40;
-      font-size: 1rem;
-      line-height: 1.5;
-    }
-    
-    .card-technologies {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin-bottom: 20px;
-      
-      .technology-badge {
-        padding: 5px 10px;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-    }
-    
-    .card-actions {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      
-      .btn {
-        flex: 1;
-        padding: 10px;
-        border-radius: 6px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        text-align: center;
-        text-decoration: none;
-        
-        i {
-          margin-right: 5px;
-        }
-        
-        &:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-      }
-      
-      .btn-visit {
-        background-color: #fd7e14;
-        color: white;
-        
-        &:hover {
-          background-color: #e67212;
-        }
-      }
-      
-      .btn-details {
-        background-color: #007bff;
-        color: white;
-        
-        &:hover {
-          background-color: #0069d9;
-        }
-      }
-    }
-  }
+
+  box-shadow:
+    0 25px 60px rgba(0,0,0,.25);
+}
+
+.project-image-container {
+
+  position: relative;
+
+  height: 500px;
+
+  overflow: hidden;
+}
+
+.project-image {
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.image-overlay {
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      #070B14,
+      transparent 60%
+    );
+}
+
+.project-content {
+
+  padding: 3rem;
+}
+
+.project-type {
+
+  display: inline-block;
+
+  padding: .6rem 1rem;
+
+  border-radius: 999px;
+
+  background:
+    rgba(139,92,246,.15);
+
+  color:
+    #C4B5FD;
+
+  border:
+    1px solid rgba(139,92,246,.25);
+
+  margin-bottom: 1rem;
+
+  font-size: .85rem;
+
+  font-weight: 600;
+}
+
+.project-title {
+
+  color: white;
+
+  font-size: clamp(2rem,5vw,4rem);
+
+  font-weight: 800;
+
+  margin-bottom: 1rem;
+}
+
+.project-date {
+
+  color: #94A3B8;
+
+  margin-bottom: 2rem;
+}
+
+.project-description {
+
+  color: #CBD5E1;
+
+  font-size: 1.05rem;
+
+  line-height: 1.9;
+
+  margin-bottom: 2rem;
+}
+
+.technologies-container {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: .7rem;
+
+  margin-bottom: 2.5rem;
+}
+
+.technology-badge {
+
+  color: white;
+
+  padding: .6rem 1rem;
+
+  border-radius: 999px;
+
+  font-size: .8rem;
+
+  font-weight: 600;
+}
+
+.project-actions {
+
+  display: flex;
+
+  gap: 1rem;
+}
+
+.visit-btn,
+.back-btn {
+
+  flex: 1;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  padding: 1rem;
+
+  border-radius: 14px;
+
+  font-weight: 600;
+
+  transition: .3s;
+}
+
+.visit-btn {
+
+  background:
+    linear-gradient(
+      135deg,
+      #8B5CF6,
+      #2563EB
+    );
+
+  color: white;
+}
+
+.visit-btn:hover {
+
+  transform:
+    translateY(-3px);
+}
+
+.back-btn {
+
+  background:
+    rgba(255,255,255,.05);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  color: white;
+}
+
+.back-btn:hover {
+
+  background:
+    rgba(255,255,255,.1);
 }
 
 .loading-container {
+
+  min-height: 70vh;
+
   display: flex;
+
   justify-content: center;
+
   align-items: center;
-  min-height: 300px;
 }
 
-/* Stili per dispositivi di piccole dimensioni */
-@media (max-width: 576px) {
-  .page-wrapper {
-    padding-top: 120px; /* Più spazio per l'header su mobile */
-    padding-bottom: 120px; /* Più spazio per il footer su mobile */
+.spinner {
+
+  width: 60px;
+  height: 60px;
+
+  border-radius: 50%;
+
+  border:
+    4px solid rgba(255,255,255,.1);
+
+  border-top:
+    4px solid #8B5CF6;
+
+  animation:
+    spin 1s linear infinite;
+}
+
+@keyframes spin {
+
+  from {
+    transform: rotate(0deg);
   }
 
-  .project-container {
-    min-height: calc(100vh - 240px); /* 100vh - (header + footer su mobile) */
-    padding: 15px 10px;
-  }
-  
-  .project-card {
-    margin: 10px auto;
-    
-    .card-header {
-      padding: 10px 15px;
-      
-      .card-title {
-        font-size: 1.5rem;
-      }
-      
-      .card-type {
-        font-size: 1rem;
-      }
-    }
-    
-    .card-image-container {
-      height: 200px;
-    }
-    
-    .card-body {
-      padding: 15px;
-      
-      .card-actions {
-        flex-direction: column;
-        
-        .btn {
-          margin-bottom: 10px;
-          &:last-child {
-            margin-bottom: 0;
-          }
-        }
-      }
-    }
+  to {
+    transform: rotate(360deg);
   }
 }
 
-/* Stili per dispositivi di medie dimensioni */
-@media (min-width: 577px) and (max-width: 768px) {
-  .page-wrapper {
-    padding-top: 110px; /* Spazio per l'header su tablet */
-    padding-bottom: 110px; /* Spazio per il footer su tablet */
+@media (max-width: 768px) {
+
+  .project-image-container {
+
+    height: 280px;
   }
 
-  .project-container {
-    min-height: calc(100vh - 220px); /* 100vh - (header + footer su tablet) */
-    padding: 20px 15px;
-  }
-  
-  .project-card {
-    margin: 15px auto;
-    
-    .card-header {
-      .card-title {
-        font-size: 1.8rem;
-      }
-    }
-    
-    .card-image-container {
-      height: 250px;
-    }
-  }
-}
+  .project-content {
 
-/* Stili per dispositivi di grandi dimensioni */
-@media (min-width: 769px) {
-  .project-container {
-    padding: 30px;
+    padding: 1.5rem;
   }
-  
-  .project-card {
-    margin: 20px auto;
+
+  .project-actions {
+
+    flex-direction: column;
   }
 }
 
 </style>
-
-

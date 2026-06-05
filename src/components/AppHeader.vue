@@ -5,186 +5,290 @@ export default {
 </script>
 
 <template>
-  <header class="top-header">
-    <div class="container">
-      <div class="header-inner">
-        <!-- Home -->
-        <div v-if="$route.name !== 'home'" class="brand">
-          <router-link to="/" class="brand-link">HOME</router-link>
+  <header class="app-header">
+    <div class="header-container">
+
+      <!-- Logo -->
+      <router-link to="/" class="logo">
+        <div class="logo-dot"></div>
+        <div class="logo-text">
+          <span class="name">Michele Fabio Pupo</span>
+          <span class="role">Full Stack Developer</span>
         </div>
-        
-        <!-- Titolo centrale -->
-        <div :class="{'header-title': true, 'align-right': $route.name === 'project'}">
-          <h1>
-            <span class="subtitle">Web Developer:</span>
-            <span class="main-title">Michele Fabio Pupo</span>
-          </h1>
-        </div>
-        
-        <!-- Menu di navigazione -->
-        <nav class="nav-menu">
-          <ul class="menu-list">
-            <li class="project-item" v-if="$route.name !== 'project'">
-              <router-link :to="{ name: 'project' }" class="project-link">PROGETTI</router-link>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      </router-link>
+
+      <!-- Menu -->
+      <nav class="nav-menu">
+        <router-link
+          to="/"
+          class="nav-link"
+          :class="{ active: $route.name === 'home' }"
+        >
+          Home
+        </router-link>
+
+        <router-link
+          :to="{ name: 'project' }"
+          class="nav-link"
+          :class="{ active: $route.name === 'project' }"
+        >
+          Projects
+        </router-link>
+      </nav>
+
+      <!-- CTA -->
+      <a
+        href="mailto:fabiomichelepupo@gmail.com"
+        class="contact-btn"
+      >
+        Contact Me
+      </a>
+
     </div>
   </header>
 </template>
 
 <style lang="scss">
-.top-header {
-  width: 100%;
-  padding: 1rem 0;
+
+.app-header {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #03346E;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  z-index: 1000;
+  width: 100%;
+  height: 85px;
+  z-index: 9999;
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  background: rgba(7, 11, 20, 0.75);
+
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.35);
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
+.header-container {
+  max-width: 1400px;
+  margin: auto;
 
-.header-inner {
+  height: 100%;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
+
+  padding: 0 2rem;
 }
 
-.brand {
-  .brand-link {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    &:hover {
-      color: #f0f0f0;
-    }
-  }
+/* =====================================
+   LOGO
+===================================== */
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  text-decoration: none;
 }
+
+.logo-dot {
+  width: 14px;
+  height: 14px;
+
+  border-radius: 50%;
+
+  background: linear-gradient(
+    135deg,
+    #8b5cf6,
+    #2563eb
+  );
+
+  box-shadow:
+    0 0 25px rgba(139,92,246,.8);
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  color: white;
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  letter-spacing: .5px;
+}
+
+.role {
+  color: #94A3B8;
+
+  font-size: .8rem;
+
+  margin-top: 2px;
+}
+
+/* =====================================
+   MENU
+===================================== */
 
 .nav-menu {
-  .menu-list {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-    align-items: center;
-    
-    .project-item {
-      position: relative;
-      
-      .project-link {
-        color: #fff;
-        text-decoration: none;
-        font-size: 1.2rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        background-color: #FF6B00;
-        padding: 0.5rem 1.5rem;
-        border-radius: 4px;
-        transition: all 0.3s ease;
-        letter-spacing: 0.5px;
-        
-        &:hover {
-          background-color: #FF8C33;
-          transform: translateY(-2px);
-          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        
-        &.router-link-active {
-          background-color: #FF8C33;
-        }
-      }
-    }
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  position: relative;
+
+  text-decoration: none;
+
+  color: #CBD5E1;
+
+  font-size: .95rem;
+  font-weight: 500;
+
+  transition: .3s;
+}
+
+.nav-link:hover {
+  color: white;
+}
+
+.nav-link.active {
+  color: white;
+}
+
+.nav-link.active::after {
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+  bottom: -8px;
+
+  width: 100%;
+  height: 2px;
+
+  background: linear-gradient(
+    90deg,
+    #8b5cf6,
+    #2563eb
+  );
+}
+
+/* =====================================
+   BUTTON
+===================================== */
+
+.contact-btn {
+  text-decoration: none;
+
+  color: white;
+
+  font-weight: 600;
+
+  padding: .9rem 1.4rem;
+
+  border-radius: 999px;
+
+  background: linear-gradient(
+    135deg,
+    #8b5cf6,
+    #2563eb
+  );
+
+  transition: .3s;
+}
+
+.contact-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 30px rgba(99,102,241,.4);
+}
+
+/* =====================================
+   TABLET
+===================================== */
+
+@media (max-width: 900px) {
+
+  .header-container {
+    padding: 0 1.2rem;
   }
-}
 
-.header-title {
-  text-align: center;
-  h1 {
-    margin: 0;
-    font-size: 1.2rem;
-    color: #fff;
-    .subtitle {
-      font-weight: 300;
-      margin-right: 0.5rem;
-      color: #ccc;
-    }
-    .main-title {
-      font-weight: 700;
-    }
-  }
-}
-
-.align-right {
-  text-align: right;
-  margin-left: auto;
-}
-
-/* Media queries per la responsività */
-@media (max-width: 768px) {
-  .header-inner {
-    justify-content: center;
+  .nav-menu {
     gap: 1rem;
   }
-  
+
+  .name {
+    font-size: .9rem;
+  }
+
+  .role {
+    font-size: .7rem;
+  }
+
+  .contact-btn {
+    padding: .8rem 1rem;
+    font-size: .85rem;
+  }
+}
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 768px) {
+
+  .app-header {
+    height: 75px;
+  }
+
+  .role {
+    display: none;
+  }
+
+  .contact-btn {
+    display: none;
+  }
+
   .nav-menu {
-    order: 3;
-    width: 100%;
-    margin-top: 0.8rem;
-    
-    .menu-list {
-      justify-content: center;
-    }
+    gap: .8rem;
   }
-  
-  .header-title {
-    order: 2;
-    h1 {
-      font-size: 1rem;
-    }
+
+  .nav-link {
+    font-size: .85rem;
   }
-  
-  .brand {
-    order: 1;
-    .brand-link {
-      font-size: 1.5rem;
-    }
+
+  .name {
+    max-width: 150px;
+    line-height: 1.2;
   }
 }
 
 @media (max-width: 480px) {
-  .header-title {
-    h1 {
-      font-size: 0.9rem;
-    }
+
+  .header-container {
+    padding: 0 .8rem;
   }
-  
-  .brand {
-    .brand-link {
-      font-size: 1.3rem;
-    }
+
+  .name {
+    font-size: .8rem;
   }
-  
+
+  .nav-link {
+    font-size: .8rem;
+  }
+
   .nav-menu {
-    .menu-list {
-      .project-item {
-        .project-link {
-          padding: 0.4rem 1.2rem;
-          font-size: 1.1rem;
-        }
-      }
-    }
+    gap: .6rem;
   }
 }
+
 </style>

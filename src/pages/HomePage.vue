@@ -74,318 +74,617 @@ export default {
 </script>
 
 <template>
-  <div class="splash-page">
-    <div class="splash-content">
-      <div class="header-spacer"></div>
+  <div class="home-page">
 
-      <!-- Immagine profilo circolare -->
+    <!-- HERO -->
+    <section class="hero-section">
+
+      <div class="hero-glow"></div>
+
       <img
         src="/download-photoaidcom-cropped.png"
         alt="Michele Fabio Pupo"
         class="profile-photo"
       />
-      <h2>Jr Full Stack Web Developer</h2>
+
+      <div class="hero-badge">
+        Full Stack Web Developer
+      </div>
+
+      <h1 class="hero-title">
+        Michele Fabio Pupo
+      </h1>
+
+      <p class="hero-description">
+        Sviluppo applicazioni web moderne, performanti e scalabili
+        utilizzando Laravel, Vue.js, MySQL e tecnologie frontend avanzate.
+      </p>
 
       <div class="quick-contact">
-        <a href="#" class="contact-link" @click.prevent="copyToClipboard('mikypupowd@gmail.com', $event)">
+
+        <a
+          href="#"
+          class="contact-link"
+          @click.prevent="copyToClipboard('mikypupowd@gmail.com', $event)"
+        >
           <i class="fas fa-envelope"></i>
           <span>mikypupowd@gmail.com</span>
         </a>
-        <a href="#" class="contact-link" @click.prevent="copyToClipboard('+39 389 992 8860', $event)">
+
+        <a
+          href="#"
+          class="contact-link"
+          @click.prevent="copyToClipboard('+39 389 992 8860', $event)"
+        >
           <i class="fas fa-phone"></i>
           <span>+39 389 992 8860</span>
         </a>
+
       </div>
 
-      <p class="description">
-        Sono una persona tenace e proattiva, determinata a raggiungere obiettivi con creatività e perseveranza. Ho maturato competenze avanzate nello sviluppo web, lavorando con tecnologie come HTML, CSS, JavaScript, Laravel e altre soluzioni moderne. La mia capacità di problem solving mi consente di individuare soluzioni efficaci e innovative, garantendo sempre il successo dei progetti a cui partecipo. Sono orientato alla collaborazione e motivato a contribuire con entusiasmo alla crescita di team e aziende nel settore tecnologico.
-      </p>
+      <div class="hero-buttons">
 
-      <!-- Sezione Skills -->
-      <div class="skills-section">
-        <h3>Competenze Tecniche</h3>
-        <div class="skills-container">
-          <div 
-            v-for="skill in skills" 
-            :key="skill.name" 
-            class="skill-item"
-          >
-            <div class="skill-icon" :style="{ color: skill.color }">
-              <i :class="skill.icon"></i>
-            </div>
-            <span class="skill-name">{{ skill.name }}</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sezione Numeri/Risultati -->
-      <div class="achievements-section">
-        <div class="achievements-container">
-          <div 
-            v-for="achievement in achievements" 
-            :key="achievement.text" 
-            class="achievement-item"
-          >
-            <div class="achievement-number">{{ achievement.number }}</div>
-            <div class="achievement-text">{{ achievement.text }}</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sezione Lingue -->
-      <div class="languages-section">
-        <h3>Lingue</h3>
-        <div class="languages-container">
-          <div class="language-item">
-            <div class="language-name">Italiano</div>
-            <div class="language-level">
-              <div class="level-bar">
-                <div class="level-fill" style="width: 100%"></div>
-              </div>
-              <span>Madrelingua</span>
-            </div>
-          </div>
-          <div class="language-item">
-            <div class="language-name">Inglese</div>
-            <div class="language-level">
-              <div class="level-bar">
-                <div class="level-fill" style="width: 75%"></div>
-              </div>
-              <span>B2</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="cta-section">
-        <router-link to="/project" class="cta-button">
-          <span class="cta-button-text">Scopri di più</span>
-          <span class="cta-button-icon"><i class="fas fa-arrow-right"></i></span>
+        <router-link
+          to="/project"
+          class="primary-btn"
+        >
+          View Projects
         </router-link>
+
+        <a
+          href="/CV%20Michele%20Fabio%20Pupo.pdf"
+          target="_blank"
+          class="secondary-btn"
+        >
+          Download CV
+        </a>
+
       </div>
 
-      <div class="cv-download-section">
-        <div class="cv-card">
-          <div class="cv-icon">
-            <i class="fas fa-file-pdf"></i>
-          </div>
-          <div class="cv-content">
-            <h3>Scarica il mio CV</h3>
-            <p>Visualizza e scarica il mio curriculum vitae completo in formato PDF</p>
-          </div>
-          <a href="/CV%20Michele%20Fabio%20Pupo.pdf" target="_blank" class="cv-button">
-            <span class="cv-button-text">Scarica CV</span>
-            <span class="cv-button-icon"><i class="fas fa-download"></i></span>
-          </a>
-        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about-section">
+
+      <div class="glass-card">
+
+        <h2>Chi sono</h2>
+
+        <p>
+          Sono una persona tenace e proattiva, determinata a raggiungere
+          obiettivi con creatività e perseveranza.
+
+          Ho maturato competenze nello sviluppo web lavorando con HTML,
+          CSS, JavaScript, Laravel, Vue.js e tecnologie moderne.
+
+          La mia capacità di problem solving mi consente di individuare
+          soluzioni efficaci e innovative, garantendo sempre qualità e
+          attenzione ai dettagli.
+        </p>
+
       </div>
-    </div>
+
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section class="achievements-section">
+
+      <div class="achievements-container">
+
+        <div
+          v-for="achievement in achievements"
+          :key="achievement.text"
+          class="achievement-item"
+        >
+          <div class="achievement-number">
+            {{ achievement.number }}
+          </div>
+
+          <div class="achievement-text">
+            {{ achievement.text }}
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- SKILLS -->
+    <section class="skills-section">
+
+      <h2>Tech Stack</h2>
+
+      <div class="skills-container">
+
+        <div
+          v-for="skill in skills"
+          :key="skill.name"
+          class="skill-item"
+        >
+
+          <div
+            class="skill-icon"
+            :style="{ color: skill.color }"
+          >
+            <i :class="skill.icon"></i>
+          </div>
+
+          <span class="skill-name">
+            {{ skill.name }}
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- LANGUAGES -->
+    <section class="languages-section">
+
+      <div class="glass-card">
+
+        <h2>Languages</h2>
+
+        <div class="languages-container">
+
+          <div class="language-item">
+
+            <div class="language-name">
+              Italiano
+            </div>
+
+            <div class="language-level">
+
+              <div class="level-bar">
+                <div
+                  class="level-fill"
+                  style="width:100%"
+                ></div>
+              </div>
+
+              <span>Madrelingua</span>
+
+            </div>
+
+          </div>
+
+          <div class="language-item">
+
+            <div class="language-name">
+              Inglese
+            </div>
+
+            <div class="language-level">
+
+              <div class="level-bar">
+                <div
+                  class="level-fill"
+                  style="width:75%"
+                ></div>
+              </div>
+
+              <span>B2</span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- CV -->
+    <section class="cv-download-section">
+
+      <div class="cv-card">
+
+        <div class="cv-icon">
+          <i class="fas fa-file-pdf"></i>
+        </div>
+
+        <div class="cv-content">
+
+          <h3>Curriculum Vitae</h3>
+
+          <p>
+            Visualizza e scarica il mio curriculum completo.
+          </p>
+
+        </div>
+
+        <a
+          href="/CV%20Michele%20Fabio%20Pupo.pdf"
+          target="_blank"
+          class="cv-button"
+        >
+          Download
+        </a>
+
+      </div>
+
+    </section>
+
   </div>
 </template>
 
 <style lang="scss">
-@keyframes fadeIn {
+
+@keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.splash-page {
+.home-page {
   min-height: 100vh;
-  background-color: #ffffff;
-  padding: 20px;
-  padding-top: 150px;
-  padding-bottom: 150px;
-  overflow-y: auto; /* Aggiunto per permettere lo scroll della pagina intera */
-  display: block; /* Cambiato da flex a block */
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(139,92,246,.20),
+      transparent 40%
+    ),
+    #070B14;
+
+  color: white;
+
+  padding-top: 130px;
+  padding-bottom: 100px;
+
+  overflow-x: hidden;
 }
 
-.header-spacer {
-  height: 60px; /* Aggiusta in base all'altezza del tuo header */
-}
+.hero-section {
+  position: relative;
 
-.splash-content {
-  max-width: 800px;
-  background: #F9DBBA;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+
+  margin: auto;
+
   text-align: center;
-  animation: fadeIn 1s ease-out;
-  margin: 0 auto; /* Centra il contenuto orizzontalmente */
-  overflow-y: visible; /* Rimosso lo scroll interno */
-  margin-top: 20px; /* Aggiungi spazio sopra il contenuto */
-  margin-bottom: 20px; /* Aggiungi spazio sotto il contenuto */
 
-  h1 {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
-    color: #03346E;
-  }
-  
-  h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    color: #03346E;
-  }
+  padding: 0 2rem;
 
-  h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: #03346E;
-  }
+  animation: fadeUp .8s ease;
+}
 
-  .profile-photo {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 3px solid #03346E;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    
-    &:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    }
-  }
+.hero-glow {
+  position: absolute;
 
-  .quick-contact {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 1.5rem;
-    
-    .contact-link {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 12px;
-      background-color: rgba(255, 255, 255, 0.6);
-      border-radius: 20px;
-      text-decoration: none;
-      color: #03346E;
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
-      
-      i {
-        font-size: 1rem;
-      }
-      
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.8);
-        transform: translateY(-2px);
-      }
-    }
-  }
+  left: 50%;
+  top: -120px;
 
-  .description {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-    color: #343a40;
-    padding: 0 10px;
-  }
+  transform: translateX(-50%);
+
+  width: 500px;
+  height: 500px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(139,92,246,.30),
+      rgba(37,99,235,.15),
+      transparent
+    );
+
+  filter: blur(100px);
+
+  pointer-events: none;
+}
+
+.profile-photo {
+  width: 180px;
+  height: 180px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 3px solid rgba(255,255,255,.15);
+
+  box-shadow:
+    0 0 60px rgba(139,92,246,.25);
+
+  margin-bottom: 2rem;
+
+  position: relative;
+  z-index: 10;
+}
+
+.hero-badge {
+  display: inline-block;
+
+  background: rgba(255,255,255,.05);
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  padding: .8rem 1.2rem;
+
+  border-radius: 999px;
+
+  color: #CBD5E1;
+
+  margin-bottom: 1.5rem;
+
+  backdrop-filter: blur(10px);
+}
+
+.hero-title {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+
+  font-weight: 800;
+
+  line-height: 1.1;
+
+  margin-bottom: 1.5rem;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff,
+      #CBD5E1
+    );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-description {
+  max-width: 700px;
+
+  margin: auto auto 2rem auto;
+
+  color: #94A3B8;
+
+  line-height: 1.8;
+
+  font-size: 1.15rem;
+}
+
+.quick-contact {
+  display: flex;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 1rem;
+
+  margin-bottom: 2rem;
+}
+
+.contact-link {
+  display: flex;
+
+  align-items: center;
+
+  gap: .7rem;
+
+  text-decoration: none;
+
+  color: white;
+
+  background: rgba(255,255,255,.05);
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  border-radius: 999px;
+
+  padding: .9rem 1.2rem;
+
+  transition: .3s;
+}
+
+.contact-link:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(139,92,246,.4);
+
+  background: rgba(139,92,246,.08);
+}
+
+.hero-buttons {
+  display: flex;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 1rem;
+
+  margin-bottom: 5rem;
+}
+
+.primary-btn {
+  text-decoration: none;
+
+  color: white;
+
+  font-weight: 600;
+
+  padding: 1rem 2rem;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8B5CF6,
+      #2563EB
+    );
+
+  transition: .3s;
+}
+
+.primary-btn:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 15px 35px rgba(99,102,241,.35);
+}
+
+.secondary-btn {
+  text-decoration: none;
+
+  color: white;
+
+  font-weight: 600;
+
+  padding: 1rem 2rem;
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(255,255,255,.12);
+
+  transition: .3s;
+}
+
+.secondary-btn:hover {
+  background: rgba(255,255,255,.05);
+}
+
+.glass-card {
+  background: rgba(255,255,255,.04);
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  backdrop-filter: blur(20px);
+
+  border-radius: 24px;
+
+  padding: 2rem;
+
+  max-width: 1000px;
+
+  margin: auto;
+}
+
+.glass-card h2 {
+  color: white;
+
+  margin-bottom: 1.5rem;
+
+  text-align: center;
+}
+
+.glass-card p {
+  color: #CBD5E1;
+
+  line-height: 1.8;
+}
+
+.about-section,
+.languages-section {
+  padding: 2rem;
+  margin-bottom: 3rem;
 }
 
 .skills-section {
-  margin: 2rem 0;
-  padding: 1.5rem;
-  background-color: rgba(255, 255, 255, 0.6);
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+
+  max-width: 1200px;
+
+  margin: auto auto 4rem auto;
+}
+
+.skills-section h2 {
+  text-align: center;
+
+  margin-bottom: 2rem;
 }
 
 .skills-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit,minmax(120px,1fr));
+
   gap: 1rem;
 }
 
 .skill-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: white;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 80px;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
-  
-  .skill-icon {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .skill-name {
-    font-size: 0.85rem;
-    font-weight: 500;
-  }
+  background: rgba(255,255,255,.04);
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  backdrop-filter: blur(15px);
+
+  border-radius: 18px;
+
+  padding: 1.5rem;
+
+  text-align: center;
+
+  transition: .3s;
+}
+
+.skill-item:hover {
+  transform: translateY(-8px);
+
+  border-color: rgba(139,92,246,.35);
+}
+
+.skill-icon {
+  font-size: 2rem;
+
+  margin-bottom: .7rem;
+}
+
+.skill-name {
+  color: #E2E8F0;
 }
 
 .achievements-section {
-  margin: 2rem 0;
+  max-width: 1200px;
+
+  margin: auto auto 4rem auto;
+
+  padding: 0 2rem;
 }
 
 .achievements-container {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+
   gap: 1rem;
 }
 
 .achievement-item {
-  background-color: #03346E;
-  color: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  min-width: 120px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 0.5s ease-out;
-  
-  .achievement-number {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-  }
-  
-  .achievement-text {
-    font-size: 0.9rem;
-    line-height: 1.4;
-  }
+  background:
+    linear-gradient(
+      135deg,
+      rgba(139,92,246,.20),
+      rgba(37,99,235,.10)
+    );
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  border-radius: 20px;
+
+  padding: 2rem;
+
+  text-align: center;
 }
 
-.languages-section {
-  margin: 2rem 0;
-  padding: 1.5rem;
-  background-color: rgba(255, 255, 255, 0.6);
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+.achievement-number {
+  font-size: 2.5rem;
+
+  font-weight: 800;
+
+  margin-bottom: .5rem;
+}
+
+.achievement-text {
+  color: #CBD5E1;
 }
 
 .languages-container {
@@ -395,337 +694,123 @@ export default {
 }
 
 .language-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  background-color: white;
+  background: rgba(255,255,255,.04);
+
+  border-radius: 15px;
+
   padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-  
-  .language-name {
-    font-weight: 600;
-    min-width: 80px;
-  }
-  
-  .language-level {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    
-    .level-bar {
-      flex: 1;
-      height: 8px;
-      background-color: #e9ecef;
-      border-radius: 4px;
-      overflow: hidden;
-      
-      .level-fill {
-        height: 100%;
-        background-color: #03346E;
-        border-radius: 4px;
-      }
-    }
-    
-    span {
-      font-size: 0.85rem;
-      color: #6c757d;
-      width: 90px;
-      text-align: left;
-    }
-  }
 }
 
-.cta-section {
-  margin: 2rem 0;
-  
-  .cta-button {
-    display: inline-flex;
-    align-items: center;
-    background-color: #03346E;
-    color: white;
-    border: none;
-    padding: 0.8rem 1.5rem;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    
-    &:hover {
-      background-color: #022652;
-      transform: translateY(-2px);
-    }
-    
-    &:active {
-      transform: translateY(0);
-    }
-    
-    .cta-button-text {
-      margin-right: 0.5rem;
-    }
-    
-    .cta-button-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
+.language-name {
+  margin-bottom: .5rem;
+
+  font-weight: 600;
+}
+
+.level-bar {
+  height: 10px;
+
+  border-radius: 999px;
+
+  overflow: hidden;
+
+  background: rgba(255,255,255,.08);
+}
+
+.level-fill {
+  height: 100%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8B5CF6,
+      #2563EB
+    );
 }
 
 .cv-download-section {
-  padding: 2rem 0;
-  display: flex;
-  justify-content: center;
-  width: 100%;
+  padding: 2rem;
 }
 
 .cv-card {
+  max-width: 800px;
+
+  margin: auto;
+
+  background: rgba(255,255,255,.04);
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  border-radius: 24px;
+
+  padding: 2rem;
+
   display: flex;
+
   align-items: center;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  padding: 1.5rem 2rem;
-  width: 100%;
-  max-width: 650px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
-  }
-  
-  @media (max-width: 768px) {
-    flex-direction: column;
-    text-align: center;
-    padding: 1.5rem;
-  }
+
+  justify-content: space-between;
+
+  gap: 2rem;
 }
 
 .cv-icon {
-  font-size: 2.5rem;
-  color: #03346E;
-  margin-right: 1.5rem;
-  
-  @media (max-width: 768px) {
-    margin-right: 0;
-    margin-bottom: 1rem;
-  }
+  font-size: 3rem;
+
+  color: #8B5CF6;
 }
 
-.cv-content {
-  flex: 1;
-  
-  h3 {
-    color: #03346E;
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  p {
-    color: #555;
-    font-size: 1rem;
-    margin: 0;
-  }
-  
-  @media (max-width: 768px) {
-    margin-bottom: 1.5rem;
-  }
+.cv-content h3 {
+  margin-bottom: .5rem;
+}
+
+.cv-content p {
+  color: #94A3B8;
 }
 
 .cv-button {
-  display: flex;
-  align-items: center;
-  background-color: #03346E;
-  color: white;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
   text-decoration: none;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  
-  &:hover {
-    background-color: #022652;
-    transform: translateY(-2px);
-  }
-  
-  &:active {
-    transform: translateY(0);
-  }
-  
-  .cv-button-text {
-    margin-right: 0.5rem;
-  }
-  
-  .cv-button-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-  .splash-content {
-    padding: 20px;
-    margin: 10px;
-    
-    h1 {
-      font-size: 2.2rem;
-    }
-    
-    h2 {
-      font-size: 1.4rem;
-    }
-    
-    .description {
-      font-size: 1rem;
-    }
-  }
-  
-  .skills-container {
-    gap: 0.7rem;
-  }
-  
-  .skill-item {
-    width: 70px;
-    padding: 0.8rem;
-    
-    .skill-icon {
-      font-size: 1.7rem;
-    }
-    
-    .skill-name {
-      font-size: 0.75rem;
-    }
-  }
-  
-  .achievements-container {
-    gap: 0.7rem;
-  }
-  
-  .achievement-item {
-    padding: 1rem;
-    min-width: 100px;
-    
-    .achievement-number {
-      font-size: 1.7rem;
-    }
-    
-    .achievement-text {
-      font-size: 0.8rem;
-    }
-  }
-  
-  .quick-contact {
-    flex-direction: column;
-    align-items: center;
-    
-    .contact-link {
-      width: 100%;
-      justify-content: center;
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  .splash-content {
-    padding: 15px;
-    
-    h1 {
-      font-size: 1.8rem;
-    }
-    
-    h2 {
-      font-size: 1.2rem;
-    }
-    
-    .profile-photo {
-      width: 120px;
-      height: 120px;
-    }
-    
-    .description {
-      font-size: 0.95rem;
-    }
-  }
-  
-  .languages-container .language-item {
-    flex-direction: column;
-    align-items: flex-start;
-    
-    .language-name {
-      margin-bottom: 0.5rem;
-    }
-    
-    .language-level {
-      width: 100%;
-    }
-  }
-  
-  .skills-container {
-    gap: 0.5rem;
-  }
-  
-  .skill-item {
-    width: 60px;
-    padding: 0.7rem;
-  }
-  
-  .header-spacer {
-    height: 50px; /* Ridotto per schermi più piccoli */
-  }
-}
-* {
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
-
-/* Stili per il tooltip */
-.contact-link {
-  cursor: pointer;
-  position: relative;
-  
-  &:active {
-    transform: scale(0.98);
-  }
-}
-
-.copy-tooltip {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -30px;
-  background-color: #333;
   color: white;
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  white-space: nowrap;
-  z-index: 1000;
-  
-  &.visible {
-    opacity: 1;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8B5CF6,
+      #2563EB
+    );
+
+  padding: 1rem 1.8rem;
+
+  border-radius: 999px;
+
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+
+  .hero-section {
+    padding: 0 1rem;
   }
-  
-  &:after {
-    content: '';
-    position: absolute;
-    top: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 0 5px 5px;
-    border-style: solid;
-    border-color: transparent transparent #333;
+
+  .profile-photo {
+    width: 140px;
+    height: 140px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .primary-btn,
+  .secondary-btn {
+    width: 100%;
+  }
+
+  .cv-card {
+    flex-direction: column;
+    text-align: center;
   }
 }
+
 </style>

@@ -221,545 +221,706 @@ export default {
 </script>
 
 <template>
-    <div class="d-flex flex-column my_home">
-        <!-- HEADER -->
-        <div class="header-section">
-            <!-- Carousel visibile solo su desktop -->
-            <div class="carousel-wrapper" v-if="!isMobile">
-                <div class="carousel">
-                    <!-- Esempio di immagini: sostituisci con le tue -->
-                    <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
-                    <img src="/bootstrap-tutorial.png" alt="Bootstrap">
-                    <img src="/1698604163003.png" alt="Javascript">
-                    <img src="/css.png" alt="Css">
-                    <img src="/353261.png" alt="Php">
-                    <img src="/eceb15684d4183c66f73c1a9bb777eef708b2b66.png" alt="Mysql">
-                    <img src="/fposter,small,wall_texture,product,750x1000_preview_rev_1.png" alt="Vite">
-                    <img src="/HTML5_logo_and_wordmark.svg.png" alt="Html5">
-                    <img src="/laravel-featured_preview_rev_1.png" alt="Laravel">
-                    <img src="/sass-icon-1024x1024-kn7u23pl.png" alt="Sass">
-                    <!-- Duplico le immagini per effetto carousel continuo -->
-                    <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
-                    <img src="/bootstrap-tutorial.png" alt="Bootstrap">
-                    <img src="/1698604163003.png" alt="Javascript">
-                    <img src="/css.png" alt="Css">
-                    <img src="/353261.png" alt="Php">
-                    <img src="/eceb15684d4183c66f73c1a9bb777eef708b2b66.png" alt="Mysql">
-                    <img src="/fposter,small,wall_texture,product,750x1000_preview_rev_1.png" alt="Vite">
-                    <img src="/HTML5_logo_and_wordmark.svg.png" alt="Html5">
-                    <img src="/laravel-featured_preview_rev_1.png" alt="Laravel">
-                    <img src="/sass-icon-1024x1024-kn7u23pl.png" alt="Sass">
-                    <!-- Duplico le immagini per effetto carousel continuo -->
-                    <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
-                    <img src="/bootstrap-tutorial.png" alt="Bootstrap">
-                    <img src="/1698604163003.png" alt="Javascript">
-                    <img src="/css.png" alt="Css">
-                    <img src="/353261.png" alt="Php">
-                    <img src="/eceb15684d4183c66f73c1a9bb777eef708b2b66.png" alt="Mysql">
-                    <img src="/fposter,small,wall_texture,product,750x1000_preview_rev_1.png" alt="Vite">
-                    <img src="/HTML5_logo_and_wordmark.svg.png" alt="Html5">
-                    <img src="/laravel-featured_preview_rev_1.png" alt="Laravel">
-                    <img src="/sass-icon-1024x1024-kn7u23pl.png" alt="Sass">
-                    <!-- Duplico le immagini per effetto carousel continuo -->
-                    <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
-                    <img src="/bootstrap-tutorial.png" alt="Bootstrap">
-                    <img src="/1698604163003.png" alt="Javascript">
-                    <img src="/css.png" alt="Css">
-                    <img src="/353261.png" alt="Php">
-                    <img src="/eceb15684d4183c66f73c1a9bb777eef708b2b66.png" alt="Mysql">
-                    <img src="/fposter,small,wall_texture,product,750x1000_preview_rev_1.png" alt="Vite">
-                    <img src="/HTML5_logo_and_wordmark.svg.png" alt="Html5">
-                    <img src="/laravel-featured_preview_rev_1.png" alt="Laravel">
-                    <img src="/sass-icon-1024x1024-kn7u23pl.png" alt="Sass">
-                    <!-- Duplico le immagini per effetto carousel continuo -->
-                    <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
-                    <img src="/bootstrap-tutorial.png" alt="Bootstrap">
-                    <img src="/1698604163003.png" alt="Javascript">
-                    <img src="/css.png" alt="Css">
-                    <img src="/353261.png" alt="Php">
-                    <img src="/eceb15684d4183c66f73c1a9bb777eef708b2b66.png" alt="Mysql">
-                    <img src="/fposter,small,wall_texture,product,750x1000_preview_rev_1.png" alt="Vite">
-                    <img src="/HTML5_logo_and_wordmark.svg.png" alt="Html5">
-                    <img src="/laravel-featured_preview_rev_1.png" alt="Laravel">
-                    <img src="/sass-icon-1024x1024-kn7u23pl.png" alt="Sass">
-                    <!-- Duplico le immagini per effetto carousel continuo -->
-                    <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
-                    <img src="/bootstrap-tutorial.png" alt="Bootstrap">
-                    <img src="/1698604163003.png" alt="Javascript">
-                    <img src="/css.png" alt="Css">
-                    <img src="/353261.png" alt="Php">
-                    <img src="/eceb15684d4183c66f73c1a9bb777eef708b2b66.png" alt="Mysql">
-                    <img src="/fposter,small,wall_texture,product,750x1000_preview_rev_1.png" alt="Vite">
-                    <img src="/HTML5_logo_and_wordmark.svg.png" alt="Html5">
-                    <img src="/laravel-featured_preview_rev_1.png" alt="Laravel">
-                    <img src="/sass-icon-1024x1024-kn7u23pl.png" alt="Sass">
-                    <!-- Duplico le immagini per effetto carousel continuo -->
-                    <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
-                    <img src="/bootstrap-tutorial.png" alt="Bootstrap">
-                    <img src="/1698604163003.png" alt="Javascript">
-                    <img src="/css.png" alt="Css">
-                    <img src="/353261.png" alt="Php">
-                    <img src="/eceb15684d4183c66f73c1a9bb777eef708b2b66.png" alt="Mysql">
-                    <img src="/fposter,small,wall_texture,product,750x1000_preview_rev_1.png" alt="Vite">
-                    <img src="/HTML5_logo_and_wordmark.svg.png" alt="Html5">
-                    <img src="/laravel-featured_preview_rev_1.png" alt="Laravel">
-                    <img src="/sass-icon-1024x1024-kn7u23pl.png" alt="Sass">
-                    <!-- Duplico le immagini per effetto carousel continuo -->
-                    <img src="/1_OrjCKmou1jT4It5so5gvOA_preview_rev_1.png" alt="Vue.js">
-                    <img src="/bootstrap-tutorial.png" alt="Bootstrap">
-                    <img src="/1698604163003.png" alt="Javascript">
-                    <img src="/css.png" alt="Css">
-                    <img src="/353261.png" alt="Php">
-                    <img src="/eceb15684d4183c66f73c1a9bb777eef708b2b66.png" alt="Mysql">
-                    <img src="/fposter,small,wall_texture,product,750x1000_preview_rev_1.png" alt="Vite">
-                    <img src="/HTML5_logo_and_wordmark.svg.png" alt="Html5">
-                    <img src="/laravel-featured_preview_rev_1.png" alt="Laravel">
-                    <img src="/sass-icon-1024x1024-kn7u23pl.png" alt="Sass">
-                </div>
-            </div>
-            <!-- Overlay sempre presente per titoli e sottotitoli -->
-            <div class="header-overlay">
-                <div class="container">
-                    <h1 class="text-uppercase fw-bold display-3">I miei progetti</h1>
-                    <p class="lead text-center mb-0">Scopri il mio portfolio di soluzioni web</p>
-                </div>
-            </div>
+  <div class="projects-page">
+
+    <!-- HERO -->
+
+    <section class="projects-hero">
+
+      <div class="hero-glow"></div>
+
+      <div class="hero-content">
+
+        <span class="hero-badge">
+          Portfolio
+        </span>
+
+        <h1 class="hero-title">
+          My Projects
+        </h1>
+
+        <p class="hero-description">
+          Una raccolta di applicazioni web sviluppate con Laravel,
+          Vue.js, MySQL e tecnologie moderne orientate a performance,
+          scalabilità ed esperienza utente.
+        </p>
+
+        <div class="hero-stats">
+
+          <div class="stat-card">
+            <span class="stat-number">
+              {{ projects.length }}
+            </span>
+            <span class="stat-label">
+              Projects
+            </span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-number">
+              10+
+            </span>
+            <span class="stat-label">
+              Technologies
+            </span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-number">
+              Full Stack
+            </span>
+            <span class="stat-label">
+              Development
+            </span>
+          </div>
+
         </div>
-        
-        <!-- SEZIONE PROGETTI -->
-        <section id="projects-section" class="projects-section">
-            <div class="container">
-                <div v-if="!isLoading && !error">
-                    <div class="projects-container">
-                        <div 
-                            v-for="(currentProject, index) in projects"
-                            :key="currentProject.slug"
-                            :data-index="index"
-                            :class="['project-item', ...projectAnimationClass(index)]"
-                        >
-                            <AppProject 
-                                :project="currentProject"
-                                :projectName="currentProject.name"
-                                :projectDescription="currentProject.description"
-                                :projectImage="currentProject.project_image"
-                                :projectDate="currentProject.project_date"
-                                :projectLink="currentProject.link_github"
-                                :projectTechnolgies="currentProject.technologies"
-                                :projectType="currentProject.types && currentProject.types.length > 0 
-                                    ? currentProject.types.map(type => type.title).join(', ') 
-                                    : 'No type'"
-                                :nonClickable="true"
-                            />
-                        </div>
-                    </div>
 
-                    <!-- Nessun progetto -->
-                    <div v-if="projects.length === 0" class="no-projects">
-                        <p>Nessun progetto disponibile al momento.</p>
-                    </div>
+      </div>
 
-                    <!-- Paginazione (solo desktop) -->
-                    <div v-if="!isMobile && apiLinks && apiLinks.length > 0" class="pagination-container">
-                        <ul class="pagination">
-                            <li 
-                                v-html="apiLinks[0].label" 
-                                :class="['page-item', apiPageNumber == 1 ? 'disabled' : '']"
-                                @click="apiPageNumber != 1 && changeApiPage(apiLinks[0].label)">
-                            </li>
-                            <li 
-                                v-for="link in apiLinks.slice(1, -1)"
-                                :key="link.label"
-                                v-html="link.label" 
-                                @click="changeApiPage(link.label)" 
-                                :class="['page-item', link.label == apiPageNumber ? 'active' : '']">
-                            </li>
-                            <li 
-                                v-html="apiLinks[apiLinks.length - 1].label" 
-                                :class="['page-item', apiPageNumber == apiLinks.length - 2 ? 'disabled' : '']"
-                                @click="apiPageNumber != apiLinks.length - 2 && changeApiPage(apiLinks[apiLinks.length - 1].label)">
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+    </section>
 
-                <!-- Errore -->
-                <div v-else-if="error" class="error-container">
-                    <div class="alert alert-danger" role="alert">
-                        {{ error }}
-                        <button class="btn btn-outline-danger mt-3" @click="loadProjects">Riprova</button>
-                    </div>
-                </div>
+    <!-- PROJECTS -->
 
-                <!-- Loading -->
-                <div v-else class="loading-container">
-                    <div class="spinner-container">
-                        <div class="spinner-border" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </div>
-                    <p class="mt-3">Caricamento progetti in corso...</p>
-                </div>
+    <section
+      id="projects-section"
+      class="projects-section"
+    >
+
+      <div class="projects-wrapper">
+
+        <div v-if="!isLoading && !error">
+
+          <div class="projects-grid">
+
+            <div
+              v-for="(currentProject, index) in projects"
+              :key="currentProject.slug"
+              :data-index="index"
+              :class="[
+                'project-item',
+                ...projectAnimationClass(index)
+              ]"
+            >
+
+              <AppProject
+                :project="currentProject"
+                :projectName="currentProject.name"
+                :projectDescription="currentProject.description"
+                :projectImage="currentProject.project_image"
+                :projectDate="currentProject.project_date"
+                :projectLink="currentProject.link_github"
+                :projectTechnolgies="currentProject.technologies"
+                :projectType="currentProject.types && currentProject.types.length > 0
+                  ? currentProject.types.map(type => type.title).join(', ')
+                  : 'No type'"
+                :nonClickable="true"
+              />
+
             </div>
-        </section>
-    </div>
+
+          </div>
+
+          <!-- PAGINATION -->
+
+          <div
+            v-if="!isMobile && apiLinks && apiLinks.length > 0"
+            class="pagination-container"
+          >
+
+            <ul class="pagination">
+
+              <li
+                v-html="apiLinks[0].label"
+                :class="[
+                  'page-item',
+                  apiPageNumber == 1 ? 'disabled' : ''
+                ]"
+                @click="apiPageNumber != 1 && changeApiPage(apiLinks[0].label)"
+              ></li>
+
+              <li
+                v-for="link in apiLinks.slice(1, -1)"
+                :key="link.label"
+                v-html="link.label"
+                @click="changeApiPage(link.label)"
+                :class="[
+                  'page-item',
+                  link.label == apiPageNumber ? 'active' : ''
+                ]"
+              ></li>
+
+              <li
+                v-html="apiLinks[apiLinks.length - 1].label"
+                :class="[
+                  'page-item',
+                  apiPageNumber == apiLinks.length - 2
+                    ? 'disabled'
+                    : ''
+                ]"
+                @click="apiPageNumber != apiLinks.length - 2 &&
+                changeApiPage(apiLinks[apiLinks.length - 1].label)"
+              ></li>
+
+            </ul>
+
+          </div>
+
+          <div
+            v-if="projects.length === 0"
+            class="no-projects"
+          >
+            Nessun progetto disponibile.
+          </div>
+
+        </div>
+
+        <!-- ERROR -->
+
+        <div
+          v-else-if="error"
+          class="error-container"
+        >
+
+          <div class="error-card">
+
+            <h3>Oops...</h3>
+
+            <p>{{ error }}</p>
+
+            <button
+              class="retry-btn"
+              @click="loadProjects"
+            >
+              Riprova
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- LOADING -->
+
+        <div
+          v-else
+          class="loading-container"
+        >
+
+          <div class="spinner-border"></div>
+
+          <p>
+            Caricamento progetti...
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
 </template>
 
 <style lang="scss">
-/* ------------------------------------------------------
-   STRUTTURA DI BASE
------------------------------------------------------- */
-.my_home {
-    width: 100%;
-    min-height: 100vh;
-    background-color: #f8f9fa; // sfondo chiaro generale
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 
-    @media (max-width: 991px) {
-        padding-bottom: 80px;
-    }
+/* ==========================================
+   PAGE
+========================================== */
+
+.projects-page {
+
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(139,92,246,.18),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(37,99,235,.12),
+      transparent 35%
+    ),
+    #070B14;
+
+  color: white;
+
+  overflow-x: hidden;
 }
 
-/* ------------------------------------------------------
-   HEADER
------------------------------------------------------- */
-/* Header con gradiente più chiaro in alto, più scuro in basso */
-.header-section {
-    position: relative;
-    margin-top: 110px;
-    background: linear-gradient(135deg, #3F8EC2 20%, #1A4870 100%);
-    /* Più percentuali: #3F8EC2 (azzurro) → #1A4870 (blu scuro) */
-    color: #fff; 
-    overflow: hidden; /* Nel caso ci siano elementi in overflow */
-    
-    /* Altezza minima per “hero” */
-    min-height: 200px;
-    
-    @media (max-width: 768px) {
-        min-height: 200px;
-    }
+/* ==========================================
+   HERO
+========================================== */
+
+.projects-hero {
+
+  position: relative;
+
+  padding-top: 180px;
+  padding-bottom: 100px;
+
+  text-align: center;
+
+  overflow: hidden;
 }
 
-/* Il carousel ora è trasparente, per non "impastare" i colori */
-.carousel-wrapper {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 30px;
-    
-    @media (max-width: 768px) {
-        display: none !important;
-    }
+.hero-glow {
+
+  position: absolute;
+
+  width: 700px;
+  height: 700px;
+
+  left: 50%;
+  top: -250px;
+
+  transform: translateX(-50%);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(139,92,246,.25),
+      rgba(37,99,235,.15),
+      transparent
+    );
+
+  filter: blur(120px);
+
+  pointer-events: none;
 }
 
-/* Animazione orizzontale del carousel */
-.carousel {
-    display: flex;
-    animation: scroll 90s linear infinite;
-    align-items: center;
-    height: auto;
-    min-height: 100px;
-    padding: 20px 0;
-    position: relative;
-    z-index: 1;
+.hero-content {
+
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 900px;
+
+  margin: auto;
+
+  padding: 0 2rem;
 }
 
-.carousel img {
-    width: 100px;
-    height: 100px;
-    margin-right: 20px;
-    object-fit: contain;
-    filter: brightness(0.9);
-    transition: filter 0.3s ease, transform 0.3s ease;
-    
-    &:hover {
-        filter: brightness(1);
-        transform: scale(1.05);
-    }
+.hero-badge {
+
+  display: inline-block;
+
+  padding: .8rem 1.2rem;
+
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.05);
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  color: #CBD5E1;
+
+  margin-bottom: 1.5rem;
 }
 
-/* Overlay leggero per leggere meglio il testo */
-.header-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3); /* overlay più leggero */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: #fff;
-    padding: 0 20px;
-    z-index: 10;
-    
-    h1 {
-        margin-bottom: 15px;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-        
-        @media (max-width: 768px) {
-            font-size: 2rem !important;
-            margin-bottom: 10px;
-        }
-        
-        @media (max-width: 576px) {
-            font-size: 1.8rem !important;
-            margin-bottom: 8px;
-        }
-    }
-    
-    p {
-        font-size: 1.2rem;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-        
-        @media (max-width: 768px) {
-            font-size: 1rem !important;
-        }
-        
-        @media (max-width: 576px) {
-            font-size: 0.9rem !important;
-        }
-    }
+.hero-title {
+
+  font-size: clamp(3rem, 7vw, 5rem);
+
+  font-weight: 800;
+
+  margin-bottom: 1.5rem;
+
+  background:
+    linear-gradient(
+      135deg,
+      white,
+      #CBD5E1
+    );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* Animazione carousel */
-@keyframes scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+.hero-description {
+
+  max-width: 700px;
+
+  margin: auto;
+
+  color: #94A3B8;
+
+  font-size: 1.15rem;
+
+  line-height: 1.8;
 }
 
-/* ------------------------------------------------------
-   SEZIONE PROGETTI
------------------------------------------------------- */
-/* Sfondo bianco o grigio chiaro per contrastare con l’header */
+/* ==========================================
+   STATS
+========================================== */
+
+.hero-stats {
+
+  margin-top: 3rem;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(180px,1fr));
+
+  gap: 1rem;
+}
+
+.stat-card {
+
+  background: rgba(255,255,255,.04);
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  backdrop-filter: blur(20px);
+
+  border-radius: 20px;
+
+  padding: 1.5rem;
+
+  transition: .3s;
+}
+
+.stat-card:hover {
+
+  transform: translateY(-5px);
+
+  border-color:
+    rgba(139,92,246,.35);
+}
+
+.stat-number {
+
+  display: block;
+
+  font-size: 1.8rem;
+
+  font-weight: 700;
+
+  color: white;
+}
+
+.stat-label {
+
+  color: #94A3B8;
+
+  font-size: .9rem;
+}
+
+/* ==========================================
+   PROJECTS
+========================================== */
+
 .projects-section {
-    background-color: #fff; 
-    padding: 40px 0;
-    
-    @media (min-width: 992px) {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        
-        .container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-    }
-    
-    @media (max-width: 991px) and (min-width: 769px) {
-        padding: 40px 0;
-        min-height: 60vh;
-    }
-    
-    @media (max-width: 768px) {
-        padding: 25px 0;
-        min-height: 50vh;
-    }
+
+  padding: 0 0 80px;
 }
 
-.projects-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-    position: relative;
-    
-    @media (min-width: 992px) {
-        margin-bottom: 30px;
-    }
-    
-    @media (max-width: 991px) and (min-width: 769px) {
-        margin-bottom: 40px;
-    }
-    
-    @media (max-width: 768px) {
-        margin-bottom: 25px;
-        gap: 20px;
-    }
-    
-    @media (max-width: 576px) {
-        margin-bottom: 20px;
-        gap: 15px;
-    }
+.projects-wrapper {
+
+  max-width: 1400px;
+
+  margin: auto;
+
+  padding: 0 2rem;
 }
+
+.projects-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(360px,1fr));
+
+  gap: 2rem;
+}
+
+/* ==========================================
+   ANIMATIONS
+========================================== */
 
 .project-animation {
-    opacity: 0;
-    transform: translateY(20px) translateZ(0);
-    transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.4s ease, filter 0.4s ease;
-    position: relative;
-    background-color: none;
-    border: none;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    
-    &.show {
-        opacity: 1;
-        transform: translateY(0) translateZ(0);
-    }
-    
-    &:hover {
-        filter: brightness(1.03);
-    }
-    
-    &:focus,
-    &:active {
-      outline: none;
-      border: none;
-    }
+
+  opacity: 0;
+
+  transform:
+    translateY(40px);
+
+  transition:
+    opacity .8s ease,
+    transform .8s ease;
 }
 
-/* Dim sulle altre card quando se ne passa sopra una */
-.projects-container:hover .project-animation:not(:hover) {
-    filter: brightness(0.9);
-    transform: scale(0.98);
+.project-animation.show {
+
+  opacity: 1;
+
+  transform:
+    translateY(0);
 }
 
-/* Mobile: animazioni da destra/sinistra */
-@media (max-width: 768px) {
-  .project-animation {
-    opacity: 0;
-    transform: translateX(100%) translateZ(0);
-    transition: transform 0.8s ease, opacity 0.8s ease;
-  }
-  .project-animation.show {
-    opacity: 1;
-    transform: translateX(0) translateZ(0);
-  }
-  .project-animation.hide-up {
-    opacity: 0;
-    transform: translateX(-100%) translateZ(0);
-  }
-  .project-animation.hide-down {
-    opacity: 0;
-    transform: translateX(100%) translateZ(0);
-  }
-  .project-animation:hover {
-    box-shadow: none;
-  }
+.project-item {
+
+  transition: .3s;
 }
 
-/* ------------------------------------------------------
-   PAGINAZIONE
------------------------------------------------------- */
+.project-item:hover {
+
+  transform:
+    translateY(-8px);
+}
+
+.projects-grid:hover
+.project-item:not(:hover) {
+
+  opacity: .75;
+}
+
+/* ==========================================
+   PAGINATION
+========================================== */
+
 .pagination-container {
-    display: flex;
-    justify-content: center;
-    
-    @media (min-width: 992px) {
-        margin: 30px 0;
-    }
-    
-    @media (max-width: 991px) and (min-width: 769px) {
-        margin: 30px 0 60px;
-    }
-    
-    @media (max-width: 768px) {
-        margin: 20px 0 50px;
-    }
+
+  display: flex;
+
+  justify-content: center;
+
+  margin-top: 4rem;
 }
 
 .pagination {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    
-    .page-item {
-        padding: 10px 15px;
-        background-color: white;
-        color: #1A4870;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border-right: 1px solid #e9ecef;
-        user-select: none;
-        font-size: 16px;
-        
-        &:last-child {
-            border-right: none;
-        }
-        
-        &:hover:not(.active):not(.disabled) {
-            background-color: #e9ecef;
-        }
-        
-        &.active {
-            background-color: #1A4870;
-            color: white;
-            font-weight: bold;
-        }
-        
-        &.disabled {
-            color: #6c757d;
-            cursor: not-allowed;
-            background-color: #f8f9fa;
-        }
-        
-        @media (max-width: 576px) {
-            padding: 8px 12px;
-            font-size: 14px;
-        }
-    }
+
+  display: flex;
+
+  gap: .6rem;
+
+  list-style: none;
+
+  padding: 0;
 }
 
-/* ------------------------------------------------------
-   STATI DI CARICAMENTO / ERRORE
------------------------------------------------------- */
-.loading-container, .error-container, .no-projects {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 50px 0;
-    text-align: center;
-    
-    @media (max-width: 768px) {
-        padding: 30px 0;
-    }
+.page-item {
+
+  min-width: 45px;
+
+  height: 45px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  cursor: pointer;
+
+  border-radius: 12px;
+
+  background:
+    rgba(255,255,255,.04);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  color: white;
+
+  transition: .3s;
 }
 
-.spinner-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 60px;
-    height: 60px;
-    
-    .spinner-border {
-        width: 3rem;
-        height: 3rem;
-        color: #1A4870;
-        
-        @media (max-width: 576px) {
-            width: 2.5rem;
-            height: 2.5rem;
-        }
-    }
+.page-item:hover:not(.active):not(.disabled) {
+
+  background:
+    rgba(139,92,246,.18);
 }
+
+.page-item.active {
+
+  background:
+    linear-gradient(
+      135deg,
+      #8B5CF6,
+      #2563EB
+    );
+
+  border: none;
+}
+
+.page-item.disabled {
+
+  opacity: .4;
+
+  cursor: not-allowed;
+}
+
+/* ==========================================
+   LOADING
+========================================== */
+
+.loading-container {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-height: 400px;
+
+  color: white;
+}
+
+.spinner-border {
+
+  width: 60px;
+  height: 60px;
+
+  border-radius: 50%;
+
+  border:
+    4px solid rgba(255,255,255,.1);
+
+  border-top:
+    4px solid #8B5CF6;
+
+  animation:
+    spin 1s linear infinite;
+}
+
+@keyframes spin {
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================
+   ERROR
+========================================== */
 
 .error-container {
-    max-width: 500px;
-    margin: 0 auto;
-    
-    .alert {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+
+  display: flex;
+
+  justify-content: center;
+
+  padding: 80px 0;
 }
+
+.error-card {
+
+  max-width: 500px;
+
+  text-align: center;
+
+  background:
+    rgba(255,255,255,.04);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  border-radius: 24px;
+
+  padding: 2rem;
+}
+
+.error-card h3 {
+
+  margin-bottom: 1rem;
+}
+
+.error-card p {
+
+  color: #94A3B8;
+}
+
+.retry-btn {
+
+  margin-top: 1rem;
+
+  border: none;
+
+  color: white;
+
+  padding: 1rem 1.5rem;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8B5CF6,
+      #2563EB
+    );
+
+  cursor: pointer;
+}
+
+/* ==========================================
+   NO PROJECTS
+========================================== */
+
+.no-projects {
+
+  text-align: center;
+
+  padding: 80px 0;
+
+  color: #94A3B8;
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+
+  .projects-hero {
+
+    padding-top: 140px;
+    padding-bottom: 70px;
+  }
+
+  .projects-wrapper {
+
+    padding: 0 1rem;
+  }
+
+  .projects-grid {
+
+    grid-template-columns: 1fr;
+
+    gap: 1.5rem;
+  }
+
+  .hero-description {
+
+    font-size: 1rem;
+  }
+
+  .hero-stats {
+
+    grid-template-columns: 1fr;
+  }
+
+  .project-animation {
+
+    transform:
+      translateX(100%);
+  }
+
+  .project-animation.show {
+
+    transform:
+      translateX(0);
+  }
+}
+
 </style>
