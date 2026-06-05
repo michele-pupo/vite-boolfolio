@@ -5,49 +5,72 @@ import 'dayjs/locale/it';
 
 export default {
   name: 'SingleProject',
+
   data() {
     return {
       project: null,
       projectSlug: null,
-      
+
       apiBaseUrl: 'http://127.0.0.1:8000/api',
       apiImageUrl: 'http://127.0.0.1:8000/storage/',
     }
   },
+
   computed: {
-    // Se il progetto è caricato, imposta come background l'immagine del progetto
-    // con un overlay bianco semitrasparente, altrimenti usa un background bianco
+
     backgroundStyle() {
+
       if (this.project && this.project.project_image) {
+
         return {
+
           background: `linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(${this.apiImageUrl + this.project.project_image})`,
+
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundAttachment: 'fixed'
         }
       }
-      return { backgroundColor: '#ffffff' }
+
+      return {
+        backgroundColor: '#ffffff'
+      }
     }
   },
+
   mounted() {
+
     this.projectSlug = this.$route.params.slug;
-    axios.get(this.apiBaseUrl + '/projects/' + this.projectSlug).then(res => {
-      if (res.data.success) {
-        this.project = res.data.result;
-      } else {
-        this.$router.push({ name: 'home' });
-      }
-    });
+
+    axios.get(this.apiBaseUrl + '/projects/' + this.projectSlug)
+
+      .then(res => {
+
+        if (res.data.success) {
+
+          this.project = res.data.result;
+
+        } else {
+
+          this.$router.push({
+            name: 'home'
+          });
+        }
+      });
   },
+
   methods: {
+
     formatDate(date) {
+
       dayjs.locale('it');
+
       return dayjs(date).format('DD/MM/YYYY');
     },
 
     getPreviousPage() {
-      // Recupera la pagina precedente dal localStorage
+
       return localStorage.getItem('currentPage') || 1;
     }
   }
@@ -60,7 +83,10 @@ export default {
 
     <div class="background-glow"></div>
 
-    <div v-if="project" class="project-wrapper">
+    <div
+      v-if="project"
+      class="project-wrapper"
+    >
 
       <div class="project-card">
 
@@ -91,19 +117,42 @@ export default {
               {{ project.name }}
             </h1>
 
-            <div
-              v-if="project.project_date"
-              class="project-date"
-            >
-              <i class="fas fa-calendar-alt"></i>
-              {{ formatDate(project.project_date) }}
+            <div class="project-meta">
+
+              <span v-if="project.project_date">
+                <i class="fas fa-calendar-alt"></i>
+                {{ formatDate(project.project_date) }}
+              </span>
+
+              <span>
+                <i class="fas fa-code"></i>
+                Full Stack Project
+              </span>
+
             </div>
 
           </div>
 
           <div class="project-description">
-
             {{ project.description }}
+          </div>
+
+          <div class="project-highlights">
+
+            <div class="highlight-card">
+              <span>Frontend</span>
+              <strong>Vue.js</strong>
+            </div>
+
+            <div class="highlight-card">
+              <span>Backend</span>
+              <strong>Laravel</strong>
+            </div>
+
+            <div class="highlight-card">
+              <span>Database</span>
+              <strong>MySQL</strong>
+            </div>
 
           </div>
 
@@ -113,7 +162,6 @@ export default {
               v-for="tech in project.technologies"
               :key="tech.id"
               class="technology-badge"
-              :style="{ backgroundColor: tech.color }"
             >
               {{ tech.title }}
             </span>
@@ -128,8 +176,18 @@ export default {
               rel="noopener noreferrer"
               class="visit-btn"
             >
-              <i class="fas fa-arrow-up-right-from-square"></i>
-              Visit Project
+              <i class="fas fa-globe"></i>
+              Live Demo
+            </a>
+
+            <a
+              :href="project.github_url"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="github-btn"
+            >
+              <i class="fab fa-github"></i>
+              Source Code
             </a>
 
             <router-link
@@ -257,6 +315,15 @@ export default {
   height: 100%;
 
   object-fit: cover;
+
+  transition:
+    transform .8s ease;
+}
+
+.project-card:hover .project-image {
+
+  transform:
+    scale(1.05);
 }
 
 .image-overlay {
@@ -302,15 +369,26 @@ export default {
   font-weight: 600;
 }
 
-.project-title {
+.project-meta {
 
-  color: white;
+  display: flex;
 
-  font-size: clamp(2rem,5vw,4rem);
+  gap: 1rem;
 
-  font-weight: 800;
+  flex-wrap: wrap;
 
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+
+  color: #94A3B8;
+
+  span {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: .5rem;
+  }
 }
 
 .project-date {
@@ -331,6 +409,60 @@ export default {
   margin-bottom: 2rem;
 }
 
+.project-highlights {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 1rem;
+
+  margin-bottom: 2.5rem;
+}
+
+.highlight-card {
+
+  background:
+    rgba(255,255,255,.04);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  padding: 1.2rem;
+
+  border-radius: 16px;
+
+  text-align: center;
+
+  transition: .3s;
+}
+
+.highlight-card:hover {
+
+  transform:
+    translateY(-4px);
+
+  border-color:
+    rgba(139,92,246,.4);
+}
+
+.highlight-card span {
+
+  display: block;
+
+  color: #94A3B8;
+
+  font-size: .8rem;
+
+  margin-bottom: .5rem;
+}
+
+.highlight-card strong {
+
+  color: white;
+}
+
 .technologies-container {
 
   display: flex;
@@ -344,15 +476,38 @@ export default {
 
 .technology-badge {
 
-  color: white;
+  background:
+    rgba(255,255,255,.06);
 
-  padding: .6rem 1rem;
+  border:
+    1px solid rgba(255,255,255,.1);
 
-  border-radius: 999px;
+  color:
+    #E2E8F0;
 
-  font-size: .8rem;
+  padding:
+    .7rem 1rem;
 
-  font-weight: 600;
+  border-radius:
+    999px;
+
+  font-size:
+    .85rem;
+
+  font-weight:
+    600;
+
+  transition:
+    .3s;
+}
+
+.technology-badge:hover {
+
+  transform:
+    translateY(-2px);
+
+  border-color:
+    rgba(139,92,246,.4);
 }
 
 .project-actions {
@@ -360,9 +515,12 @@ export default {
   display: flex;
 
   gap: 1rem;
+
+  flex-wrap: wrap;
 }
 
 .visit-btn,
+.github-btn,
 .back-btn {
 
   flex: 1;
@@ -390,18 +548,46 @@ export default {
     );
 
   color: white;
+
+  position: relative;
+
+  overflow: hidden;
 }
 
 .visit-btn:hover {
 
   transform:
-    translateY(-3px);
+    translateY(-4px);
+
+  box-shadow:
+    0 0 30px rgba(139,92,246,.35);
+}
+
+
+.github-btn {
+
+  background:
+    rgba(255,255,255,.06);
+
+  border:
+    1px solid rgba(255,255,255,.1);
+
+  color: white;
+}
+
+.github-btn:hover {
+
+  transform:
+    translateY(-4px);
+
+  background:
+    rgba(255,255,255,.12);
 }
 
 .back-btn {
 
   background:
-    rgba(255,255,255,.05);
+    rgba(255,255,255,.04);
 
   border:
     1px solid rgba(255,255,255,.08);
@@ -411,8 +597,11 @@ export default {
 
 .back-btn:hover {
 
+  transform:
+    translateY(-4px);
+
   background:
-    rgba(255,255,255,.1);
+    rgba(255,255,255,.08);
 }
 
 .loading-container {

@@ -68,6 +68,31 @@ export default {
         }
     },
 
+    computed: {
+
+      uniqueTechnologies() {
+
+          const techs = [];
+
+          this.projects.forEach(project => {
+
+              if (project.technologies) {
+
+                  project.technologies.forEach(tech => {
+
+                      techs.push(tech.title);
+
+                  });
+
+              }
+
+          });
+
+          return [...new Set(techs)].length;
+      }
+
+    },
+
     methods: {
         checkDeviceType() {
             const wasAlreadyMobile = this.isMobile;
@@ -257,12 +282,15 @@ export default {
           </div>
 
           <div class="stat-card">
+
             <span class="stat-number">
-              10+
+              {{ uniqueTechnologies }}
             </span>
+
             <span class="stat-label">
               Technologies
             </span>
+
           </div>
 
           <div class="stat-card">
