@@ -81,11 +81,23 @@ export default {
 
       <div class="hero-glow"></div>
 
-      <img
-        src="/download-photoaidcom-cropped.png"
-        alt="Michele Fabio Pupo"
-        class="profile-photo"
-      />
+      <div class="profile-wrapper">
+
+        <img
+          src="/download-photoaidcom-cropped.png"
+          alt="Michele Fabio Pupo"
+          class="profile-photo"
+        />
+
+        <div class="availability-badge">
+
+          <span class="availability-dot"></span>
+
+          Available
+
+        </div>
+
+      </div>
 
       <div class="hero-badge">
         Full Stack Web Developer
@@ -95,10 +107,19 @@ export default {
         Michele Fabio Pupo
       </h1>
 
-      <p class="hero-description">
-        Sviluppo applicazioni web moderne, performanti e scalabili
-        utilizzando Laravel, Vue.js, MySQL e tecnologie frontend avanzate.
-      </p>
+      <div class="hero-status">
+
+        <div class="status-item">
+          <i class="fas fa-location-dot"></i>
+          <span>Italy</span>
+        </div>
+
+        <div class="status-item">
+          <i class="fas fa-rocket"></i>
+          <span>Open to Opportunities</span>
+        </div>
+
+      </div>
 
       <div class="quick-contact">
 
@@ -148,19 +169,71 @@ export default {
 
       <div class="glass-card">
 
-        <h2>Chi sono</h2>
+        <h2>What I Build</h2>
 
-        <p>
-          Sono una persona tenace e proattiva, determinata a raggiungere
-          obiettivi con creatività e perseveranza.
+        <p class="about-description">
 
-          Ho maturato competenze nello sviluppo web lavorando con HTML,
-          CSS, JavaScript, Laravel, Vue.js e tecnologie moderne.
+            Progetto e sviluppo applicazioni web moderne orientate a
+            performance, scalabilità ed esperienza utente.
 
-          La mia capacità di problem solving mi consente di individuare
-          soluzioni efficaci e innovative, garantendo sempre qualità e
-          attenzione ai dettagli.
+            Mi occupo dell'intero ciclo di sviluppo, dalla progettazione
+            del database alla realizzazione del backend con Laravel,
+            fino alla creazione di interfacce moderne e responsive con Vue.js.
+
+            Realizzo dashboard amministrative, API REST, sistemi gestionali
+            e applicazioni web complete con particolare attenzione alla
+            qualità del codice e alla manutenibilità del progetto.
+
         </p>
+
+        <div class="about-specialties">
+
+        <div class="specialty-card">
+
+          <div class="specialty-icon">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+
+          <h3>Frontend</h3>
+
+          <p>
+            Vue.js, JavaScript, SCSS, responsive design
+            e user experience moderna.
+          </p>
+
+        </div>
+
+        <div class="specialty-card">
+
+          <div class="specialty-icon">
+            <i class="fas fa-server"></i>
+          </div>
+
+          <h3>Backend</h3>
+
+          <p>
+            Laravel, REST API, autenticazione,
+            gestione dati e business logic.
+          </p>
+
+        </div>
+
+        <div class="specialty-card">
+
+          <div class="specialty-icon">
+            <i class="fas fa-database"></i>
+          </div>
+
+          <h3>Database</h3>
+
+          <p>
+            MySQL, progettazione relazionale,
+            query ottimizzate e gestione dati.
+          </p>
+
+        </div>
+
+      </div>
 
       </div>
 
@@ -219,63 +292,7 @@ export default {
 
     </section>
 
-    <!-- LANGUAGES -->
-    <section class="languages-section">
-
-      <div class="glass-card">
-
-        <h2>Languages</h2>
-
-        <div class="languages-container">
-
-          <div class="language-item">
-
-            <div class="language-name">
-              Italiano
-            </div>
-
-            <div class="language-level">
-
-              <div class="level-bar">
-                <div
-                  class="level-fill"
-                  style="width:100%"
-                ></div>
-              </div>
-
-              <span>Madrelingua</span>
-
-            </div>
-
-          </div>
-
-          <div class="language-item">
-
-            <div class="language-name">
-              Inglese
-            </div>
-
-            <div class="language-level">
-
-              <div class="level-bar">
-                <div
-                  class="level-fill"
-                  style="width:75%"
-                ></div>
-              </div>
-
-              <span>B2</span>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
+    
     <!-- CV -->
     <section class="cv-download-section">
 
@@ -381,7 +398,17 @@ export default {
   pointer-events: none;
 }
 
+.profile-wrapper {
+
+  position: relative;
+
+  display: inline-block;
+
+  margin-bottom: 2rem;
+}
+
 .profile-photo {
+
   width: 180px;
   height: 180px;
 
@@ -394,10 +421,138 @@ export default {
   box-shadow:
     0 0 60px rgba(139,92,246,.25);
 
-  margin-bottom: 2rem;
-
   position: relative;
-  z-index: 10;
+
+  z-index: 2;
+
+  transition:
+    transform .4s ease,
+    box-shadow .4s ease;
+}
+
+.profile-photo:hover {
+
+  transform:
+    scale(1.04);
+
+  box-shadow:
+    0 0 80px rgba(139,92,246,.45);
+}
+
+.profile-wrapper::before {
+
+  content: '';
+
+  position: absolute;
+
+  inset: -12px;
+
+  border-radius: 50%;
+
+  background:
+    conic-gradient(
+      from 0deg,
+      #8B5CF6,
+      #2563EB,
+      #8B5CF6
+    );
+
+  animation:
+    rotateGlow 8s linear infinite;
+
+  opacity: .7;
+
+  filter:
+    blur(10px);
+
+  z-index: 1;
+}
+
+@keyframes rotateGlow {
+
+  from {
+
+    transform:
+      rotate(0deg);
+
+  }
+
+  to {
+
+    transform:
+      rotate(360deg);
+
+  }
+}
+
+.availability-badge {
+
+  position: absolute;
+
+  bottom: 10px;
+
+  right: -10px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: .5rem;
+
+  padding: .5rem .9rem;
+
+  border-radius: 999px;
+
+  background:
+    rgba(15,23,42,.95);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  font-size: .8rem;
+
+  font-weight: 600;
+
+  color: white;
+
+  z-index: 20;
+}
+
+.availability-dot {
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  background: #22C55E;
+
+  animation:
+    pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+
+  0% {
+
+    box-shadow:
+      0 0 0 0 rgba(34,197,94,.7);
+
+  }
+
+  70% {
+
+    box-shadow:
+      0 0 0 10px rgba(34,197,94,0);
+
+  }
+
+  100% {
+
+    box-shadow:
+      0 0 0 0 rgba(34,197,94,0);
+
+  }
 }
 
 .hero-badge {
@@ -448,6 +603,67 @@ export default {
   line-height: 1.8;
 
   font-size: 1.15rem;
+}
+
+.hero-status {
+
+  display: flex;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 1rem;
+
+  margin-top: 2rem;
+
+  margin-bottom: 2rem;
+}
+
+.status-item {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: .6rem;
+
+  padding: .8rem 1.2rem;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255,255,255,.05);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  color:
+    #CBD5E1;
+
+  backdrop-filter:
+    blur(10px);
+
+  transition:
+    .3s;
+}
+
+.status-item:hover {
+
+  transform:
+    translateY(-3px);
+
+  border-color:
+    rgba(139,92,246,.35);
+
+  background:
+    rgba(139,92,246,.08);
+}
+
+.status-item i {
+
+  color:
+    #8B5CF6;
 }
 
 .quick-contact {
@@ -580,6 +796,74 @@ export default {
   color: #CBD5E1;
 
   line-height: 1.8;
+}
+
+.about-description {
+
+  margin-bottom: 2rem;
+}
+
+.about-specialties {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 1rem;
+
+  margin-top: 2rem;
+}
+
+.specialty-card {
+
+  background:
+    rgba(255,255,255,.03);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  border-radius: 18px;
+
+  padding: 1.5rem;
+
+  text-align: center;
+
+  transition: .3s;
+}
+
+.specialty-card:hover {
+
+  transform:
+    translateY(-6px);
+
+  border-color:
+    rgba(139,92,246,.35);
+}
+
+.specialty-icon {
+
+  font-size: 2rem;
+
+  color: #8B5CF6;
+
+  margin-bottom: 1rem;
+}
+
+.specialty-card h3 {
+
+  color: white;
+
+  margin-bottom: .8rem;
+}
+
+.specialty-card p {
+
+  color: #CBD5E1;
+
+  font-size: .95rem;
+
+  line-height: 1.7;
 }
 
 .about-section,
@@ -810,6 +1094,38 @@ export default {
   .cv-card {
     flex-direction: column;
     text-align: center;
+  }
+
+  .about-specialties {
+
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+
+    background:
+      linear-gradient(
+        rgba(255,255,255,.04),
+        rgba(255,255,255,.02)
+      );
+
+    border:
+      1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:
+      blur(10px);
+  }
+
+  .stat-card:hover {
+
+    transform:
+      translateY(-6px);
+
+    border-color:
+      rgba(139,92,246,.35);
+
+    box-shadow:
+      0 20px 40px rgba(139,92,246,.15);
   }
 }
 

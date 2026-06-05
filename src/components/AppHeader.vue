@@ -13,7 +13,6 @@ export default {
         <div class="logo-dot"></div>
         <div class="logo-text">
           <span class="name">Michele Fabio Pupo</span>
-          <span class="role">Full Stack Developer</span>
         </div>
       </router-link>
 
@@ -41,7 +40,7 @@ export default {
         href="mailto:fabiomichelepupo@gmail.com"
         class="contact-btn"
       >
-        Contact Me
+        Let's Talk
       </a>
 
     </div>
@@ -122,14 +121,6 @@ export default {
   font-weight: 700;
 
   letter-spacing: .5px;
-}
-
-.role {
-  color: #94A3B8;
-
-  font-size: .8rem;
-
-  margin-top: 2px;
 }
 
 /* =====================================
@@ -248,10 +239,6 @@ export default {
 
   .app-header {
     height: 75px;
-  }
-
-  .role {
-    display: none;
   }
 
   .contact-btn {

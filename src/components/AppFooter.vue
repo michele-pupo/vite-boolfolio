@@ -13,12 +13,18 @@ export default {
 
       <div class="footer-top">
 
-        <h2>Let's Build Something Great</h2>
+        <h2>Ready to work together?</h2>
 
         <p>
-          Sono specializzato nello sviluppo di applicazioni web moderne
-          con Laravel, Vue.js e MySQL.
+          Have a project in mind? Let's build something amazing.
         </p>
+
+        <router-link
+          :to="{ name: 'contact-me' }"
+          class="footer-cta"
+        >
+          Contact Me
+        </router-link>
 
       </div>
 
@@ -155,6 +161,48 @@ export default {
   color: #94A3B8;
 
   line-height: 1.8;
+}
+
+.footer-cta {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-top: 1.5rem;
+
+  padding: 1rem 2rem;
+
+  border-radius: 14px;
+
+  text-decoration: none;
+
+  font-weight: 600;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8B5CF6,
+      #2563EB
+    );
+
+  transition: .35s ease;
+
+  box-shadow:
+    0 10px 30px rgba(99,102,241,.25);
+}
+
+.footer-cta:hover {
+
+  transform:
+    translateY(-4px);
+
+  box-shadow:
+    0 15px 40px rgba(99,102,241,.35);
 }
 
 .footer-socials {
