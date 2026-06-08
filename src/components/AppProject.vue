@@ -91,7 +91,7 @@ export default {
         </div>
 
         <img
-          :src="`${baseApiUrl}/${projectImage}`"
+          :src="`${apiImageUrl}/${projectImage}`"
           :alt="projectName"
           class="card-image"
           @load="handleImageLoad"

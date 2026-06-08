@@ -4,24 +4,32 @@ import axios from 'axios';
 import emitter from '../plugins/mitt';
 
 export default {
+
     name: 'HomePage',
 
-    components: { 
+    components: {
         AppProject,
     },
 
-        data() {
-            return {
-              projects: [],
-              isLoading: true,
-              apiBaseUrl: import.meta.env.VITE_API_URL,
-              selectedTechnology: 'All',
-              isMobile: false,
-              error: null,
-              visibleProjects: [],
-              lastScrollY: window.scrollY,
-              scrollDirection: 'down'
-        }
+    data() {
+
+        return {
+
+            projects: [],
+            isLoading: true,
+            error: null,
+
+            apiBaseUrl: import.meta.env.VITE_API_URL,
+
+            selectedTechnology: 'All',
+
+            isMobile: false,
+
+            visibleProjects: [],
+
+            lastScrollY: window.scrollY,
+            scrollDirection: 'down'
+        };
     },
 
     mounted() {
@@ -42,24 +50,36 @@ export default {
             'scroll',
             () => emitter.emit('scroll')
         );
-console.log('API URL:', this.apiBaseUrl);
+
         this.apiCallAll();
     },
-    
+
     beforeUnmount() {
-        // Rimuovi i listener di mitt
+
         emitter.off('resize', this.checkDeviceType);
         emitter.off('scroll', this.checkProjectVisibility);
-        
-        // Rimuovi i listener nativi
-        window.removeEventListener('resize', () => emitter.emit('resize'));
-        window.removeEventListener('scroll', () => emitter.emit('scroll'));
+
+        window.removeEventListener(
+            'resize',
+            () => emitter.emit('resize')
+        );
+
+        window.removeEventListener(
+            'scroll',
+            () => emitter.emit('scroll')
+        );
     },
-    
+
     updated() {
-        if (this.projects.length > 0 && this.visibleProjects.length === 0) {
+
+        if (
+            this.projects.length > 0 &&
+            this.visibleProjects.length === 0
+        ) {
             this.$nextTick(() => {
+
                 this.setupIntersectionObserver();
+
             });
         }
     },
@@ -113,12 +133,11 @@ console.log('API URL:', this.apiBaseUrl);
             if (this.selectedTechnology === 'All') {
 
                 return this.projects;
-
             }
 
             return this.projects.filter(project => {
 
-                return project.technologies.some(
+                return project.technologies?.some(
                     tech => tech.title === this.selectedTechnology
                 );
 
@@ -127,171 +146,170 @@ console.log('API URL:', this.apiBaseUrl);
     },
 
     methods: {
+
         checkDeviceType() {
-            const wasAlreadyMobile = this.isMobile;
+
             this.isMobile = window.innerWidth < 992;
-            if (wasAlreadyMobile !== this.isMobile) {
-                this.loadProjects();
-                this.resetProjectVisibility();
-            }
-        },
-        
-        loadProjects() {
-            if (this.isMobile) {
-                this.apiCallAll();
-            } else {
-                this.apiCall();
-            }
-        },
-        
-        apiCall() {
-            this.isLoading = true;
-            this.error = null;
-            axios.get(`${this.baseApiUrl}/projects`, {
-                params: {
-                page: this.apiPageNumber,
-                }
-            }).then(res => {
-                console.log('API Response:', res); // Log completo risposta
-                if (res.data.success) {
-                this.isLoading = false;
-                this.projects = res.data.result.data;
-                this.apiLinks = res.data.result.links;
-                this.resetProjectVisibility();
-                }
-            }).catch(error => {
-                console.error('Detailed Error:', error);
-                console.error('Error Response:', error.response);
-                console.error('Error Request:', error.request);
-                this.isLoading = false;
-                this.error = error.message || "Errore di connessione";
-            });
         },
 
         apiCallAll() {
 
-          this.isLoading = true;
+            this.isLoading = true;
 
-          this.error = null;
+            this.error = null;
 
-          axios.get(`${this.baseApiUrl}/projects`, {
-              params: {
-                  all: true
-              }
-          })
-          .then(res => {
+            axios.get(`${this.apiBaseUrl}/projects`, {
+                params: {
+                    all: true
+                }
+            })
+            .then(res => {
 
-              if (res.data.success) {
+                if (res.data.success) {
 
-                  this.projects = res.data.result;
+                    this.projects = res.data.result;
 
-                  this.isLoading = false;
+                    this.resetProjectVisibility();
 
-                  this.resetProjectVisibility();
+                    this.$nextTick(() => {
 
-                  this.$nextTick(() => {
+                        this.setupIntersectionObserver();
 
-                      this.setupIntersectionObserver();
+                    });
+                }
 
-                  });
+                this.isLoading = false;
+            })
+            .catch(error => {
 
-              }
+                console.error(error);
 
-          })
-          .catch(error => {
+                this.error =
+                    'Si è verificato un errore durante il caricamento dei progetti.';
 
-              console.error(error);
-
-              this.isLoading = false;
-
-              this.error =
-                  'Si è verificato un errore durante il caricamento dei progetti.';
-
-          });
-
+                this.isLoading = false;
+            });
         },
-        
+
         resetProjectVisibility() {
-            this.visibleProjects = Array(this.projects.length).fill(false);
+
+            this.visibleProjects =
+                Array(this.projects.length).fill(false);
+
             this.$nextTick(() => {
+
                 this.checkProjectVisibility();
+
             });
         },
-        
+
         setupIntersectionObserver() {
-            const options = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    const index = parseInt(entry.target.dataset.index);
-                    if (!isNaN(index)) {
-                        if (entry.isIntersecting) {
-                            setTimeout(() => {
-                                this.visibleProjects[index] = true;
-                            }, index * 150);
-                        } else {
-                            this.visibleProjects[index] = false;
+
+            const observer = new IntersectionObserver(
+
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        const index =
+                            parseInt(entry.target.dataset.index);
+
+                        if (!isNaN(index)) {
+
+                            if (entry.isIntersecting) {
+
+                                setTimeout(() => {
+
+                                    this.visibleProjects[index] = true;
+
+                                }, index * 150);
+
+                            } else {
+
+                                this.visibleProjects[index] = false;
+                            }
                         }
-                    }
-                });
-            }, options);
-            
-            document.querySelectorAll('.project-item').forEach(el => {
-                observer.observe(el);
-            });
+                    });
+
+                },
+
+                {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.1
+                }
+            );
+
+            document
+                .querySelectorAll('.project-item')
+                .forEach(el => observer.observe(el));
         },
-        
+
         checkProjectVisibility() {
+
             const currentScrollY = window.scrollY;
-            this.scrollDirection = currentScrollY > this.lastScrollY ? 'down' : 'up';
+
+            this.scrollDirection =
+                currentScrollY > this.lastScrollY
+                    ? 'down'
+                    : 'up';
+
             this.lastScrollY = currentScrollY;
 
-            const projectElements = document.querySelectorAll('.project-item');
+            const projectElements =
+                document.querySelectorAll('.project-item');
+
             projectElements.forEach((el, index) => {
+
                 const rect = el.getBoundingClientRect();
-                const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+
+                const windowHeight =
+                    window.innerHeight ||
+                    document.documentElement.clientHeight;
+
                 if (rect.top <= windowHeight * 0.8) {
+
                     setTimeout(() => {
+
                         this.visibleProjects[index] = true;
+
                     }, index * 150);
+
                 } else {
+
                     this.visibleProjects[index] = false;
                 }
             });
         },
 
         projectAnimationClass(index) {
-            const base = 'project-animation';
-            if (this.isMobile) {
-                if (this.visibleProjects[index]) {
-                    return [base, 'show'];
-                } else {
-                    return [base, this.scrollDirection === 'up' ? 'hide-up' : 'hide-down'];
-                }
-            } else {
-                return [base, this.visibleProjects[index] ? 'show' : ''];
-            }
-        },
 
-        changeApiPage(pageNumber) {
-            if (pageNumber === '&laquo; Previous') {
-                this.apiPageNumber = Number(this.apiPageNumber) - 1;
-            } else if (pageNumber === 'Next &raquo;') {
-                this.apiPageNumber = Number(this.apiPageNumber) + 1;
-            } else {
-                this.apiPageNumber = pageNumber;
+            const base = 'project-animation';
+
+            if (this.isMobile) {
+
+                if (this.visibleProjects[index]) {
+
+                    return [base, 'show'];
+
+                } else {
+
+                    return [
+                        base,
+                        this.scrollDirection === 'up'
+                            ? 'hide-up'
+                            : 'hide-down'
+                    ];
+                }
             }
-            
-            // Salva la pagina corrente nel localStorage
-            localStorage.setItem('currentPage', this.apiPageNumber);
-            
-            this.apiCall();
-            
-        }, 
+
+            return [
+                base,
+                this.visibleProjects[index]
+                    ? 'show'
+                    : ''
+            ];
+        },
 
         handleTechnologyFilter(technology) {
 
@@ -308,38 +326,7 @@ console.log('API URL:', this.apiBaseUrl);
                 this.checkProjectVisibility();
 
             });
-
-        },
-
-        checkDeviceType() {
-
-            this.isMobile = window.innerWidth < 992;
-
-        },
-
-        loadAllProjects() {
-
-            axios.get(`${this.baseApiUrl}/projects`, {
-                params: {
-                    all: true
-                }
-            })
-            .then(res => {
-
-                if (res.data.success) {
-
-                    this.allProjects = res.data.result;
-
-                }
-
-            })
-            .catch(error => {
-
-                console.error(error);
-
-            });
-
-        },
+        }
     },
 
     watch: {
@@ -357,11 +344,9 @@ console.log('API URL:', this.apiBaseUrl);
                 this.checkProjectVisibility();
 
             });
-
         }
-
-    },
-}
+    }
+};
 </script>
 
 <template>
