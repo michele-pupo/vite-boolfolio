@@ -11,8 +11,8 @@ export default {
       project: null,
       projectSlug: null,
 
-      apiBaseUrl: 'http://127.0.0.1:8000/api',
-      apiImageUrl: 'http://127.0.0.1:8000/storage/',
+      apiBaseUrl: import.meta.env.VITE_API_URL,
+      apiImageUrl: import.meta.env.VITE_STORAGE_URL,
     }
   },
 
@@ -93,7 +93,7 @@ export default {
         <div class="project-image-container">
 
           <img
-            :src="apiImageUrl + project.project_image"
+            :src="`${apiImageUrl}/${project.project_image}`"
             :alt="project.name"
             class="project-image"
           >
@@ -181,6 +181,7 @@ export default {
             </a>
 
             <a
+              v-if="project.github_url"
               :href="project.github_url"
               target="_blank"
               rel="noopener noreferrer"

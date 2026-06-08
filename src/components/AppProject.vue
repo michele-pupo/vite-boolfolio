@@ -25,7 +25,7 @@ export default {
     
     data() {
         return {
-            baseApiUrl: 'http://127.0.0.1:8000/storage/', // Percorso relativo
+            apiImageUrl: import.meta.env.VITE_STORAGE_URL, // Percorso relativo
             imageLoaded: false,
             imageError: false
         }
@@ -91,12 +91,12 @@ export default {
         </div>
 
         <img
-          :src="baseApiUrl + projectImage"
+          :src="`${baseApiUrl}/${projectImage}`"
           :alt="projectName"
           class="card-image"
           @load="handleImageLoad"
           @error="handleImageError"
-        >
+        />
 
         <div
           v-if="imageError"

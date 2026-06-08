@@ -14,7 +14,7 @@ export default {
             return {
               projects: [],
               isLoading: true,
-              baseApiUrl: 'http://127.0.0.1:8000/api',
+              apiBaseUrl: import.meta.env.VITE_API_URL,
               selectedTechnology: 'All',
               isMobile: false,
               error: null,
@@ -42,7 +42,7 @@ export default {
             'scroll',
             () => emitter.emit('scroll')
         );
-
+console.log('API URL:', this.apiBaseUrl);
         this.apiCallAll();
     },
     
