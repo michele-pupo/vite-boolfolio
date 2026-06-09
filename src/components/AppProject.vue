@@ -68,6 +68,21 @@ export default {
             
             // Ritorna la classe corrispondente o default se non trovata
             return typeClasses[typeKey] || 'type-default';
+        },
+
+        getProjectImage(projectName) {
+            const images = {
+                'Boolando': '/project image/boolando.png',
+                'Discord': '/project image/discord.png',
+                'Boolzapp': '/project image/Boolzapp.png',
+                'Boolflix': '/project image/Boolflix.jpg',
+                'Spotifyweb': '/project image/Spotifyweb.jpg',
+                'Campominato': '/project image/Campominato.jpg',
+                'Deliveboo': '/project image/deliveboo.jpg',
+                'Sudoku': '/project image/sudoku solver.png',
+            };
+
+            return images[projectName];
         }
     },
 }
@@ -91,7 +106,7 @@ export default {
         </div>
 
         <img
-          :src="`${apiImageUrl}/${projectImage}`"
+          :src="getProjectImage(projectName)"
           :alt="projectName"
           class="card-image"
           @load="handleImageLoad"

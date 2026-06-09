@@ -20,24 +20,24 @@ export default {
 
     backgroundStyle() {
 
-      if (this.project && this.project.project_image) {
+        if (this.project) {
+
+            return {
+
+                background: `linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(${this.getProjectImage(this.project.name)})`,
+
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                backgroundAttachment: 'fixed'
+            };
+        }
 
         return {
-
-          background: `linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(${this.apiImageUrl + this.project.project_image})`,
-
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          backgroundAttachment: 'fixed'
-        }
-      }
-
-      return {
-        backgroundColor: '#ffffff'
-      }
+            backgroundColor: '#ffffff'
+        };
     }
-  },
+},
 
   mounted() {
 
@@ -72,7 +72,22 @@ export default {
     getPreviousPage() {
 
       return localStorage.getItem('currentPage') || 1;
-    }
+    },
+
+    getProjectImage(projectName) {
+      const images = {
+          'Boolando': '/project image/boolando.png',
+          'Discord': '/project image/discord.png',
+          'Boolzapp': '/project image/Boolzapp.png',
+          'Boolflix': '/project image/Boolflix.jpg',
+          'Spotifyweb': '/project image/Spotifyweb.jpg',
+          'Campominato': '/project image/Campominato.jpg',
+          'Deliveboo': '/project image/deliveboo.jpg',
+          'Sudoku': '/project image/sudoku solver.png',
+      };
+
+      return images[projectName];
+    },
   }
 }
 </script>
@@ -93,7 +108,7 @@ export default {
         <div class="project-image-container">
 
           <img
-            :src="`${apiImageUrl}/${project.project_image}`"
+            :src="getProjectImage(project.name)"
             :alt="project.name"
             class="project-image"
           >
