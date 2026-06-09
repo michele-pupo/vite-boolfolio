@@ -12,7 +12,8 @@ export default {
             },
             loading: false,
             success: false,
-            error: null
+            error: null,
+            apiBaseUrl: import.meta.env.VITE_API_URL,
         }
     },
     
@@ -22,7 +23,7 @@ export default {
             this.success = false;
             this.error = null;
             
-            axios.post('http://127.0.0.1:8000/api/new-contact', this.formData)
+            axios.post(`${this.apiBaseUrl}/new-contact`, this.formData)
                 .then(response => {
                     console.log('Risposta API:', response);
                     this.success = true;
