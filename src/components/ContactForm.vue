@@ -27,6 +27,9 @@ export default {
                 .then(response => {
                     console.log('Risposta API:', response);
                     this.success = true;
+                    setTimeout(() => {
+                      this.success = false;
+                    }, 5000);
                     // Reset del form
                     this.formData = {
                         name: '',
